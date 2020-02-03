@@ -1,0 +1,14 @@
+.post {
+    display: flex;
+}
+
+.avatar {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

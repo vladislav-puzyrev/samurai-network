@@ -1,0 +1,19 @@
+.paginationItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1f1f1f;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.paginationItemActive {
+  background-color: #f90;
+  color: black;
+}
+
+.paginationItem:hover {
+  filter: brightness(95%);
+}

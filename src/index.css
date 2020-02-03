@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+input,
+button,
+textarea {
+  color: black;
+}
+
+button[disabled] {
+  color: #a6a6a6;
+}
+
+/*
+colors
+#1f1f23
+#26262c
+#18181b
+#0e0e10
+*/

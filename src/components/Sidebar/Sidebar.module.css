@@ -1,0 +1,10 @@
+.aside {
+	flex-basis: 15%;
+	/*border: 1px dashed green;*/
+}
+
+@media screen and (max-width: 768px) {
+	.aside {
+		display: none;
+	}
+}

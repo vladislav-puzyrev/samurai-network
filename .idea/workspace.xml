@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="398ec8d6-c209-4c4b-a958-1450ca7c4e5f" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="social-network" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Stylus File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1VfIREUpPbxhSB7QqhdykyX9Ea7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Работы\sites\social-network\src\redux" />
+      <recent name="D:\Работы\sites\social-network\src\components\Content\Profile\User\Status" />
+      <recent name="D:\Работы\sites\social-network\src\components\Content\Login" />
+      <recent name="D:\Работы\sites\social-network\src\components\Header" />
+      <recent name="D:\Работы\sites\social-network\src\components\common\Preloader" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Работы\sites\social-network\src\assets\images" />
+      <recent name="D:\Работы\sites\social-network\src\components\Content" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Jest.Status component.нету спана при создании">
+    <configuration name="Рендер без ошибок" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/App.test.js" />
+      <test-names>
+        <test-name value="Рендер без ошибок" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Status component.нету спана при создании" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/components/Content/Profile/User/Status/StatusHooks.test.js" />
+      <test-names>
+        <test-name value="Status component" />
+        <test-name value="нету спана при создании" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="StatusHooks component.статус из пропсов поступает в стейт" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/components/Content/Profile/User/Status/StatusHooks.test.js" />
+      <test-names>
+        <test-name value="StatusHooks component" />
+        <test-name value="статус из пропсов поступает в стейт" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="deploy" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.deploy" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="Jest.Status component.нету спана при создании" />
+        <item itemvalue="Jest.StatusHooks component.статус из пропсов поступает в стейт" />
+        <item itemvalue="Jest.Рендер без ошибок" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="398ec8d6-c209-4c4b-a958-1450ca7c4e5f" name="Default Changelist" comment="" />
+      <created>1577637712735</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1577637712735</updated>
+      <workItem from="1577637716142" duration="19000" />
+      <workItem from="1577637738623" duration="26000" />
+      <workItem from="1577637768142" duration="4000" />
+      <workItem from="1577637785027" duration="6303000" />
+      <workItem from="1577700445827" duration="5681000" />
+      <workItem from="1577729823914" duration="1632000" />
+      <workItem from="1578322907330" duration="10790000" />
+      <workItem from="1578383750622" duration="8191000" />
+      <workItem from="1578412820301" duration="2000" />
+      <workItem from="1578412891894" duration="1000" />
+      <workItem from="1578587574441" duration="1861000" />
+      <workItem from="1578591212243" duration="2772000" />
+      <workItem from="1578648549370" duration="16126000" />
+      <workItem from="1578731864909" duration="7774000" />
+      <workItem from="1578757309652" duration="8851000" />
+      <workItem from="1578817851265" duration="6752000" />
+      <workItem from="1578846877373" duration="2708000" />
+      <workItem from="1578922603363" duration="5323000" />
+      <workItem from="1579013570166" duration="3803000" />
+      <workItem from="1579023203437" duration="2846000" />
+      <workItem from="1579097445816" duration="7140000" />
+      <workItem from="1579191863448" duration="4815000" />
+      <workItem from="1579266799154" duration="7717000" />
+      <workItem from="1579385374411" duration="3534000" />
+      <workItem from="1579403465605" duration="3004000" />
+      <workItem from="1579536271475" duration="5511000" />
+      <workItem from="1579625124082" duration="3012000" />
+      <workItem from="1579705545587" duration="4070000" />
+      <workItem from="1579793788874" duration="4043000" />
+      <workItem from="1579798475614" duration="2412000" />
+      <workItem from="1579846694140" duration="4600000" />
+      <workItem from="1579877993879" duration="8916000" />
+      <workItem from="1579947715146" duration="3494000" />
+      <workItem from="1579963495900" duration="3061000" />
+      <workItem from="1579969109810" duration="1020000" />
+      <workItem from="1579974344526" duration="3773000" />
+      <workItem from="1579980453768" duration="2040000" />
+      <workItem from="1580044822095" duration="101000" />
+      <workItem from="1580044999261" duration="267000" />
+      <workItem from="1580045280870" duration="230000" />
+      <workItem from="1580110907173" duration="5323000" />
+      <workItem from="1580142336468" duration="1234000" />
+      <workItem from="1580213505800" duration="5705000" />
+      <workItem from="1580232435267" duration="200000" />
+      <workItem from="1580232650008" duration="3285000" />
+      <workItem from="1580292152018" duration="8118000" />
+      <workItem from="1580308053133" duration="7366000" />
+      <workItem from="1580320701824" duration="3075000" />
+      <workItem from="1580397574212" duration="1980000" />
+      <workItem from="1580466544693" duration="5224000" />
+      <workItem from="1580478921199" duration="5333000" />
+      <workItem from="1580543274170" duration="5118000" />
+      <workItem from="1580570999036" duration="1856000" />
+      <workItem from="1580640416525" duration="17016000" />
+      <workItem from="1580729992376" duration="547000" />
+      <workItem from="1580730804319" duration="654000" />
+      <workItem from="1580749827739" duration="22000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2472" y="131" key="#ESLint" timestamp="1580651520865">
+      <screen x="1920" y="-49" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="131" key="#ESLint/0.0.1920.1034/1920.-49.1920.1040@1920.-49.1920.1040" timestamp="1580651520865" />
+    <state x="2472" y="136" key="#ESLint/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1578399611534" />
+    <state x="2472" y="135" key="#Inspections" timestamp="1577641473127">
+      <screen x="1920" y="-43" width="1920" height="1034" />
+    </state>
+    <state x="2472" y="135" key="#Inspections/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1577641473127" />
+    <state x="2685" y="188" key="#com.intellij.ide.util.MemberChooser" timestamp="1580583664048">
+      <screen x="1920" y="-49" width="1920" height="1040" />
+    </state>
+    <state x="2685" y="188" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1034/1920.-49.1920.1040@1920.-49.1920.1040" timestamp="1580583664048" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1578682018738">
+      <screen x="0" y="0" width="1920" height="1034" />
+    </state>
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.-43.1920.1034/0.0.1920.1034@0.0.1920.1034" timestamp="1578682018738" />
+    <state x="2610" y="223" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1577730341526" />
+    <state width="1899" height="261" key="GridCell.Tab.0.bottom" timestamp="1580750049814">
+      <screen x="1920" y="-49" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1034/1920.-49.1920.1040@0.0.1920.1034" timestamp="1580301936354" />
+    <state width="1899" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1034/1920.-49.1920.1040@1920.-49.1920.1040" timestamp="1580750049814" />
+    <state width="1899" height="260" key="GridCell.Tab.0.bottom/1920.-43.1920.1034/0.0.1920.1034@0.0.1920.1034" timestamp="1579854004582" />
+    <state width="1899" height="260" key="GridCell.Tab.0.bottom/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1579983836324" />
+    <state width="1899" height="261" key="GridCell.Tab.0.center" timestamp="1580750049814">
+      <screen x="1920" y="-49" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="261" key="GridCell.Tab.0.center/0.0.1920.1034/1920.-49.1920.1040@0.0.1920.1034" timestamp="1580301936354" />
+    <state width="1899" height="261" key="GridCell.Tab.0.center/0.0.1920.1034/1920.-49.1920.1040@1920.-49.1920.1040" timestamp="1580750049814" />
+    <state width="1899" height="260" key="GridCell.Tab.0.center/1920.-43.1920.1034/0.0.1920.1034@0.0.1920.1034" timestamp="1579854004582" />
+    <state width="1899" height="260" key="GridCell.Tab.0.center/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1579983836324" />
+    <state width="1899" height="261" key="GridCell.Tab.0.left" timestamp="1580750049814">
+      <screen x="1920" y="-49" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="261" key="GridCell.Tab.0.left/0.0.1920.1034/1920.-49.1920.1040@0.0.1920.1034" timestamp="1580301936354" />
+    <state width="1899" height="261" key="GridCell.Tab.0.left/0.0.1920.1034/1920.-49.1920.1040@1920.-49.1920.1040" timestamp="1580750049814" />
+    <state width="1899" height="260" key="GridCell.Tab.0.left/1920.-43.1920.1034/0.0.1920.1034@0.0.1920.1034" timestamp="1579854004577" />
+    <state width="1899" height="260" key="GridCell.Tab.0.left/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1579983836324" />
+    <state width="1899" height="261" key="GridCell.Tab.0.right" timestamp="1580750049814">
+      <screen x="1920" y="-49" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="261" key="GridCell.Tab.0.right/0.0.1920.1034/1920.-49.1920.1040@0.0.1920.1034" timestamp="1580301936354" />
+    <state width="1899" height="261" key="GridCell.Tab.0.right/0.0.1920.1034/1920.-49.1920.1040@1920.-49.1920.1040" timestamp="1580750049814" />
+    <state width="1899" height="260" key="GridCell.Tab.0.right/1920.-43.1920.1034/0.0.1920.1034@0.0.1920.1034" timestamp="1579854004582" />
+    <state width="1899" height="260" key="GridCell.Tab.0.right/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1579983836324" />
+    <state x="835" y="136" key="SettingsEditor" timestamp="1580045504178">
+      <screen x="0" y="0" width="1920" height="1034" />
+    </state>
+    <state x="835" y="136" key="SettingsEditor/0.0.1920.1034/1920.-49.1920.1040@0.0.1920.1034" timestamp="1580045504178" />
+    <state x="2381" y="119" key="SettingsEditor/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1579279941911" />
+    <state x="2536" y="215" key="run.anything.popup" timestamp="1580554753375">
+      <screen x="1920" y="-49" width="1920" height="1040" />
+    </state>
+    <state x="2536" y="215" key="run.anything.popup/0.0.1920.1034/1920.-49.1920.1040@1920.-49.1920.1040" timestamp="1580554753375" />
+    <state x="2536" y="219" key="run.anything.popup/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1579393231957" />
+    <state x="2543" y="177" width="672" height="682" key="search.everywhere.popup" timestamp="1580667816097">
+      <screen x="1920" y="-49" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="679" key="search.everywhere.popup/0.0.1920.1034/1920.-49.1920.1040@0.0.1920.1034" timestamp="1580234469754" />
+    <state x="2543" y="177" width="672" height="682" key="search.everywhere.popup/0.0.1920.1034/1920.-49.1920.1040@1920.-49.1920.1040" timestamp="1580667816097" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.-43.1920.1034/0.0.1920.1034@0.0.1920.1034" timestamp="1579024033642" />
+    <state x="2543" y="182" width="672" height="678" key="search.everywhere.popup/1920.-43.1920.1034/0.0.1920.1034@1920.-43.1920.1034" timestamp="1579394078405" />
+  </component>
+</project>
