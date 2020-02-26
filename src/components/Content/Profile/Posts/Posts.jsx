@@ -3,10 +3,10 @@ import styles from './Posts.module.css';
 import Post from './Post/Post';
 import {Field, reduxForm} from "redux-form";
 import {required, maxLengthCreator} from "../../../../utils/validators/validators";
-import {formControl} from "../../../common/FormsControls/FormsControls";
+import {createField} from "../../../common/FormsControls/createField";
 
 const maxLength = maxLengthCreator(10);
-const Textarea = formControl('textarea');
+const Textarea = createField('textarea');
 
 function Posts(props) {
     const postsElements = props.state.profilePage.posts.map(

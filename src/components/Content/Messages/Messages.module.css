@@ -3,14 +3,14 @@
 }
 
 .output {
-    display: grid;
-    grid-template-columns: 3fr 9fr;
+  display: grid;
+  grid-template-columns: 3fr 9fr;
 }
 
 .dialogs {
-    list-style-position: inside;
+  list-style-position: inside;
 }
 
 .chat {
-    padding: 10px;
+  padding: 10px;
 }

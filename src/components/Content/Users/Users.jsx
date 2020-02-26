@@ -5,13 +5,13 @@ import User from './User/User';
 import Preloader from '../../common/Preloader/Preloader';
 
 function Users(props) {
-    const pagesQuantity = Math.ceil(props.totalUsersCount / props.pageSize);
+    // const pagesQuantity = Math.ceil(props.totalUsersCount / props.pageSize);
     const paginationItems = [];
 
     for (let i = +props.currentPage; i < +props.currentPage + 5; i++) {
         if (i < +props.totalUsersCount) {
             paginationItems.push(
-                <PaginationItem key={i} number={i} active={props.currentPage == i}/>
+                <PaginationItem key={i} number={i} active={props.currentPage === +i}/>
             );
         }
     }

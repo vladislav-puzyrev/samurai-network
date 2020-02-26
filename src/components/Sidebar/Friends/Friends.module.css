@@ -1,24 +1,24 @@
 .friends {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .friendsTitle {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .friendsList {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    padding-top: 5px;
-    width: 140px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding-top: 5px;
+  width: 140px;
 }
 
 .friendsListItem {
-    flex-basis: 50%;
+  flex-basis: 50%;
 }
 
 .avatar {
-    width: 50px;
-    border-radius: 50%;
+  width: 50px;
+  border-radius: 50%;
 }

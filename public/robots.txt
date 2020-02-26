@@ -1,2 +1,3 @@
 # https://www.robotstxt.org/robotstxt.html
-Status-agent: *
+User-agent: *
+Disallow:

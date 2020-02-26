@@ -1,10 +1,9 @@
 .aside {
-	flex-basis: 15%;
-	/*border: 1px dashed green;*/
+  flex-basis: 15%;
 }
 
 @media screen and (max-width: 768px) {
-	.aside {
-		display: none;
-	}
+  .aside {
+    display: none;
+  }
 }
