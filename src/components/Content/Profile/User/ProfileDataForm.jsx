@@ -50,7 +50,7 @@ function ProfileDataForm(props) {
             <b>Контакты</b>
             {
               Object.keys(props.profile.contacts).map(key => {
-                return <div>
+                return <div key={key}>
                   <b>{key}</b>:
                   <Field type='text' placeholder={key} name={'contacts.' + key}
                          component={Input}/>
