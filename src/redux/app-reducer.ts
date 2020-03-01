@@ -1,6 +1,6 @@
 import {getAuthUserData} from './auth-reducer';
 
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
+const INITIALIZED_SUCCESS = 'samurai-network/app/INITIALIZED_SUCCESS';
 
 export type InitialStateType = {
   initialized: boolean

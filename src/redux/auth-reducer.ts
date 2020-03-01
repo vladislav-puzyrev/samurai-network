@@ -1,26 +1,19 @@
 import {authAPI, securityAPI} from '../api/api';
 import {stopSubmit} from 'redux-form';
 
-const SET_USER_DATA = 'social-network/auth/SET_USER_DATA';
-const GET_CAPTCHA_URL_SUCCESS = 'social-network/auth/GET_CAPTCHA_URL_SUCCESS';
+const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA';
+const GET_CAPTCHA_URL_SUCCESS = 'samurai-network/auth/GET_CAPTCHA_URL_SUCCESS';
 
-export type InitialStateType = {
-  userId: number | null
-  email: string | null
-  login: string | null
-  isFetching: boolean
-  isAuth: boolean
-  captchaUrl: string | null
+const initialState = {
+  userId: null as number | null,
+  email: null as string | null,
+  login: null as string | null,
+  isFetching: false as boolean,
+  isAuth: false as boolean,
+  captchaUrl: null as string | null,
 };
 
-const initialState: InitialStateType = {
-  userId: null,
-  email: null,
-  login: null,
-  isFetching: false,
-  isAuth: false,
-  captchaUrl: null,
-};
+export type InitialStateType = typeof initialState;
 
 function authReducer(state = initialState, action: any): InitialStateType {
   switch (action.type) {
@@ -31,7 +24,6 @@ function authReducer(state = initialState, action: any): InitialStateType {
       };
 
     case GET_CAPTCHA_URL_SUCCESS:
-      console.log(action.captchaUrl);
       return {
         ...state,
         captchaUrl: action.captchaUrl,
