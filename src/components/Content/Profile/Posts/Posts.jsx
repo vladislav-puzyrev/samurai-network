@@ -1,42 +1,43 @@
-import React from 'react';
-import styles from './Posts.module.css';
-import Post from './Post/Post';
-import {Field, reduxForm} from "redux-form";
-import {required, maxLengthCreator} from "../../../../utils/validators/validators";
-import {createField} from "../../../common/FormsControls/createField";
+import React from 'react'
+import styles from './Posts.module.css'
+import Post from './Post/Post'
+import { Field, reduxForm } from 'redux-form'
+import { required, maxLengthCreator } from '../../../../utils/validators/validators'
+import { createField } from '../../../common/FormsControls/createField'
 
-const maxLength = maxLengthCreator(10);
-const Textarea = createField('textarea');
+const maxLength = maxLengthCreator(10)
+const Textarea = createField('textarea')
 
-function Posts(props) {
-    const postsElements = props.state.profilePage.posts.map(
-        post => <Post key={post.id} text={post.text} likes={post.likes}/>
-    ).reverse();
+function Posts (props) {
+  const postsElements = props.state.profilePage.posts.map(
+    post => <Post key={post.id} text={post.text} likes={post.likes}/>,
+  ).reverse()
 
-    return (
-        <div className={styles.posts}>
-            <h2 className={styles.title}>Посты</h2>
-            <AddNewPostFormRedux onSubmit={(formData) => {props.addPost(formData)}}/>
-            <div className={styles.postsList}>
-                {postsElements}
-            </div>
-        </div>
-    );
+  return (
+    <div className={styles.posts}>
+      <h2 className={styles.title}>Посты</h2>
+      <AddNewPostFormRedux onSubmit={(formData) => {props.addPost(formData)}}/>
+      <div className={styles.postsList}>
+        {postsElements}
+      </div>
+    </div>
+  )
 }
 
-const AddNewPostFormRedux = reduxForm({form: 'profileAddNewPost'})(AddNewPostForm);
+const AddNewPostFormRedux = reduxForm({ form: 'profileAddNewPost' })(AddNewPostForm)
 
-function AddNewPostForm(props) {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field className={styles.textarea} name='newPost' component={Textarea} placeholder='Что у вас нового?' validate={[required, maxLength]}/>
-            </div>
-            <div>
-                <button className={styles.button}>Отправить</button>
-            </div>
-        </form>
-    );
+function AddNewPostForm (props) {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field className={styles.textarea} name='newPost' component={Textarea} placeholder='Что у вас нового?'
+               validate={[required, maxLength]}/>
+      </div>
+      <div>
+        <button className={styles.button}>Отправить</button>
+      </div>
+    </form>
+  )
 }
 
-export default Posts;
+export default Posts

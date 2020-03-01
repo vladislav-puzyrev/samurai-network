@@ -1,12 +1,12 @@
-import React from 'react';
-import styles from './Settings.module.css';
+import React from 'react'
+import styles from './Settings.module.css'
 
-function Settings() {
+function Settings () {
   return (
-      <div className={styles.messages}>
-        Настройки
-      </div>
-  );
+    <div className={styles.messages}>
+      Настройки
+    </div>
+  )
 }
 
-export default Settings;
+export default Settings

@@ -1,30 +1,30 @@
-import profileReducer from './profile-reducer';
-import sidebarReducer from './sidebar-reducer';
-import messagesReducer from './messages-reducer';
+import profileReducer from './profile-reducer'
+import sidebarReducer from './sidebar-reducer'
+import messagesReducer from './messages-reducer'
 
 const store = {
-  _subscriber() {
-    console.log('no subscribers');
+  _subscriber () {
+    console.log('no subscribers')
   },
   _state: {
     profilePage: {
       posts: [
-        {id: 1, text: 'Вам нравится React?', likes: 4},
-        {id: 2, text: 'hey', likes: 2},
+        { id: 1, text: 'Вам нравится React?', likes: 4 },
+        { id: 2, text: 'hey', likes: 2 },
       ],
       postText: 'facebook',
     },
     messagesPage: {
       dialogs: [
-        {id: 1, username: 'Димыч'},
-        {id: 2, username: 'Саша'},
-        {id: 3, username: 'Валера'},
-        {id: 4, username: 'Иван'},
-        {id: 5, username: 'Света'},
+        { id: 1, username: 'Димыч' },
+        { id: 2, username: 'Саша' },
+        { id: 3, username: 'Валера' },
+        { id: 4, username: 'Иван' },
+        { id: 5, username: 'Света' },
       ],
       messages: [
-        {id: 1, username: 'Димыч', message: 'Я люблю react!'},
-        {id: 2, username: 'Димыч', message: 'Я люблю react!'},
+        { id: 1, username: 'Димыч', message: 'Я люблю react!' },
+        { id: 2, username: 'Димыч', message: 'Я люблю react!' },
       ],
       currentMessage: 'Привет мир!',
     },
@@ -49,22 +49,22 @@ const store = {
     },
   },
 
-  getState() {
-    return this._state;
+  getState () {
+    return this._state
   },
-  subscribe(observer) {
-    this._subscriber = observer;
+  subscribe (observer) {
+    this._subscriber = observer
   },
 
-  dispatch(action) {
-    this._state.profilePage = profileReducer(this._state.profilePage, action);
+  dispatch (action) {
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
     this._state.messagesPage = messagesReducer(this._state.messagesPage,
-        action);
-    this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+      action)
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
-    this._subscriber();
+    this._subscriber()
   },
-};
+}
 
-window.store = store;
-export default store;
+window.store = store
+export default store

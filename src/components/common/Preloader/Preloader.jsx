@@ -1,11 +1,11 @@
-import React from 'react';
-import styles from './Preloader.module.css';
-import preloader from '../../../assets/images/preloader.gif';
+import React from 'react'
+import styles from './Preloader.module.css'
+import preloader from '../../../assets/images/preloader.gif'
 
-function Preloader() {
+function Preloader () {
   return (
-      <img className={styles.preloader} src={preloader} alt="load"/>
-  );
+    <img className={styles.preloader} src={preloader} alt="load"/>
+  )
 }
 
-export default Preloader;
+export default Preloader

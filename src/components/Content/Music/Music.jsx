@@ -1,12 +1,12 @@
-import React from 'react';
-import styles from './Music.module.css';
+import React from 'react'
+import styles from './Music.module.css'
 
-function Music() {
+function Music () {
   return (
-      <div className={styles.messages}>
-        Музыка
-      </div>
-  );
+    <div className={styles.messages}>
+      Музыка
+    </div>
+  )
 }
 
-export default Music;
+export default Music
