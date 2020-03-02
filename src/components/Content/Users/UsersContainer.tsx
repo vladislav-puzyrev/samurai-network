@@ -16,23 +16,61 @@ import {
   getTotalUsersCount,
   getUsersSelector,
 } from '../../../redux/users-selectors'
+import { AppStateType } from '../../../redux/redux-store'
+import { UserType } from '../../../types/types'
 
-class UsersContainer extends React.Component {
+type MSTPPropTypes = {
+  pageSize: number
+  currentPage: number
+  users: Array<UserType>
+  totalUsersCount: number
+  isFetching: boolean
+  followingInProgress: Array<number>
+}
+
+type MDTPPropTypes = {
+  setCurrentPage: (page: number) => void
+  setIsFetching: (isFetching: boolean) => void
+  getRequestUsers: (pageSize: number, currentPage: number) => void
+  follow: (id: number) => void
+  unfollow: (id: number) => void
+}
+
+type OwnPropTypes = {
+  pageSize: number
+  currentPage: number
+  getRequestUsers: (pageSize: number, currentPage: number) => void
+  onPageChanged: (text: number) => void
+}
+
+type PropTypes = MSTPPropTypes & MDTPPropTypes & OwnPropTypes
+
+class UsersContainer extends React.Component<PropTypes> {
   componentDidMount () {
     this.props.getRequestUsers(this.props.pageSize, this.props.currentPage)
   }
 
   // WITHOUT BIND
-  onPageChanged = (currentPage) => {
+  onPageChanged = (currentPage: number) => {
     this.props.getRequestUsers(this.props.pageSize, currentPage)
   }
 
   render () {
-    return <Users {...this.props} onPageChanged={this.onPageChanged}/>
+    return <Users
+      onPageChanged={this.onPageChanged}
+      currentPage={this.props.currentPage}
+      totalUsersCount={this.props.totalUsersCount}
+      setCurrentPage={this.props.setCurrentPage}
+      isFetching={this.props.isFetching}
+      users={this.props.users}
+      follow={this.props.follow}
+      unfollow={this.props.unfollow}
+      followingInProgress={this.props.followingInProgress}
+    />
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state: AppStateType): MSTPPropTypes {
   return {
     users: getUsersSelector(state),
     pageSize: getPageSize(state),
@@ -66,7 +104,7 @@ function mapStateToProps (state) {
     }
 }*/
 
-export default connect(mapStateToProps, {
+export default connect<MSTPPropTypes, MDTPPropTypes, OwnPropTypes, AppStateType>(mapStateToProps, {
   setCurrentPage,
   setIsFetching,
   getRequestUsers,
