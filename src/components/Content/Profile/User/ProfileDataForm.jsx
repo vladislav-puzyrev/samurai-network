@@ -19,8 +19,10 @@ function ProfileDataForm (props) {
         <div>
           <label>
             Имя:
-            <Field type='text' placeholder='Имя' name='fullName'
-                   component={Input} validate={[required]}/>
+            <Field
+              type='text' placeholder='Имя' name='fullName'
+              component={Input} validate={[required]}
+            />
           </label>
         </div>
 
@@ -34,8 +36,10 @@ function ProfileDataForm (props) {
         <div>
           <label>
             Мои навыки:
-            <Field name='lookingForAJobDescription' component={Textarea}
-                   validate={[required]}/>
+            <Field
+              name='lookingForAJobDescription' component={Textarea}
+              validate={[required]}
+            />
           </label>
         </div>
 
@@ -52,8 +56,10 @@ function ProfileDataForm (props) {
             Object.keys(props.profile.contacts).map(key => {
               return <div key={key}>
                 <b>{key}</b>:
-                <Field type='text' placeholder={key} name={'contacts.' + key}
-                       component={Input}/>
+                <Field
+                  type='text' placeholder={key} name={'contacts.' + key}
+                  component={Input}
+                />
               </div>
             })
           }

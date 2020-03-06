@@ -19,7 +19,7 @@ import {
 import { AppStateType } from '../../../redux/redux-store'
 import { UserType } from '../../../types/types'
 
-type MSTPPropTypes = {
+type MapStatePropTypes = {
   pageSize: number
   currentPage: number
   users: Array<UserType>
@@ -28,7 +28,7 @@ type MSTPPropTypes = {
   followingInProgress: Array<number>
 }
 
-type MDTPPropTypes = {
+type MapDispatchPropTypes = {
   setCurrentPage: (page: number) => void
   setIsFetching: (isFetching: boolean) => void
   getRequestUsers: (pageSize: number, currentPage: number) => void
@@ -43,7 +43,7 @@ type OwnPropTypes = {
   onPageChanged: (text: number) => void
 }
 
-type PropTypes = MSTPPropTypes & MDTPPropTypes & OwnPropTypes
+type PropTypes = MapStatePropTypes & MapDispatchPropTypes & OwnPropTypes
 
 class UsersContainer extends React.Component<PropTypes> {
   componentDidMount () {
@@ -70,7 +70,7 @@ class UsersContainer extends React.Component<PropTypes> {
   }
 }
 
-function mapStateToProps (state: AppStateType): MSTPPropTypes {
+function mapStateToProps (state: AppStateType): MapStatePropTypes {
   return {
     users: getUsersSelector(state),
     pageSize: getPageSize(state),
@@ -104,7 +104,7 @@ function mapStateToProps (state: AppStateType): MSTPPropTypes {
     }
 }*/
 
-export default connect<MSTPPropTypes, MDTPPropTypes, OwnPropTypes, AppStateType>(mapStateToProps, {
+export default connect<MapStatePropTypes, MapDispatchPropTypes, OwnPropTypes, AppStateType>(mapStateToProps, {
   setCurrentPage,
   setIsFetching,
   getRequestUsers,

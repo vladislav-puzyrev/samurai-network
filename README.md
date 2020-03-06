@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Социальная сеть на React & Redux
 
-![Screenshot](https://github.com/vladislav-puzyrev/samurai-network/raw/master/readme/Screenshot.png)
+![Screenshot](https://github.com/vladislav-puzyrev/samurai-network/raw/master/static/Screenshot.png)
 
 ## Используемые пакеты:
 * typescript

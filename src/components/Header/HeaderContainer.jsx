@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 
 function HeaderContainer (props) {
   return (
-    <Header {...props}/>
+    <Header {...props} />
   )
 }
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
-  login: state.auth.login,
+  login: state.auth.login
 })
 
 export default connect(mapStateToProps, { logout })(HeaderContainer)

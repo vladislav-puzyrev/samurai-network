@@ -4,7 +4,7 @@ import { create } from 'react-test-renderer'
 
 describe('Status component', () => {
   test('статус из пропсов поступает в стейт', () => {
-    const component = create(<Status status='REACT!!!'/>)
+    const component = create(<Status status='REACT!!!' />)
     const instance = component.getInstance()
     expect(instance.state.status).toBe('REACT!!!')
   })

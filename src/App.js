@@ -16,24 +16,24 @@ function App (props) {
   })
 
   if (!props.initialized) {
-    return <Preloader/>
+    return <Preloader />
   }
 
   return (
     <div className={styles.page}>
-      <HeaderContainer/>
+      <HeaderContainer />
       <main className={styles.main}>
-        <Sidebar/>
-        <Content/>
+        <Sidebar />
+        <Content />
       </main>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
 
 function mapStateToProps (state) {
   return {
-    initialized: state.init.initialized,
+    initialized: state.init.initialized
   }
 }
 
@@ -43,7 +43,7 @@ export default function AppContainer (props) {
   return (
     <Provider store={store}>
       <HashRouter>
-        <AppConnect/>
+        <AppConnect />
       </HashRouter>
     </Provider>
   )

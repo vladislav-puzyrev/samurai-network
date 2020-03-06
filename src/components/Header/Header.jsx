@@ -8,10 +8,13 @@ function Header (props) {
       <div className={styles.container}>
         <div>LOGO</div>
         {
-          props.isAuth ?
-            <div>{props.login} - <button
-              onClick={props.logout}>Выйти</button></div> :
-            <NavLink to='/login' className={styles.login}>Login</NavLink>
+          props.isAuth
+            ? <div>{props.login} - <button
+              onClick={props.logout}
+            >Выйти
+            </button>
+            </div>
+            : <NavLink to='/login' className={styles.login}>Login</NavLink>
         }
       </div>
     </header>

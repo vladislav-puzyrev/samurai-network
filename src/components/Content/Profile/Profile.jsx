@@ -7,13 +7,15 @@ import PostsContainer from './Posts/PostsContainer'
 function Profile (props) {
   return (
     <div className={styles.profile}>
-      {/*<Wallpaper/>*/}
-      <User savePhoto={props.savePhoto}
-            profile={props.profile}
-            status={props.status}
-            updateStatus={props.updateStatus}
-            isOwner={props.isOwner}
-            saveProfile={props.saveProfile}/>
+      {/* <Wallpaper/> */}
+      <User
+        savePhoto={props.savePhoto}
+        profile={props.profile}
+        status={props.status}
+        updateStatus={props.updateStatus}
+        isOwner={props.isOwner}
+        saveProfile={props.saveProfile}
+      />
       <PostsContainer/>
     </div>
   )

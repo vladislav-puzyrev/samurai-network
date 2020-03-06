@@ -11,6 +11,6 @@ import AppContainer from './App'
 
 test('Рендер без ошибок AppContainer', () => {
   const div = document.createElement('div')
-  ReactDOM.render(<AppContainer/>, div)
+  ReactDOM.render(<AppContainer />, div)
   ReactDOM.unmountComponentAtNode(div)
 })

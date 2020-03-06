@@ -10,13 +10,13 @@ const Textarea = createField('textarea')
 
 function Posts (props) {
   const postsElements = props.state.profilePage.posts.map(
-    post => <Post key={post.id} text={post.text} likes={post.likes}/>,
+    post => <Post key={post.id} text={post.text} likes={post.likes} />
   ).reverse()
 
   return (
     <div className={styles.posts}>
       <h2 className={styles.title}>Посты</h2>
-      <AddNewPostFormRedux onSubmit={(formData) => {props.addPost(formData)}}/>
+      <AddNewPostFormRedux onSubmit={(formData) => { props.addPost(formData) }} />
       <div className={styles.postsList}>
         {postsElements}
       </div>
@@ -30,8 +30,10 @@ function AddNewPostForm (props) {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field className={styles.textarea} name='newPost' component={Textarea} placeholder='Что у вас нового?'
-               validate={[required, maxLength]}/>
+        <Field
+          className={styles.textarea} name='newPost' component={Textarea} placeholder='Что у вас нового?'
+          validate={[required, maxLength]}
+        />
       </div>
       <div>
         <button className={styles.button}>Отправить</button>

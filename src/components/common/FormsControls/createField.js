@@ -7,10 +7,9 @@ export function createField (FormElement) {
 
     return (
       <span className={(isError || null) && styles.error}>
-          <FormElement {...input} {...props}/>
+        <FormElement {...input} {...props} />
         {isError && <span>{meta.error}</span>}
-        </span>
+      </span>
     )
   }
-
 }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 function mapStateToProps (state) {
   return {
-    state: state,
+    state: state
   }
 }
 
@@ -12,7 +12,7 @@ function mapDispatchToProps (dispatch) {
   return {
     addPost (formData) {
       dispatch(addPostActionCreator(formData))
-    },
+    }
   }
 }
 

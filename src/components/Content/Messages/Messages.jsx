@@ -11,12 +11,14 @@ const Textarea = createField('textarea')
 
 function Messages (props) {
   const dialogsElements = props.state.dialogs.map(
-    dialog => <Dialog key={dialog.id} id={dialog.id} name={dialog.username}/>,
+    dialog => <Dialog key={dialog.id} id={dialog.id} name={dialog.username} />
   )
 
   const messagesElements = props.state.messages.map(
-    message => <Message key={message.id} name={message.username}
-                        message={message.message}/>,
+    message => <Message
+      key={message.id} name={message.username}
+      message={message.message}
+               />
   )
 
   return (
@@ -30,7 +32,8 @@ function Messages (props) {
         </ul>
       </div>
       <AddMessageFormRedux
-        onSubmit={(formData) => {props.buttonOnClick(formData)}}/>
+        onSubmit={(formData) => { props.buttonOnClick(formData) }}
+      />
     </div>
   )
 }
@@ -39,8 +42,10 @@ function AddMessageForm (props) {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field name='message' validate={[required, maxLength]}
-               component={Textarea}/>
+        <Field
+          name='message' validate={[required, maxLength]}
+          component={Textarea}
+        />
       </div>
       <div>
         <button>Отправить</button>

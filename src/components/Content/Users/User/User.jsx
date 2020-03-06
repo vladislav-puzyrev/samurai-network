@@ -8,17 +8,23 @@ function User ({ user, followingInProgress, unfollow, follow }) {
     <li className={styles.user}>
       <div className={styles.avatarBox}>
         <NavLink to={`/profile/${user.id}`}>
-          <img src={user.photos.small || defaultAvatar} alt='avatar' width='100'/>
+          <img src={user.photos.small || defaultAvatar} alt='avatar' width='100' />
         </NavLink>
         {
-          user.followed ?
-            <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-              unfollow(user.id)
-            }}>unfollow</button> :
+          user.followed
+            ? <button
+              disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+                unfollow(user.id)
+              }}
+              >unfollow
+              </button>
 
-            <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-              follow(user.id)
-            }}>follow</button>
+            : <button
+              disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+                follow(user.id)
+              }}
+              >follow
+              </button>
         }
       </div>
 

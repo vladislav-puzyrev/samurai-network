@@ -6,8 +6,8 @@ import Menu from './Menu/Menu'
 function Sidebar () {
   return (
     <aside className={styles.aside}>
-      <Menu/>
-      <Friends/>
+      <Menu />
+      <Friends />
     </aside>
   )
 }
