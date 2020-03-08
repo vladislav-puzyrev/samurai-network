@@ -1,6 +1,6 @@
 import { profileAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
-import { PostType, ProfileType } from '../types/types'
+import { PhotosType, PostType, ProfileType } from '../types/AppTypes'
 
 const ADD_POST = 'samurai-network/profile/ADD_POST'
 const SET_USER_PROFILE = 'samurai-network/profile/SET_USER_PROFILE'
@@ -108,42 +108,43 @@ export const deletePost = (postId: number): DeletePostActionType => (
 // savePhotoSuccess
 type SavePhotoSuccessActionType = {
   type: typeof SAVE_PHOTO_SUCCESS
-  photos: ProfileType
+  photos: PhotosType
 };
 
-export const savePhotoSuccess = (photos: ProfileType): SavePhotoSuccessActionType => (
+export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType => (
   { type: SAVE_PHOTO_SUCCESS, photos: photos }
 )
 
 export const getUsersProfile = (userId: number) => async (dispatch: any) => {
   const response = await profileAPI.getProfile(userId)
-  dispatch(setUserProfile(response.data))
+  dispatch(setUserProfile(response))
 }
 
 export const getStatus = (userId: number) => async (dispatch: any) => {
   const response = await profileAPI.getStatus(userId)
-  dispatch(setStatus(response.data))
+  dispatch(setStatus(response))
 }
 
 export const updateStatus = (status: string) => async (dispatch: any) => {
   const response = await profileAPI.updateStatus(status)
-  if (response.data.resultCode === 0) {
+  if (response.resultCode === 0) {
     dispatch(setStatus(status))
   }
 }
 
 export const savePhoto = (file: any) => async (dispatch: any) => {
-  const response = await profileAPI.savePhoto(file)
-  if (response.data.resultCode === 0) {
-    dispatch(savePhotoSuccess(response.data.data.photos))
+  const response = await profileAPI.updatePhoto(file)
+  if (response.resultCode === 0) {
+    dispatch(savePhotoSuccess(response.data.photos))
   }
 }
 
 export const saveProfile = (profile: ProfileType) => async (dispatch: any, getState: any) => {
-  const response = await profileAPI.saveProfile(profile)
-  if (response.data.resultCode === 0) {
+  const response = await profileAPI.updateProfile(profile)
+  if (response.resultCode === 0) {
     dispatch(getUsersProfile(getState().auth.userId))
-  } else {
+  }
+  else {
     dispatch(stopSubmit(
       'edit-profile', { _error: 'response.data.messages[0]' },
     ))

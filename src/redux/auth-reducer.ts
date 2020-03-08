@@ -104,14 +104,14 @@ export const login = (
 export const logout = () => async (dispatch: any) => {
   const response = await authAPI.logout()
 
-  if (response.data.resultCode === 0) {
+  if (response.resultCode === 0) {
     dispatch(setAuthUserData(null, null, null, false))
   }
 }
 
 export const getCaptchaUrl = () => async (dispatch: any) => {
-  const response = await securityAPI.getCaptchaUrl()
-  const captchaUrl = response.data.url
+  const response = await securityAPI.getCaptcha()
+  const captchaUrl = response.url
   dispatch(getCaptchaUrlSuccess(captchaUrl))
 }
 

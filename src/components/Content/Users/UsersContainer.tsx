@@ -17,7 +17,7 @@ import {
   getUsersSelector,
 } from '../../../redux/users-selectors'
 import { AppStateType } from '../../../redux/redux-store'
-import { UserType } from '../../../types/types'
+import { UserType } from '../../../types/AppTypes'
 
 type MapStatePropTypes = {
   pageSize: number

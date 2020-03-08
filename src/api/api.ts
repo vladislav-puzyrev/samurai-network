@@ -1,49 +1,21 @@
 import axios from 'axios'
-import { ProfileType } from '../types/types'
+import {
+  GetUsersResponse,
+  OperationResult,
+  SavePhotoResponse,
+  MeResponse,
+  LoginResponse,
+  GetCaptchaResponse
+} from '../types/APITypes'
+import { ProfileType } from '../types/AppTypes'
 
-const instance = axios.create({
+const server = axios.create({
   withCredentials: true,
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
   headers: {
     'API-KEY': '0408f290-d27f-4e1c-bba9-4d253322100f'
   }
 })
-
-export const usersAPI = {
-  getUsers (count: number, page: number) {
-    return instance.get(`users?count=${count}&page=${page}`).then((res) => res.data)
-  },
-  follow (userID: number) {
-    return instance.post(`follow/${userID}`)
-  },
-  unfollow (userID: number) {
-    return instance.delete(`follow/${userID}`)
-  }
-}
-
-export const profileAPI = {
-  getProfile (userID: number) {
-    return instance.get(`profile/${userID}`)
-  },
-  getStatus (userID: number) {
-    return instance.get(`profile/status/${userID}`)
-  },
-  updateStatus (status: string) {
-    return instance.put('profile/status', { status: status })
-  },
-  savePhoto (photoFile: File) {
-    const formData = new FormData()
-    formData.append('image', photoFile)
-    return instance.put('profile/photo', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-  },
-  saveProfile (profile: ProfileType) {
-    return instance.put('profile', profile)
-  }
-}
 
 export enum ResultCodesEnum {
   Success = 0,
@@ -54,39 +26,74 @@ export enum ResultCodesForCaptchaEnum {
   CaptchaIsRequired = 10,
 }
 
-type MeResponseType = {
-  data: {
-    id: number
-    email: string
-    login: string
+export const usersAPI = {
+  async getUsers (count: number, page: number, term = '') {
+    const res = await server.get<GetUsersResponse>(`users?count=${count}&page=${page}&term=${term}`)
+    return res.data
+  },
+  async isFollowing (userID: number) {
+    const res = await server.get<boolean>(`follow/${userID}`)
+    return res.data
+  },
+  async follow (userID: number) {
+    const res = await server.post<OperationResult>(`follow/${userID}`)
+    return res.data
+  },
+  async unfollow (userID: number) {
+    const res = await server.delete<OperationResult>(`follow/${userID}`)
+    return res.data
   }
-  resultCode: ResultCodesEnum
-  messages: Array<string>
 }
 
-type LoginResponseType = {
-  data: {
-    userId: number
+export const profileAPI = {
+  async getProfile (userID: number) {
+    const res = await server.get<ProfileType>(`profile/${userID}`)
+    return res.data
+  },
+  async getStatus (userID: number) {
+    const res = await server.get<string>(`profile/status/${userID}`)
+    return res.data
+  },
+  async updateStatus (status: string) {
+    const res = await server.put<OperationResult>('profile/status', { status: status })
+    return res.data
+  },
+  async updatePhoto (photoFile: File) {
+    const formData = new FormData()
+    formData.append('image', photoFile)
+
+    const res = await server.put<SavePhotoResponse>('profile/photo', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+
+    return res.data
+  },
+  async updateProfile (profile: ProfileType) {
+    const res = await server.put<OperationResult>('profile', profile)
+    return res.data
   }
-  resultCode: ResultCodesEnum | ResultCodesForCaptchaEnum
-  messages: Array<string>
 }
 
 export const authAPI = {
-  me () {
-    return instance.get<MeResponseType>('auth/me').then(res => res.data)
+  async me () {
+    const res = await server.get<MeResponse>('auth/me')
+    return res.data
   },
-  login (email: string, password: string, rememberMe = false, captcha: string) {
-    return instance.post<LoginResponseType>('auth/login', { email, password, rememberMe, captcha })
-      .then(res => res.data)
+  async login (email: string, password: string, rememberMe = true, captcha: string) {
+    const res = await server.post<LoginResponse>('auth/login', { email, password, rememberMe, captcha })
+    return res.data
   },
-  logout () {
-    return instance.delete('auth/login')
+  async logout () {
+    const res = await server.delete<OperationResult>('auth/login')
+    return res.data
   }
 }
 
 export const securityAPI = {
-  getCaptchaUrl () {
-    return instance.get('security/get-captcha-url')
+  async getCaptcha () {
+    const res = await server.get<GetCaptchaResponse>('security/get-captcha-url')
+    return res.data
   }
 }

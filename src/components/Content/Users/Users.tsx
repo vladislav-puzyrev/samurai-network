@@ -3,7 +3,7 @@ import styles from './Users.module.css'
 import PaginationItem from './PaginationItem/PaginationItem'
 import User from './User/User'
 import Preloader from '../../common/Preloader/Preloader'
-import { UserType } from '../../../types/types'
+import { UserType } from '../../../types/AppTypes'
 
 type PropTypes = {
   currentPage: number
