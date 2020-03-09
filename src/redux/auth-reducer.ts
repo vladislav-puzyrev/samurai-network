@@ -1,4 +1,4 @@
-import { authAPI, ResultCodesEnum, ResultCodesForCaptchaEnum, securityAPI } from '../api/api'
+import { authAPI, securityAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
 
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
@@ -71,7 +71,7 @@ export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessTy
 export const getAuthUserData = () => async (dispatch: any) => {
   const meData = await authAPI.me()
 
-  if (meData.resultCode === ResultCodesEnum.Success) {
+  if (meData.resultCode === 0) {
     let { id, email, login } = meData.data
     dispatch(setAuthUserData(id, email, login, true))
   }
@@ -86,11 +86,12 @@ export const login = (
 ) => async (dispatch: any) => {
   const data = await authAPI.login(email, password, rememberMe, captcha)
 
-  if (data.resultCode === ResultCodesEnum.Success) {
+  if (data.resultCode === 0) {
     dispatch(getAuthUserData())
   }
   else {
-    if (data.resultCode === ResultCodesForCaptchaEnum.CaptchaIsRequired) {
+    // 10 - Captcha is required
+    if (data.resultCode === 10) {
       dispatch(getCaptchaUrl())
     }
 

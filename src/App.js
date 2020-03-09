@@ -13,7 +13,7 @@ import { HashRouter } from 'react-router-dom'
 function App (props) {
   useEffect(() => {
     props.initializeApp()
-  })
+  }, [])
 
   if (!props.initialized) {
     return <Preloader/>

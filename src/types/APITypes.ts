@@ -1,44 +1,47 @@
 import { PhotosType, UserType } from './AppTypes'
-import { ResultCodesEnum, ResultCodesForCaptchaEnum } from '../api/api'
 
-export type OperationResult = {
-  data: any
+export interface OperationResult {
+  data: Object
   messages: Array<string>
   resultCode: number
 }
 
-export type GetUsersResponse = {
+export interface GetUsersResponse {
   items: Array<UserType>
   totalCount: number
   error: string | null
 }
 
-export type SavePhotoResponse = {
+export interface SavePhotoResponse extends OperationResult {
   data: {
     photos: PhotosType
   }
-  messages: Array<string>
-  resultCode: number
 }
 
-export type MeResponse = {
+export interface MeResponse extends OperationResult {
   data: {
     id: number
     email: string
     login: string
   }
-  messages: Array<string>
-  resultCode: ResultCodesEnum
 }
 
-export type LoginResponse = {
+export interface LoginResponse extends OperationResult {
   data: {
     userId: number
   }
-  messages: Array<string>
-  resultCode: ResultCodesEnum | ResultCodesForCaptchaEnum
 }
 
-export type GetCaptchaResponse = {
+export interface GetCaptchaResponse {
   url: string
+}
+
+export interface GetAllDialogsResponse {
+  id: number
+  userName: string
+  hasNewMessages: boolean
+  lastDialogActivityDate: string
+  lastUserActivityDate: string
+  newMessagesCount: number
+  photos: PhotosType
 }

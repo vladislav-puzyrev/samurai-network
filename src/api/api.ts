@@ -5,7 +5,8 @@ import {
   SavePhotoResponse,
   MeResponse,
   LoginResponse,
-  GetCaptchaResponse
+  GetCaptchaResponse,
+  GetAllDialogsResponse
 } from '../types/APITypes'
 import { ProfileType } from '../types/AppTypes'
 
@@ -13,18 +14,10 @@ const server = axios.create({
   withCredentials: true,
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
   headers: {
-    'API-KEY': '0408f290-d27f-4e1c-bba9-4d253322100f'
+    'API-KEY':
+      '420dc76f-b29f-496f-bc3d-479cffbbc8e0'
   }
 })
-
-export enum ResultCodesEnum {
-  Success = 0,
-  Error = 1,
-}
-
-export enum ResultCodesForCaptchaEnum {
-  CaptchaIsRequired = 10,
-}
 
 export const usersAPI = {
   async getUsers (count: number, page: number, term = '') {
@@ -55,45 +48,91 @@ export const profileAPI = {
     return res.data
   },
   async updateStatus (status: string) {
-    const res = await server.put<OperationResult>('profile/status', { status: status })
+    const res = await server.put<OperationResult>(`profile/status`, { status: status })
     return res.data
   },
   async updatePhoto (photoFile: File) {
     const formData = new FormData()
-    formData.append('image', photoFile)
+    formData.append(`image`, photoFile)
 
-    const res = await server.put<SavePhotoResponse>('profile/photo', formData, {
+    const res = await server.put<SavePhotoResponse>(`profile/photo`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type':
+          'multipart/form-data'
       }
     })
 
     return res.data
   },
   async updateProfile (profile: ProfileType) {
-    const res = await server.put<OperationResult>('profile', profile)
+    const res = await server.put<OperationResult>(`profile`, profile)
     return res.data
   }
 }
 
 export const authAPI = {
   async me () {
-    const res = await server.get<MeResponse>('auth/me')
+    const res = await server.get<MeResponse>(`auth/me`)
     return res.data
   },
   async login (email: string, password: string, rememberMe = true, captcha: string) {
-    const res = await server.post<LoginResponse>('auth/login', { email, password, rememberMe, captcha })
+    const res = await server.post<LoginResponse>(`auth/login`, { email, password, rememberMe, captcha })
     return res.data
   },
   async logout () {
-    const res = await server.delete<OperationResult>('auth/login')
+    const res = await server.post<OperationResult>(`auth/logout`)
     return res.data
   }
 }
 
 export const securityAPI = {
   async getCaptcha () {
-    const res = await server.get<GetCaptchaResponse>('security/get-captcha-url')
+    const res = await server.get<GetCaptchaResponse>(`security/get-captcha-url`)
+    return res.data
+  }
+}
+
+export const dialogsAPI = {
+  // Сортировка человека вверх при начале чатинга
+  async startChatting (userID: number) {
+    const res = await server.put<OperationResult>(`dialogs/${userID}`)
+    return res.data
+  },
+  // Получить все диалоги (без сообщений просто для вывода)
+  async getAllDialogs () {
+    const res = await server.get<Array<GetAllDialogsResponse>>(`dialogs`)
+    return res.data
+  },
+  async getDialog (userID: number) {
+    const res = await server.get<any>(`dialogs/${userID}/messages`)
+    return res.data
+  },
+  async sendMessage (userID: number, message: string) {
+    const res = await server.post<any>(`dialogs/${userID}/messages`, message)
+    return res.data
+  },
+  async isMessageViewed (messageID: number) {
+    const res = await server.get<any>(`dialogs/messages/${messageID}/viewed`)
+    return res.data
+  },
+  async putMessageInSpam (messageID: number) {
+    const res = await server.post<any>(`dialogs/messages/${messageID}/spam`)
+    return res.data
+  },
+  async deleteMessage (messageID: number) {
+    const res = await server.delete<any>(`dialogs/messages/${messageID}`)
+    return res.data
+  },
+  async restoreMessage (messageID: number) {
+    const res = await server.put<any>(`dialogs/messages/${messageID}/restore`)
+    return res.data
+  },
+  async messagesNewerThanDate (userID: number, date: string) {
+    const res = await server.get<any>(`dialogs/${userID}/messages/new?newerThen=${date}`)
+    return res.data
+  },
+  async getNewMessages () {
+    const res = await server.get<any>(`dialogs/messages/new/count`)
     return res.data
   }
 }
