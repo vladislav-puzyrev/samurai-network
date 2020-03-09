@@ -19,15 +19,15 @@ function Content () {
   return (
     <div className={styles.content}>
       <Switch>
-        <Route exact path='/' render={() => <Redirect to='/profile' />} />
-        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
-        <Route path='/messages' render={withSuspense(MessagesContainer)} />
-        <Route path='/users' render={() => <UsersContainer />} />
-        <Route path='/news' component={News} />
-        <Route path='/music' component={Music} />
-        <Route path='/settings' component={Settings} />
-        <Route path='/login' render={() => <Login />} />
-        <Route path='*' render={() => '404'} />
+        <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
+        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
+        <Route path='/messages' render={withSuspense(MessagesContainer)}/>
+        <Route path='/users' render={() => <UsersContainer/>}/>
+        <Route path='/news' component={News}/>
+        <Route path='/music' component={Music}/>
+        <Route path='/settings' component={Settings}/>
+        <Route path='/login' render={() => <Login/>}/>
+        <Route path='*' render={() => '404'}/>
       </Switch>
     </div>
   )

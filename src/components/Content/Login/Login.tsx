@@ -8,8 +8,14 @@ import { Redirect } from 'react-router-dom'
 
 const Input = createField('input')
 
-function Login (props) {
-  const onSubmit = (formData) => {
+type PropTypes = {
+  isAuth: boolean
+  captchaUrl: string
+  login: (login: string, password: string, rememberMe: boolean, captcha: string) => void
+}
+
+function Login (props: PropTypes) {
+  const onSubmit = (formData: any) => {
     const { login, password, rememberMe, captcha } = formData
     props.login(login, password, rememberMe, captcha)
   }
@@ -21,12 +27,13 @@ function Login (props) {
   return (
     <div>
       <h1>Login</h1>
+      // @ts-ignore
       <LoginReduxForm captchaUrl={props.captchaUrl} onSubmit={onSubmit}/>
     </div>
   )
 }
 
-function LoginForm ({ handleSubmit, error, captchaUrl }) {
+function LoginForm ({ handleSubmit, error, captchaUrl }: any) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -64,6 +71,4 @@ function LoginForm ({ handleSubmit, error, captchaUrl }) {
 
 const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm)
 
-export default connect(
-  (state) => ({ isAuth: state.auth.isAuth, captchaUrl: state.auth.captchaUrl }),
-  { login })(Login)
+export default connect((state: any) => ({ isAuth: state.auth.isAuth, captchaUrl: state.auth.captchaUrl }), { login })(Login)

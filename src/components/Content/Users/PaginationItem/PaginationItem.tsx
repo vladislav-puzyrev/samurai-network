@@ -1,7 +1,12 @@
 import React from 'react'
 import styles from './PaginationItem.module.css'
 
-function PaginationItem (props) {
+type PropTypes = {
+  active: boolean
+  number: number
+}
+
+function PaginationItem (props: PropTypes) {
   const activeStyle = props.active ? styles.paginationItemActive : ''
 
   return (

@@ -16,7 +16,7 @@ import {
   getTotalUsersCount,
   getUsersSelector,
 } from '../../../redux/users-selectors'
-import { AppStateType } from '../../../redux/redux-store'
+import { AppStateType } from '../../../redux/store'
 import { UserType } from '../../../types/AppTypes'
 
 type MapStatePropTypes = {
@@ -36,14 +36,7 @@ type MapDispatchPropTypes = {
   unfollow: (id: number) => void
 }
 
-type OwnPropTypes = {
-  pageSize: number
-  currentPage: number
-  getRequestUsers: (pageSize: number, currentPage: number) => void
-  onPageChanged: (text: number) => void
-}
-
-type PropTypes = MapStatePropTypes & MapDispatchPropTypes & OwnPropTypes
+type PropTypes = MapStatePropTypes & MapDispatchPropTypes
 
 class UsersContainer extends React.Component<PropTypes> {
   componentDidMount () {
@@ -81,30 +74,7 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
   }
 }
 
-/*function mapDispatchToProps(dispatch) {
-    return {
-        follow(userId) {
-            dispatch(followAC(userId));
-        },
-        unfollow(userId) {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers(users) {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage(currentPage) {
-            dispatch(setCurrentPageAC(currentPage));
-        },
-        setTotalUsers(totalUsers) {
-            dispatch(setTotalUsersAC(totalUsers));
-        },
-        setIsFetching(isFetching) {
-            dispatch(setIsFetchingAC(isFetching));
-        }
-    }
-}*/
-
-export default connect<MapStatePropTypes, MapDispatchPropTypes, OwnPropTypes, AppStateType>(mapStateToProps, {
+export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, AppStateType>(mapStateToProps, {
   setCurrentPage,
   setIsFetching,
   getRequestUsers,

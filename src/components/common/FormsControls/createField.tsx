@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './FormsControls.module.css'
 
-export function createField (FormElement) {
-  return function ({ meta, input, ...props }) {
+export function createField (FormElement: string) {
+  return function ({ meta, input, ...props }: any) {
     const isError = meta.error && meta.touched
 
     return (

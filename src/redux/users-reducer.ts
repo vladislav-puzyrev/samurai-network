@@ -1,6 +1,6 @@
 import { usersAPI } from '../api/api'
 import { UserType } from '../types/AppTypes'
-import { AppStateType } from './redux-store'
+import { AppStateType } from './store'
 import { Dispatch } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 

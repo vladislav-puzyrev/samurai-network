@@ -1,70 +1,31 @@
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import profileReducer from './profile-reducer'
-import sidebarReducer from './sidebar-reducer'
 import messagesReducer from './messages-reducer'
+import sidebarReducer from './sidebar-reducer'
+import usersReducer from './users-reducer'
+import authReducer from './auth-reducer'
+import appReducer from './app-reducer'
+import thunkMiddleware from 'redux-thunk'
+import { reducer as formReducer } from 'redux-form'
 
-const store = {
-  _subscriber () {
-    console.log('no subscribers')
-  },
-  _state: {
-    profilePage: {
-      posts: [
-        { id: 1, text: 'Вам нравится React?', likes: 4 },
-        { id: 2, text: 'hey', likes: 2 }
-      ],
-      postText: 'facebook'
-    },
-    messagesPage: {
-      dialogs: [
-        { id: 1, username: 'Димыч' },
-        { id: 2, username: 'Саша' },
-        { id: 3, username: 'Валера' },
-        { id: 4, username: 'Иван' },
-        { id: 5, username: 'Света' }
-      ],
-      messages: [
-        { id: 1, username: 'Димыч', message: 'Я люблю react!' },
-        { id: 2, username: 'Димыч', message: 'Я люблю react!' }
-      ],
-      currentMessage: 'Привет мир!'
-    },
-    sidebar: {
-      friends: [
-        {
-          id: 1,
-          username: 'Димыч',
-          avatar: 'https://whatsism.com/uploads/posts/2018-07/1530546770_rmk_vdjbx10.jpg'
-        },
-        {
-          id: 2,
-          username: 'Колян',
-          avatar: 'https://whatsism.com/uploads/posts/2018-07/1530546770_rmk_vdjbx10.jpg'
-        },
-        {
-          id: 3,
-          username: 'Серега',
-          avatar: 'https://whatsism.com/uploads/posts/2018-07/1530546770_rmk_vdjbx10.jpg'
-        }
-      ]
-    }
-  },
+const rootReducer = combineReducers({
+  profilePage: profileReducer,
+  messagesPage: messagesReducer,
+  usersPage: usersReducer,
+  sidebar: sidebarReducer,
+  auth: authReducer,
+  init: appReducer,
+  form: formReducer,
+})
 
-  getState () {
-    return this._state
-  },
-  subscribe (observer: any) {
-    this._subscriber = observer
-  },
+type RootReducerType = typeof rootReducer
+export type AppStateType = ReturnType<RootReducerType>
 
-  dispatch (action: any) {
-    // @ts-ignore
-    this._state.profilePage = profileReducer(this._state.profilePage, action)
-    // @ts-ignore
-    this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
-    this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-    this._subscriber()
-  }
-}
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
+// @ts-ignore
+window._store = store
 export default store
