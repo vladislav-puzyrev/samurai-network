@@ -1,6 +1,6 @@
 import React from 'react'
 import { createField } from '../../../common/FormsControls/createField'
-import { required } from '../../../../utils/validators/validators'
+import { required } from '../../../../utils/validators'
 import { Field, reduxForm } from 'redux-form'
 
 const Input = createField('input')

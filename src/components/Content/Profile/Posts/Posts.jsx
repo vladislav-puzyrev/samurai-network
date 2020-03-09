@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Posts.module.css'
 import Post from './Post/Post'
 import { Field, reduxForm } from 'redux-form'
-import { required, maxLengthCreator } from '../../../../utils/validators/validators'
+import { required, maxLengthCreator } from '../../../../utils/validators'
 import { createField } from '../../../common/FormsControls/createField'
 
 const maxLength = maxLengthCreator(10)

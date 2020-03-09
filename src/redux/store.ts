@@ -52,19 +52,19 @@ const store = {
   getState () {
     return this._state
   },
-  subscribe (observer) {
+  subscribe (observer: any) {
     this._subscriber = observer
   },
 
-  dispatch (action) {
+  dispatch (action: any) {
+    // @ts-ignore
     this._state.profilePage = profileReducer(this._state.profilePage, action)
-    this._state.messagesPage = messagesReducer(this._state.messagesPage,
-      action)
+    // @ts-ignore
+    this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
     this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
     this._subscriber()
   }
 }
 
-window.store = store
 export default store

@@ -7,10 +7,10 @@ import Content from './components/Content/Content'
 import HeaderContainer from './components/Header/HeaderContainer'
 import { initializeApp } from './redux/app-reducer'
 import Preloader from './components/common/Preloader/Preloader'
-import store from './redux/redux-store'
+import store, { AppStateType } from './redux/redux-store'
 import { HashRouter } from 'react-router-dom'
 
-function App (props) {
+function App (props: any) {
   useEffect(() => {
     props.initializeApp()
   }, [])
@@ -31,7 +31,7 @@ function App (props) {
   )
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state: AppStateType) {
   return {
     initialized: state.init.initialized
   }
@@ -39,7 +39,7 @@ function mapStateToProps (state) {
 
 const AppConnect = connect(mapStateToProps, { initializeApp })(App)
 
-export default function AppContainer (props) {
+const AppContainer: React.FC<any> = (props: any) => {
   return (
     <Provider store={store}>
       <HashRouter>
@@ -48,3 +48,5 @@ export default function AppContainer (props) {
     </Provider>
   )
 }
+
+export default AppContainer

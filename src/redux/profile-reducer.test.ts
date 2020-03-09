@@ -1,13 +1,14 @@
-import profileReducer, {
-  addPostActionCreator,
-  deletePost
-} from './profile-reducer'
+import profileReducer, { addPostActionCreator, deletePost } from './profile-reducer'
+import { PostType, ProfileType } from '../types/AppTypes'
 
 const initialState = {
   posts: [
     { id: 1, text: 'Вам нравится React?', likes: 4 },
-    { id: 2, text: 'hey', likes: 2 }
-  ]
+    { id: 2, text: 'hey', likes: 2 },
+  ] as Array<PostType>,
+  profile: null as ProfileType | null,
+  status: '',
+  postText: '',
 }
 
 it('Длина постов была увеличена', () => {

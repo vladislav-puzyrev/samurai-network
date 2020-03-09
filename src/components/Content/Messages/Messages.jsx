@@ -4,7 +4,7 @@ import Dialog from './Dialog/Dialog'
 import Message from './Message/Message'
 import { Field, reduxForm } from 'redux-form'
 import { createField } from '../../common/FormsControls/createField'
-import { maxLengthCreator, required } from '../../../utils/validators/validators'
+import { maxLengthCreator, required } from '../../../utils/validators'
 
 const maxLength = maxLengthCreator(10)
 const Textarea = createField('textarea')
