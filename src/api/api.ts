@@ -15,6 +15,8 @@ const server = axios.create({
   withCredentials: true,
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
   headers: {
+    // ca3b0eb4-4af6-4803-8caa-f7d26464a12c main
+    // a7da6dad-5c4f-417c-a0d9-8d30ee0d96ec secondary
     'API-KEY': 'ca3b0eb4-4af6-4803-8caa-f7d26464a12c',
   }
 })
@@ -103,27 +105,22 @@ export const dialogsAPI = {
     const res = await server.get<Array<GetAllDialogsResponse>>(`dialogs`)
     return res.data
   },
-  // Получить диалог
   async getDialog (userID: number) {
     const res = await server.get<GetDialogResponse>(`dialogs/${userID}/messages`)
     return res.data
   },
-  // Отправить сообщение
   async sendMessage (userID: number, message: string) {
     const res = await server.post<SendMessageResponse>(`dialogs/${userID}/messages`, { body: message })
     return res.data
   },
-  // Прочитано ли сообщение
   async isMessageViewed (messageID: string) {
     const res = await server.get<boolean>(`dialogs/messages/${messageID}/viewed`)
     return res.data
   },
-  // Поместить сообщение в спам
   async putMessageInSpam (messageID: string) {
     const res = await server.post<OperationResult>(`dialogs/messages/${messageID}/spam`)
     return res.data
   },
-  // Удалить сообщение
   async deleteMessage (messageID: string) {
     const res = await server.delete<OperationResult>(`dialogs/messages/${messageID}`)
     return res.data

@@ -6,7 +6,7 @@ export interface OperationResult {
   resultCode: number
 }
 
-export interface ItemsResult {
+interface ItemsResult {
   items: Array<Object>
   totalCount: number
   error: string | null
@@ -40,6 +40,7 @@ export interface GetCaptchaResponse {
   url: string
 }
 
+// Dialogs
 export interface GetAllDialogsResponse {
   id: number
   userName: string
