@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import styles from './App.module.css'
 import Footer from './Footer/Footer'
 import Sidebar from './Sidebar/Sidebar'
-import Content from './Content/Content'
+import Content from './Main/Content'
 import HeaderContainer from './Header/HeaderContainer'
 import { initializeApp } from '../redux/app-reducer'
-import Preloader from './common/Preloader/Preloader'
 import { AppStateType } from '../redux/store'
 import { HashRouter } from 'react-router-dom'
+import PagePreloader from './PagePreloader/PagePreloader'
 
 type MapStatePropTypes = {
   initialized: boolean
@@ -28,7 +28,7 @@ const App: React.FC<PropTypes> = (props) => {
   }, [props])
 
   if (!props.initialized) {
-    return <Preloader/>
+    return <PagePreloader/>
   }
 
   return (

@@ -2,7 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: white;
 }
 
 html,
@@ -14,14 +13,9 @@ body,
 body {
   font-family: Arial, sans-serif;
   font-size: 14px;
+  color: white;
 }
 
-input,
-button,
-textarea {
-  color: black;
-}
-
-button[disabled] {
-  color: #a6a6a6;
+a {
+  color: inherit;
 }

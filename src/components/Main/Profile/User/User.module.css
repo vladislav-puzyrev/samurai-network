@@ -1,0 +1,56 @@
+.user {
+  display: flex;
+}
+
+.avatar {
+  background-color: #26262c;
+  margin-right: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 25%;
+}
+
+.avatarWrapper {
+  padding: 15px;
+}
+
+.avatarIMG {
+  width: 100%;
+  display: block;
+  height: 220px
+}
+
+.avatarLoad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.info {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #26262c;
+  flex-basis: 75%;
+}
+
+.name {
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+.about {
+  margin-top: 10px;
+  list-style: none;
+}
+
+.contacts {
+  list-style: none;
+}
+
+.contLI {
+  margin-top: 10px;
+}

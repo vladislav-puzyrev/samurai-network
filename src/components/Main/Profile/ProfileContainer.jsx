@@ -13,8 +13,7 @@ import { compose } from 'redux'
 
 class ProfileContainer extends React.Component {
   refreshProfile () {
-    const userURLId = this.props.match.params.userId || this.props.userId ||
-      this.props.history.push('/login')
+    const userURLId = this.props.match.params.userId || this.props.userId || this.props.history.push('/login')
     this.props.getUsersProfile(userURLId)
     this.props.getStatus(userURLId)
   }
@@ -30,7 +29,7 @@ class ProfileContainer extends React.Component {
   }
 
   render () {
-    return <Profile {...this.props} isOwner={!this.props.match.params.userId} />
+    return <Profile {...this.props} isOwner={!this.props.match.params.userId}/>
   }
 }
 
@@ -42,12 +41,7 @@ function mapStateToProps (state) {
   }
 }
 
-/* let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-let withUrlDataContainerComponent = withRouter(AuthRedirectComponent);
-export default connect(mapStateToProps, {getUsersProfile})(withUrlDataContainerComponent); */
-
 export default compose(
-  connect(mapStateToProps,
-    { getUsersProfile, getStatus, updateStatus, savePhoto, saveProfile }),
+  connect(mapStateToProps, { getUsersProfile, getStatus, updateStatus, savePhoto, saveProfile }),
   withRouter
 )(ProfileContainer)

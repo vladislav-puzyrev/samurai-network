@@ -9,20 +9,8 @@
 .main {
   display: flex;
   width: 60%;
+  min-width: 650px;
   margin: 0 auto;
   flex: 1 0 auto;
   padding: 20px 0;
-}
-
-@media screen and (max-width: 1200px) {
-  .main {
-    width: 80%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .main {
-    width: 100%;
-    padding: 20px;
-  }
 }

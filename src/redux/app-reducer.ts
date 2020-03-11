@@ -26,6 +26,7 @@ function appReducer (state = initialState, action: any): InitialStateType {
 type InitializedSuccessType = {
   type: typeof INITIALIZED_SUCCESS
 };
+
 export const initializedSuccess = (): InitializedSuccessType => ({ type: INITIALIZED_SUCCESS })
 
 export const initializeApp = () => (dispatch: any) => {

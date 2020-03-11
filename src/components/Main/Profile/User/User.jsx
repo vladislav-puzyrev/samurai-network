@@ -26,10 +26,21 @@ function User ({ profile, savePhoto, status, updateStatus, isOwner, saveProfile 
 
   return (
     <div className={styles.user}>
-      <img
-        className={styles.avatar}
-        src={profile.photos.large || defaultAvatar} alt='avatar'
-      />
+      <div className={styles.avatar}>
+        <div className={styles.avatarWrapper}>
+          <img
+            className={styles.avatarIMG}
+            src={profile.photos.large || defaultAvatar} alt='avatar'
+          />
+        </div>
+        {
+          isOwner &&
+          <div className={styles.avatarLoad}>
+            <input onChange={onMainPhotoSelected} type='file'/>
+          </div>
+        }
+      </div>
+
       <div className={styles.info}>
         <h1 className={styles.name}>
           {profile && profile.fullName}
@@ -44,10 +55,6 @@ function User ({ profile, savePhoto, status, updateStatus, isOwner, saveProfile 
             goToEditMode={() => { setEditMode(true) }}
             isOwner={isOwner} profile={profile}
           />}
-        {isOwner && <input
-          onChange={onMainPhotoSelected} type='file'
-          style={{ color: 'white' }}
-        />}
       </div>
     </div>
   )
