@@ -6,7 +6,8 @@ import {
   MeResponse,
   LoginResponse,
   GetCaptchaResponse,
-  GetAllDialogsResponse
+  GetAllDialogsResponse,
+  GetDialogResponse, SendMessageResponse, messagesNewerThanDateResponse
 } from '../types/APITypes'
 import { ProfileType } from '../types/AppTypes'
 
@@ -14,7 +15,7 @@ const server = axios.create({
   withCredentials: true,
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
   headers: {
-    'API-KEY': '13d142c2-4a3d-479d-864d-57ee538f7fe2'
+    'API-KEY': 'ca3b0eb4-4af6-4803-8caa-f7d26464a12c',
   }
 })
 
@@ -102,36 +103,54 @@ export const dialogsAPI = {
     const res = await server.get<Array<GetAllDialogsResponse>>(`dialogs`)
     return res.data
   },
+  // Получить диалог
   async getDialog (userID: number) {
-    const res = await server.get<any>(`dialogs/${userID}/messages`)
+    const res = await server.get<GetDialogResponse>(`dialogs/${userID}/messages`)
     return res.data
   },
+  // Отправить сообщение
   async sendMessage (userID: number, message: string) {
-    const res = await server.post<any>(`dialogs/${userID}/messages`, message)
+    const res = await server.post<SendMessageResponse>(`dialogs/${userID}/messages`, { body: message })
     return res.data
   },
-  async isMessageViewed (messageID: number) {
-    const res = await server.get<any>(`dialogs/messages/${messageID}/viewed`)
+  // Прочитано ли сообщение
+  async isMessageViewed (messageID: string) {
+    const res = await server.get<boolean>(`dialogs/messages/${messageID}/viewed`)
     return res.data
   },
-  async putMessageInSpam (messageID: number) {
-    const res = await server.post<any>(`dialogs/messages/${messageID}/spam`)
+  // Поместить сообщение в спам
+  async putMessageInSpam (messageID: string) {
+    const res = await server.post<OperationResult>(`dialogs/messages/${messageID}/spam`)
     return res.data
   },
-  async deleteMessage (messageID: number) {
-    const res = await server.delete<any>(`dialogs/messages/${messageID}`)
+  // Удалить сообщение
+  async deleteMessage (messageID: string) {
+    const res = await server.delete<OperationResult>(`dialogs/messages/${messageID}`)
     return res.data
   },
-  async restoreMessage (messageID: number) {
-    const res = await server.put<any>(`dialogs/messages/${messageID}/restore`)
+  async restoreMessage (messageID: string) {
+    const res = await server.put<OperationResult>(`dialogs/messages/${messageID}/restore`)
     return res.data
   },
   async messagesNewerThanDate (userID: number, date: string) {
-    const res = await server.get<any>(`dialogs/${userID}/messages/new?newerThen=${date}`)
+    const res = await server.get<Array<messagesNewerThanDateResponse>>(
+      `dialogs/${userID}/messages/new?newerThen=${date}`
+    )
     return res.data
   },
   async getNewMessages () {
-    const res = await server.get<any>(`dialogs/messages/new/count`)
+    const res = await server.get<number>(`dialogs/messages/new/count`)
     return res.data
   }
 }
+
+// dialogsAPI.startChatting(5).then(r => {console.log(r)})
+// dialogsAPI.getAllDialogs().then(r => {console.log(r)})
+// dialogsAPI.getDialog(5).then(r => {console.log(r)})
+// dialogsAPI.sendMessage(5856, 'test').then(r => {console.log(r)})
+// dialogsAPI.isMessageViewed('3e755133-76bf-4d8e-9ba4-80a1683973cd').then(r => {console.log(r)})
+// dialogsAPI.putMessageInSpam('3e755133-76bf-4d8e-9ba4-80a1683973cd').then(r => {console.log(r)})
+// dialogsAPI.deleteMessage('3e755133-76bf-4d8e-9ba4-80a1683973cd').then(r => {console.log(r)})
+// dialogsAPI.restoreMessage('3e755133-76bf-4d8e-9ba4-80a1683973cd').then(r => {console.log(r)})
+// dialogsAPI.messagesNewerThanDate(5, '2020-03-11T17:11:10.403').then(r => {console.log(r)})
+// dialogsAPI.getNewMessages().then(r => {console.log(r)})

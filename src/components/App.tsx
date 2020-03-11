@@ -22,8 +22,10 @@ type PropTypes = MapStatePropTypes & MapDispatchPropTypes
 
 const App: React.FC<PropTypes> = (props) => {
   useEffect(() => {
-    props.initializeApp()
-  }, [])
+    if (!props.initialized) {
+      props.initializeApp()
+    }
+  }, [props])
 
   if (!props.initialized) {
     return <Preloader/>
@@ -49,5 +51,6 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
   }
 }
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, AppStateType>
-(mapStateToProps, { initializeApp })(App)
+export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, AppStateType>(
+  mapStateToProps, { initializeApp }
+)(App)

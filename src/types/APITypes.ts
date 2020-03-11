@@ -6,10 +6,14 @@ export interface OperationResult {
   resultCode: number
 }
 
-export interface GetUsersResponse {
-  items: Array<UserType>
+export interface ItemsResult {
+  items: Array<Object>
   totalCount: number
   error: string | null
+}
+
+export interface GetUsersResponse extends ItemsResult {
+  items: Array<UserType>
 }
 
 export interface SavePhotoResponse extends OperationResult {
@@ -44,4 +48,39 @@ export interface GetAllDialogsResponse {
   lastUserActivityDate: string
   newMessagesCount: number
   photos: PhotosType
+}
+
+export interface GetDialogResponse extends ItemsResult {
+  items: Array<{
+    id: string
+    body: string
+    translatedBody: null
+    addedAt: string
+    senderId: number
+    senderName: string
+    recipientId: number
+    viewed: boolean
+  }>
+}
+
+export interface messagesNewerThanDateResponse {
+  id: string
+  body: string
+  translatedBody: null
+  addedAt: string
+  senderId: number
+  senderName: string
+  recipientId: number
+  recipientName: string
+  viewed: boolean
+  deletedBySender: boolean
+  deletedByRecipient: boolean
+  isSpam: boolean
+  distributionId: null
+}
+
+export interface SendMessageResponse extends OperationResult {
+  data: {
+    message: messagesNewerThanDateResponse
+  }
 }
