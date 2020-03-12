@@ -3,13 +3,13 @@ const SEND_MESSAGE = 'samurai-network/messages/SEND_MESSAGE'
 type DialogType = {
   id: number
   username: string
-};
+}
 
 type MessageType = {
   id: number
   username: string
   message: string
-};
+}
 
 const initialState = {
   dialogs: [
@@ -48,7 +48,7 @@ function messagesReducer (state = initialState, action: any): InitialStateType {
 type sendMessageActionCreatorActionType = {
   type: typeof SEND_MESSAGE
   formData: string
-};
+}
 
 export const sendMessageActionCreator = (formData: string): sendMessageActionCreatorActionType => ({
   type: SEND_MESSAGE,

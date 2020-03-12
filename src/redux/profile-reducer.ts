@@ -15,7 +15,6 @@ const initialState = {
   ] as Array<PostType>,
   profile: null as ProfileType | null,
   status: '',
-  postText: '',
 }
 
 export type InitialStateType = typeof initialState;
@@ -33,7 +32,6 @@ function profileReducer (state = initialState, action: any): InitialStateType {
       return {
         ...state,
         posts: [...state.posts, newPost],
-        postText: '',
       }
 
     case SET_USER_PROFILE:

@@ -7,7 +7,7 @@ import {
   follow,
   unfollow,
 } from '../../../redux/users-reducer'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   getCurrentPage,
   getFollowingInProgress,
@@ -38,29 +38,28 @@ type MapDispatchPropTypes = {
 
 type PropTypes = MapStatePropTypes & MapDispatchPropTypes
 
-class UsersContainer extends React.Component<PropTypes> {
-  componentDidMount () {
-    this.props.getRequestUsers(this.props.pageSize, this.props.currentPage)
+const UsersContainer: React.FC<PropTypes> = (props) => {
+  useEffect(() => {
+    if (!props.totalUsersCount) {
+      props.getRequestUsers(props.pageSize, props.currentPage)
+    }
+  }, [props])
+
+  const onPageChanged = (currentPage: number) => {
+    props.getRequestUsers(props.pageSize, currentPage)
   }
 
-  // WITHOUT BIND
-  onPageChanged = (currentPage: number) => {
-    this.props.getRequestUsers(this.props.pageSize, currentPage)
-  }
-
-  render () {
-    return <Users
-      onPageChanged={this.onPageChanged}
-      currentPage={this.props.currentPage}
-      totalUsersCount={this.props.totalUsersCount}
-      setCurrentPage={this.props.setCurrentPage}
-      isFetching={this.props.isFetching}
-      users={this.props.users}
-      follow={this.props.follow}
-      unfollow={this.props.unfollow}
-      followingInProgress={this.props.followingInProgress}
-    />
-  }
+  return <Users
+    onPageChanged={onPageChanged}
+    currentPage={props.currentPage}
+    totalUsersCount={props.totalUsersCount}
+    setCurrentPage={props.setCurrentPage}
+    isFetching={props.isFetching}
+    users={props.users}
+    follow={props.follow}
+    unfollow={props.unfollow}
+    followingInProgress={props.followingInProgress}
+  />
 }
 
 function mapStateToProps (state: AppStateType): MapStatePropTypes {
@@ -74,7 +73,7 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
   }
 }
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, AppStateType>(mapStateToProps, {
+export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>(mapStateToProps, {
   setCurrentPage,
   setIsFetching,
   getRequestUsers,

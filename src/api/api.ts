@@ -37,7 +37,7 @@ export const usersAPI = {
   async unfollow (userID: number) {
     const res = await server.delete<OperationResult>(`follow/${userID}`)
     return res.data
-  }
+  },
 }
 
 export const profileAPI = {
@@ -69,7 +69,7 @@ export const profileAPI = {
   async updateProfile (profile: ProfileType) {
     const res = await server.put<OperationResult>(`profile`, profile)
     return res.data
-  }
+  },
 }
 
 export const authAPI = {
@@ -84,14 +84,14 @@ export const authAPI = {
   async logout () {
     const res = await server.post<OperationResult>(`auth/logout`)
     return res.data
-  }
+  },
 }
 
 export const securityAPI = {
   async getCaptcha () {
     const res = await server.get<GetCaptchaResponse>(`security/get-captcha-url`)
     return res.data
-  }
+  },
 }
 
 export const dialogsAPI = {
@@ -138,7 +138,7 @@ export const dialogsAPI = {
   async getNewMessages () {
     const res = await server.get<number>(`dialogs/messages/new/count`)
     return res.data
-  }
+  },
 }
 
 // dialogsAPI.startChatting(5).then(r => {console.log(r)})
