@@ -1,0 +1,7 @@
+.avatarBox img {
+  border-radius: 50%;
+}
+
+.user:not(:last-child) {
+  margin-bottom: 10px
+}

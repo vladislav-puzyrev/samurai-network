@@ -1,0 +1,29 @@
+.paginationItems {
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  width: 600px;
+  justify-content: space-between;
+}
+
+.button {
+  display: block;
+  height: 40px;
+  width: 50px;
+  background-color: #1f1f1f;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button:disabled {
+  display: block;
+  height: 40px;
+  width: 50px;
+  background-color: #1f1f1f;
+  border-radius: 5px;
+  color: #a3a3a3;
+  border: none;
+  cursor: not-allowed;
+}

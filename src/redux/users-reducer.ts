@@ -19,6 +19,7 @@ const initialState = {
   currentPage: 1,
   isFetching: false,
   followingInProgress: [] as Array<number>, // array of users ids
+  portionSize: 10
 }
 
 export type InitialStateType = typeof initialState

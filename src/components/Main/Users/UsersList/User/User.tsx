@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './User.module.css'
-import defaultAvatar from '../../../../assets/images/defaultAvatar.png'
+import defaultAvatar from '../../../../../assets/images/defaultAvatar.png'
 import { NavLink } from 'react-router-dom'
-import { UserType } from '../../../../types/AppTypes'
+import { UserType } from '../../../../../types/AppTypes'
 
 type PropTypes = {
   user: UserType

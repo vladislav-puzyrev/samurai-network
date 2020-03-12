@@ -1,9 +1,7 @@
 import React from 'react'
-import styles from './Users.module.css'
-import PaginationItem from './PaginationItem/PaginationItem'
-import User from './User/User'
-import Preloader from '../../common/Preloader/Preloader'
 import { UserType } from '../../../types/AppTypes'
+import Paginator from './Paginator/Paginator'
+import UsersList from './UsersList/UsersList'
 
 type PropTypes = {
   currentPage: number
@@ -15,47 +13,28 @@ type PropTypes = {
   follow: (id: number) => void
   unfollow: (id: number) => void
   followingInProgress: Array<number>
+  pageSize: number
+  portionSize: number
 }
 
-const Users: React.FC<PropTypes> = ({
-  currentPage, totalUsersCount, onPageChanged, setCurrentPage, isFetching, users, follow, unfollow, followingInProgress,
-}) => {
-  // const pagesQuantity = Math.ceil(totalUsersCount / pageSize);
-  const paginationItems = []
-
-  for (let i = +currentPage; i < +currentPage + 5; i++) {
-    if (i < +totalUsersCount) {
-      paginationItems.push(
-        <PaginationItem key={i} number={i} active={currentPage === +i}/>,
-      )
-    }
-  }
-
-  function onClickHandler (event: any) {
-    onPageChanged(event.target.textContent)
-    setCurrentPage(event.target.textContent)
-  }
-
+const Users: React.FC<PropTypes> = (props) => {
   return (
     <>
-      <h1 className={styles.title}>Пользователи</h1>
-      <ul className={styles.pagination} onClick={onClickHandler}>
-        {paginationItems}
-      </ul>
-
-      {isFetching && <Preloader/>}
-      <ul className={styles.users}>
-        {
-          users.map((user) => (
-            <User key={user.id}
-                  user={user}
-                  followingInProgress={followingInProgress}
-                  follow={follow}
-                  unfollow={unfollow}
-            />
-          ))
-        }
-      </ul>
+      <h1>Пользователи</h1>
+      <Paginator
+        totalUsersCount={props.totalUsersCount}
+        currentPage={props.currentPage}
+        pageSize={props.pageSize}
+        onPageChanged={props.onPageChanged}
+        portionSize={props.portionSize}
+      />
+      <UsersList
+        users={props.users}
+        followingInProgress={props.followingInProgress}
+        follow={props.follow}
+        unfollow={props.unfollow}
+        isFetching={props.isFetching}
+      />
     </>
   )
 }
