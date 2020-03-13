@@ -26,10 +26,20 @@ const Search: React.FC<PropTypes> = ({ setTerm, setCurrentPage }) => {
     }
   }
 
+  const searchButtonStyle = {
+    cursor: (inputText) ? 'pointer' : 'not-allowed'
+  }
+
   return (
     <div className={styles.div}>
       <input placeholder="Поиск" type="text" onChange={onTextChange} className={styles.input} value={inputText}/>
-      <button onClick={onButtonClick} className={styles.button}>Найти</button>
+      <button
+        disabled={!inputText}
+        style={searchButtonStyle}
+        onClick={onButtonClick}
+        className={styles.button}>
+        Найти
+      </button>
       <button onClick={onReset} className={styles.reset}>Сброс</button>
     </div>
   )

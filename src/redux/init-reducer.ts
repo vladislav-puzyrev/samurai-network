@@ -1,5 +1,6 @@
 import { getAuthUserData } from './auth-reducer'
 
+/* Action types */
 const INITIALIZED_SUCCESS = 'samurai-network/app/INITIALIZED_SUCCESS'
 
 export type InitialStateType = {
@@ -10,7 +11,7 @@ const initialState: InitialStateType = {
   initialized: false,
 }
 
-function appReducer (state = initialState, action: any): InitialStateType {
+function initReducer (state = initialState, action: any): InitialStateType {
   switch (action.type) {
     case INITIALIZED_SUCCESS:
       return {
@@ -23,12 +24,14 @@ function appReducer (state = initialState, action: any): InitialStateType {
   }
 }
 
+/* Action creators */
 type InitializedSuccessType = {
   type: typeof INITIALIZED_SUCCESS
 };
 
 export const initializedSuccess = (): InitializedSuccessType => ({ type: INITIALIZED_SUCCESS })
 
+/* Thunk creators */
 export const initializeApp = () => (dispatch: any) => {
   // Когда все промисы будут resolve
   Promise.all([
@@ -38,4 +41,4 @@ export const initializeApp = () => (dispatch: any) => {
   })
 }
 
-export default appReducer
+export default initReducer

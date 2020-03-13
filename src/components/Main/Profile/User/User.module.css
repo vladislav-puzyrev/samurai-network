@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   flex-basis: 25%;
+  min-width: 200px;
 }
 
 .avatarWrapper {
@@ -17,17 +18,8 @@
 }
 
 .avatarIMG {
-  width: 100%;
   display: block;
-  height: 220px
-}
-
-.avatarLoad {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  max-width: 100%;
 }
 
 .info {

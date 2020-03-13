@@ -1,3 +1,19 @@
-.preloader {
+.preloaderIMG {
   width: 100px;
+  display: block;
+}
+
+/* fullscreen */
+.wrapper {
+  position: fixed;
+  background-color: #1f1f23;
+  width: 100vw;
+  height: 100vh;
+}
+
+.preloader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -82%);
 }

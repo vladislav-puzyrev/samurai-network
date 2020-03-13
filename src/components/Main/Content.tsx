@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import styles from './Content.module.css'
-import UsersContainer from './Users/UsersContainer'
+import Users from './Users/Users'
 import News from './News/News'
 import Music from './Music/Music'
 import Settings from './Settings/Settings'
@@ -22,7 +22,7 @@ function Content () {
         <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
         <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
         <Route path='/messages' render={withSuspense(MessagesContainer)}/>
-        <Route path='/users' render={() => <UsersContainer/>}/>
+        <Route path='/users' render={() => <Users/>}/>
         <Route path='/news' component={News}/>
         <Route path='/music' component={Music}/>
         <Route path='/settings' component={Settings}/>

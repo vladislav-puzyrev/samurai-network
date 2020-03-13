@@ -2,6 +2,7 @@ import { profileAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
 import { PhotosType, PostType, ProfileType } from '../types/AppTypes'
 
+/* Action types */
 const ADD_POST = 'samurai-network/profile/ADD_POST'
 const SET_USER_PROFILE = 'samurai-network/profile/SET_USER_PROFILE'
 const SET_STATUS = 'samurai-network/profile/SET_STATUS'
@@ -63,56 +64,48 @@ function profileReducer (state = initialState, action: any): InitialStateType {
   }
 }
 
-// addPostActionCreator
+/* Action creators */
 type AddPostActionCreatorActionType = {
   type: typeof ADD_POST
   post: string
 };
-
 export const addPostActionCreator = (formData: any): AddPostActionCreatorActionType => (
   { type: ADD_POST, post: formData.newPost }
 )
 
-// setUserProfile
 type SetUserProfileActionType = {
   type: typeof SET_USER_PROFILE
   profile: ProfileType
 };
-
 export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => (
   { type: SET_USER_PROFILE, profile: profile }
 )
 
-// setStatus
 type SetStatusActionType = {
   type: typeof SET_STATUS
   status: string
 };
-
 export const setStatus = (status: string): SetStatusActionType => (
   { type: SET_STATUS, status: status }
 )
 
-// deletePost
 type DeletePostActionType = {
   type: typeof DELETE_POST
   postId: number
 };
-
 export const deletePost = (postId: number): DeletePostActionType => (
   { type: DELETE_POST, postId: postId }
 )
 
-// savePhotoSuccess
 type SavePhotoSuccessActionType = {
   type: typeof SAVE_PHOTO_SUCCESS
   photos: PhotosType
 };
-
 export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType => (
   { type: SAVE_PHOTO_SUCCESS, photos: photos }
 )
 
+/* Thunk creators */
 export const getUsersProfile = (userId: number) => async (dispatch: any) => {
   const response = await profileAPI.getProfile(userId)
   dispatch(setUserProfile(response))

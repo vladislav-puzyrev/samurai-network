@@ -1,6 +1,7 @@
 import { authAPI, securityAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
 
+/* Action types */
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'samurai-network/auth/GET_CAPTCHA_URL_SUCCESS'
 
@@ -34,7 +35,7 @@ function authReducer (state = initialState, action: any): InitialStateType {
   }
 }
 
-// setAuthUserData
+/* Action creators */
 type SetAuthUserDataActionPayloadType = {
   userId: number | null
   email: string | null
@@ -56,7 +57,6 @@ export const setAuthUserData = (
   { type: SET_USER_DATA, payload: { userId, email, login, isAuth } }
 )
 
-// getCaptchaUrlSuccess
 type GetCaptchaUrlSuccessType = {
   type: typeof GET_CAPTCHA_URL_SUCCESS
   captchaUrl: string
@@ -67,7 +67,7 @@ export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessTy
   captchaUrl: captchaUrl,
 })
 
-// getAuthUserData
+/* Thunk creators */
 export const getAuthUserData = () => async (dispatch: any) => {
   const meData = await authAPI.me()
 
@@ -77,7 +77,6 @@ export const getAuthUserData = () => async (dispatch: any) => {
   }
 }
 
-// login
 export const login = (
   email: string,
   password: string,

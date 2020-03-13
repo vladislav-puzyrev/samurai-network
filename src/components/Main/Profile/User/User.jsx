@@ -35,7 +35,7 @@ function User ({ profile, savePhoto, status, updateStatus, isOwner, saveProfile 
         </div>
         {
           isOwner &&
-          <div className={styles.avatarLoad}>
+          <div>
             <input onChange={onMainPhotoSelected} type='file'/>
           </div>
         }

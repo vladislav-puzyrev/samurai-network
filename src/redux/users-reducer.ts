@@ -4,6 +4,7 @@ import { AppStateType } from './store'
 import { Dispatch } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 
+/* Action types */
 const FOLLOW = 'samurai-network/users/FOLLOW'
 const UNFOLLOW = 'samurai-network/users/UNFOLLOW'
 const SET_USERS = 'samurai-network/users/SET_USERS'
@@ -15,12 +16,10 @@ const SET_TERM = 'samurai-network/users/SET_TERM'
 
 const initialState = {
   users: [] as Array<UserType>,
-  pageSize: 5,
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
   followingInProgress: [] as Array<number>, // array of users ids
-  portionSize: 10,
   term: '',
 }
 
@@ -102,7 +101,7 @@ function usersReducer (state = initialState, action: ActionTypes): InitialStateT
   }
 }
 
-// Action Creators
+/* Action creators */
 type AcceptFollowActionType = {
   type: typeof FOLLOW,
   id: number
@@ -168,7 +167,7 @@ export const setTerm = (term: string): setTermActionType => ({
   term,
 })
 
-// Thunk Creators
+/* Thunk creators */
 type GetStateType = () => AppStateType
 type DispatchType = Dispatch<ActionTypes>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
