@@ -11,6 +11,7 @@ const SET_CURRENT_PAGE = 'samurai-network/users/SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'samurai-network/users/SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'samurai-network/users/TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'samurai-network/users/TOGGLE_IS_FOLLOWING_PROGRESS'
+const SET_TERM = 'samurai-network/users/SET_TERM'
 
 const initialState = {
   users: [] as Array<UserType>,
@@ -19,7 +20,8 @@ const initialState = {
   currentPage: 1,
   isFetching: false,
   followingInProgress: [] as Array<number>, // array of users ids
-  portionSize: 10
+  portionSize: 10,
+  term: '',
 }
 
 export type InitialStateType = typeof initialState
@@ -30,7 +32,8 @@ type ActionTypes =
   SetCurrentPageActionType |
   SetTotalUsersActionType |
   SetIsFetchingActionType |
-  ToggleFollowingProgressActionType
+  ToggleFollowingProgressActionType |
+  setTermActionType
 
 function usersReducer (state = initialState, action: ActionTypes): InitialStateType {
   switch (action.type) {
@@ -86,6 +89,12 @@ function usersReducer (state = initialState, action: ActionTypes): InitialStateT
         followingInProgress: action.isFetching ?
           [...state.followingInProgress, action.userId] :
           state.followingInProgress.filter(id => id !== action.userId),
+      }
+
+    case SET_TERM:
+      return {
+        ...state,
+        term: action.term,
       }
 
     default:
@@ -150,15 +159,24 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): To
   userId,
 })
 
+type setTermActionType = {
+  type: typeof SET_TERM
+  term: string
+}
+export const setTerm = (term: string): setTermActionType => ({
+  type: SET_TERM,
+  term,
+})
+
 // Thunk Creators
 type GetStateType = () => AppStateType
 type DispatchType = Dispatch<ActionTypes>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
-export const getRequestUsers = (pageSize: number, currentPage: number): ThunkType => {
+export const getRequestUsers = (pageSize: number, currentPage: number, term = ''): ThunkType => {
   return async (dispatch, getState) => {
     dispatch(setIsFetching(true))
-    const response = await usersAPI.getUsers(pageSize, currentPage)
+    const response = await usersAPI.getUsers(pageSize, currentPage, term)
     dispatch(setUsers(response.items))
     dispatch(setTotalUsers(response.totalCount))
     dispatch(setIsFetching(false))

@@ -1,0 +1,49 @@
+.div {
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.input {
+  background-color: #3a3a3d;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  padding: 10px;
+  border: none;
+  color: white;
+  outline: none;
+  position: relative;
+  z-index: 1;
+}
+
+.input:focus {
+  box-shadow: 0 0 0 2px #106fc1;
+}
+
+.button {
+  color: white;
+  background-color: #29292c;
+  border: none;
+  padding: 10px;
+  margin-left: 1px;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  outline: none;
+}
+
+.button:focus {
+  box-shadow: 0 0 5px #108de2;
+}
+
+.reset {
+  color: white;
+  background-color: #29292c;
+  border: none;
+  padding: 10px;
+  outline: none;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+.reset:focus {
+  box-shadow: 0 0 5px #108de2;
+}

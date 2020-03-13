@@ -25,7 +25,7 @@ const Paginator: React.FC<PropTypes> = ({ currentPage, totalUsersCount, pageSize
   const rightPortionPageNumber = portionNumber * portionSize
 
   const changePage = (event: any) => {
-    const pageNumber = event.target.dataset.number
+    const pageNumber = +event.target.dataset.number
 
     if (pageNumber) {
       onPageChanged(pageNumber)

@@ -2,8 +2,10 @@
   display: flex;
   margin-bottom: 20px;
   margin-top: 5px;
-  width: 600px;
-  justify-content: space-between;
+}
+
+.paginationItems > *:not(:last-child) {
+  margin-right: 5px;
 }
 
 .button {

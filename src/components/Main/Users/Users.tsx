@@ -2,6 +2,7 @@ import React from 'react'
 import { UserType } from '../../../types/AppTypes'
 import Paginator from './Paginator/Paginator'
 import UsersList from './UsersList/UsersList'
+import Search from './Search/Search'
 
 type PropTypes = {
   currentPage: number
@@ -15,12 +16,17 @@ type PropTypes = {
   followingInProgress: Array<number>
   pageSize: number
   portionSize: number
+  setTerm: (term: string) => void
 }
 
 const Users: React.FC<PropTypes> = (props) => {
   return (
     <>
       <h1>Пользователи</h1>
+      <Search
+        setTerm={props.setTerm}
+        setCurrentPage={props.setCurrentPage}
+      />
       <Paginator
         totalUsersCount={props.totalUsersCount}
         currentPage={props.currentPage}

@@ -5,7 +5,7 @@ import {
   setCurrentPage,
   setIsFetching,
   follow,
-  unfollow,
+  unfollow, setTerm,
 } from '../../../redux/users-reducer'
 import React, { useEffect } from 'react'
 import {
@@ -28,46 +28,60 @@ type MapStatePropTypes = {
   isFetching: boolean
   followingInProgress: Array<number>
   portionSize: number
+  term: string
 }
 
 type MapDispatchPropTypes = {
   setCurrentPage: (page: number) => void
   setIsFetching: (isFetching: boolean) => void
-  getRequestUsers: (pageSize: number, currentPage: number) => void
+  getRequestUsers: (pageSize: number, currentPage: number, term: string) => void
   follow: (id: number) => void
   unfollow: (id: number) => void
+  setTerm: (term: string) => void
 }
 
 type PropTypes = MapStatePropTypes & MapDispatchPropTypes
 
-const UsersContainer = React.memo<PropTypes>(
-  (props) => {
-    useEffect(() => {
-      if (!props.totalUsersCount && !props.isFetching) {
-        props.getRequestUsers(props.pageSize, props.currentPage)
-      }
-    })
+const UsersContainer: React.FC<PropTypes> = ({
+  pageSize,
+  currentPage,
+  totalUsersCount,
+  isFetching,
+  users,
+  followingInProgress,
+  portionSize,
+  getRequestUsers,
+  setCurrentPage,
+  follow,
+  unfollow,
+  setTerm,
+  term,
+}) => {
 
-    const onPageChanged = (currentPage: number) => {
-      props.getRequestUsers(props.pageSize, currentPage)
-      props.setCurrentPage(currentPage)
-    }
+  useEffect(() => {
+    getRequestUsers(pageSize, currentPage, term)
+  }, [getRequestUsers, pageSize, currentPage, term])
 
-    return <Users
-      onPageChanged={onPageChanged}
-      currentPage={props.currentPage}
-      totalUsersCount={props.totalUsersCount}
-      setCurrentPage={props.setCurrentPage}
-      isFetching={props.isFetching}
-      users={props.users}
-      follow={props.follow}
-      unfollow={props.unfollow}
-      followingInProgress={props.followingInProgress}
-      pageSize={props.pageSize}
-      portionSize={props.portionSize}
-    />
+  const onPageChanged = (currentPage: number) => {
+    getRequestUsers(pageSize, currentPage, term)
+    setCurrentPage(currentPage)
   }
-)
+
+  return <Users
+    onPageChanged={onPageChanged}
+    currentPage={currentPage}
+    totalUsersCount={totalUsersCount}
+    setCurrentPage={setCurrentPage}
+    isFetching={isFetching}
+    users={users}
+    follow={follow}
+    unfollow={unfollow}
+    followingInProgress={followingInProgress}
+    pageSize={pageSize}
+    portionSize={portionSize}
+    setTerm={setTerm}
+  />
+}
 
 function mapStateToProps (state: AppStateType): MapStatePropTypes {
   return {
@@ -77,7 +91,8 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
     currentPage: getCurrentPage(state),
     isFetching: getIsFetching(state),
     followingInProgress: getFollowingInProgress(state),
-    portionSize: state.usersPage.portionSize
+    portionSize: state.usersPage.portionSize,
+    term: state.usersPage.term,
   }
 }
 
@@ -88,5 +103,6 @@ export default compose(
     getRequestUsers,
     follow,
     unfollow,
+    setTerm,
   }),
 )(UsersContainer)

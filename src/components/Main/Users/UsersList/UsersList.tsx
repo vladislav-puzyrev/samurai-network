@@ -13,19 +13,20 @@ type PropTypes = {
 }
 
 const UsersList: React.FC<PropTypes> = ({ users, followingInProgress, follow, unfollow, isFetching }) => {
+  const usersOrMessage = (users.length) ?
+    users.map((user) => (
+      <User key={user.id}
+            user={user}
+            followingInProgress={followingInProgress}
+            follow={follow}
+            unfollow={unfollow}
+      />
+    )) : 'Ничего не найдено'
+
   return (
     isFetching ? <Preloader/> :
       <ul className={styles.users}>
-        {
-          users.map((user) => (
-            <User key={user.id}
-                  user={user}
-                  followingInProgress={followingInProgress}
-                  follow={follow}
-                  unfollow={unfollow}
-            />
-          ))
-        }
+        {usersOrMessage}
       </ul>
   )
 }
