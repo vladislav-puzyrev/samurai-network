@@ -1,6 +1,7 @@
-import { authAPI, profileAPI, securityAPI } from '../api/api'
+import { authAPI, securityAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
 import { ProfileType } from '../types/AppTypes'
+import { getMyProfile } from './init-reducer'
 
 /* Action types */
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
@@ -105,7 +106,9 @@ export const login = (
   const data = await authAPI.login(email, password, rememberMe, captcha)
 
   if (data.resultCode === 0) {
-    dispatch(getAuthUserData())
+    dispatch(getAuthUserData()).then(() => {
+      dispatch(getMyProfile())
+    })
   }
   else {
     // 10 - Captcha is required
@@ -132,11 +135,6 @@ export const getCaptchaUrl = () => async (dispatch: any) => {
   const response = await securityAPI.getCaptcha()
   const captchaUrl = response.url
   dispatch(getCaptchaUrlSuccess(captchaUrl))
-}
-
-export const getMyProfile = (myID: number) => async (dispatch: any) => {
-  const response = await profileAPI.getProfile(myID)
-  dispatch(setMyProfile(response))
 }
 
 export default authReducer

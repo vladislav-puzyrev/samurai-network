@@ -1,4 +1,5 @@
-import { getAuthUserData } from './auth-reducer'
+import { getAuthUserData, setMyProfile } from './auth-reducer'
+import { profileAPI } from '../api/api'
 
 /* Action types */
 const INITIALIZED_SUCCESS = 'samurai-network/app/INITIALIZED_SUCCESS'
@@ -33,12 +34,19 @@ export const initializedSuccess = (): InitializedSuccessType => ({ type: INITIAL
 
 /* Thunk creators */
 export const initializeApp = () => (dispatch: any) => {
-  // Когда все промисы будут resolve
-  Promise.all([
-    dispatch(getAuthUserData()),
-  ]).then(() => {
-    dispatch(initializedSuccess())
-  })
+  dispatch(getAuthUserData())
+    .then(() => {
+      dispatch(getMyProfile()).then(() => {
+        dispatch(initializedSuccess())
+      })
+    })
+}
+
+export const getMyProfile = () => async (dispatch: any, getState: any) => {
+  if (getState().auth.isAuth) {
+    const response = await profileAPI.getProfile(getState().auth.userId)
+    dispatch(setMyProfile(response))
+  }
 }
 
 export default initReducer

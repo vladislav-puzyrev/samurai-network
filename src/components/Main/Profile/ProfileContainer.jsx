@@ -14,8 +14,10 @@ import { compose } from 'redux'
 class ProfileContainer extends React.Component {
   refreshProfile () {
     const userURLId = this.props.match.params.userId || this.props.userId || this.props.history.push('/login')
-    this.props.getUsersProfile(userURLId)
-    this.props.getStatus(userURLId)
+    if (userURLId) {
+      this.props.getUsersProfile(userURLId)
+      this.props.getStatus(userURLId)
+    }
   }
 
   componentDidMount () {

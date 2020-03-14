@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { logout, getMyProfile } from '../../redux/auth-reducer'
+import React from 'react'
+import { logout } from '../../redux/auth-reducer'
 import { connect } from 'react-redux'
 import { AppStateType } from '../../redux/store'
 import styles from './Header.module.css'
@@ -9,24 +9,16 @@ import { ProfileType } from '../../types/AppTypes'
 
 type MapStatePropTypes = {
   isAuth: boolean
-  myID: number | null
   myProfile: ProfileType | null
 }
 
 type MapDispatchPropTypes = {
   logout: () => void
-  getMyProfile: (myID: number) => void
 }
 
 type PropTypes = MapStatePropTypes & MapDispatchPropTypes
 
-const Header: React.FC<PropTypes> = ({ isAuth, logout, getMyProfile, myID, myProfile }) => {
-  useEffect(() => {
-    if (myID) {
-      getMyProfile(myID)
-    }
-  }, [getMyProfile, myID])
-
+const Header: React.FC<PropTypes> = ({ isAuth, logout, myProfile }) => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -50,11 +42,9 @@ const Header: React.FC<PropTypes> = ({ isAuth, logout, getMyProfile, myID, myPro
 
 const mapStateToProps = (state: AppStateType): MapStatePropTypes => ({
   isAuth: state.auth.isAuth,
-  myID: state.auth.userId,
   myProfile: state.auth.myProfile
 })
 
 export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, AppStateType>(mapStateToProps, {
   logout,
-  getMyProfile,
 })(Header)
