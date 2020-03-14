@@ -21,7 +21,6 @@ type MapDispatchPropTypes = {
 type PropTypes = MapStatePropTypes & MapDispatchPropTypes
 
 const App: React.FC<PropTypes> = ({ initializeApp, initialized }) => {
-  console.log('app render')
   useEffect(() => {
     initializeApp()
   }, [initializeApp])

@@ -19,7 +19,7 @@ const UsersList = React.memo<PropTypes>(
       users.map((user) => (
         <User key={user.id}
               user={user}
-              followingInProgress={followingInProgress}
+              followButtonDisabled={followingInProgress.some(id => id === user.id)}
               follow={follow}
               unfollow={unfollow}
         />

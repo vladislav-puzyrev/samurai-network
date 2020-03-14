@@ -4,10 +4,11 @@ import styles from './Search.module.css'
 type PropTypes = {
   setTerm: (term: string) => void
   setCurrentPage: (page: number) => void
+  setPortionNumber: (number: number) => void
 }
 
 const Search = React.memo<PropTypes>(
-  ({ setTerm, setCurrentPage }) => {
+  ({ setTerm, setCurrentPage, setPortionNumber }) => {
     const [inputText, setInputText] = useState('')
 
     const onTextChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,14 +18,14 @@ const Search = React.memo<PropTypes>(
     const onButtonClick = () => {
       setCurrentPage(1)
       setTerm(inputText)
+      setPortionNumber(1)
     }
 
     const onReset = () => {
-      if (inputText) {
-        setCurrentPage(1)
-        setTerm('')
-        setInputText('')
-      }
+      setCurrentPage(1)
+      setTerm('')
+      setInputText('')
+      setPortionNumber(1)
     }
 
     const searchButtonStyle = {

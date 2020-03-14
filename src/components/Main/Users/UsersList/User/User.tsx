@@ -6,39 +6,45 @@ import { UserType } from '../../../../../types/AppTypes'
 
 type PropTypes = {
   user: UserType
-  followingInProgress: Array<number>
+  followButtonDisabled: boolean
   unfollow: (id: number) => void
   follow: (id: number) => void
 }
 
-function User ({ user, followingInProgress, unfollow, follow }: PropTypes) {
+function User ({ user, followButtonDisabled, unfollow, follow }: PropTypes) {
   return (
     <li className={styles.user}>
       <div className={styles.avatarBox}>
         <NavLink to={`/profile/${user.id}`}>
-          <img src={user.photos.small || defaultAvatar} alt='avatar' width='100'/>
+          <img src={user.photos.small || defaultAvatar} alt='avatar'/>
         </NavLink>
-        {
-          user.followed
-            ? <button
-              disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-              unfollow(user.id)
-            }}
-            >unfollow
-            </button>
-
-            : <button
-              disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-              follow(user.id)
-            }}
-            >follow
-            </button>
-        }
       </div>
 
-      <div>
-        {user.name}
-        {user.status}
+      <div className={styles.info}>
+        <NavLink className={styles.userName} to={`/profile/${user.id}`}>{user.name}</NavLink>
+        {user.status && <span className={styles.userStatus}>{user.status}</span>}
+
+        {
+          user.followed ? (
+            <button
+              className={styles.followButton}
+              disabled={followButtonDisabled}
+              onClick={() => {unfollow(user.id)}}
+            >
+              Отписаться <span aria-label="Отписаться" role="img">❌</span>
+            </button>
+          ) : (
+            <button
+              className={styles.followButton}
+              disabled={followButtonDisabled}
+              onClick={() => {follow(user.id)}}
+            >
+              Подписаться <span aria-label="Подписаться" role="img">✅</span>
+            </button>
+          )
+        }
+
+        <NavLink to={`/messages/${user.id}`} className={styles.sendMessage}>Написать сообщение</NavLink>
       </div>
     </li>
   )

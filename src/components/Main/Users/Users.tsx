@@ -7,7 +7,7 @@ import {
   unfollow,
   setTerm,
 } from '../../../redux/users-reducer'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   getCurrentPage,
   getFollowingInProgress,
@@ -62,21 +62,26 @@ const Users: React.FC<PropTypes> = ({
     }
   }, [setCurrentPage])
 
+  const [portionNumber, setPortionNumber] = useState(1)
+
   return (
     <>
       <h1>Пользователи</h1>
       <Search
         setTerm={setTerm}
         setCurrentPage={setCurrentPage}
+        setPortionNumber={setPortionNumber}
       />
       <Paginator
         totalUsersCount={totalUsersCount}
         currentPage={currentPage}
-        pageSize={5}
+        pageSize={6}
         portionSize={10}
         getRequestUsers={getRequestUsers}
         term={term}
         setCurrentPage={setCurrentPage}
+        portionNumber={portionNumber}
+        setPortionNumber={setPortionNumber}
       />
       <UsersList
         users={users}

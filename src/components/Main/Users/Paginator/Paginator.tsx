@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styles from './Paginator.module.css'
 import PaginationItem from './PaginationItem/PaginationItem'
 
@@ -10,10 +10,12 @@ type PropTypes = {
   getRequestUsers: (pageSize: number, currentPage: number, term: string) => void
   term: string
   setCurrentPage: (page: number) => void
+  portionNumber: number
+  setPortionNumber: (number: number) => void
 }
 
 const Paginator = React.memo<PropTypes>(
-  ({ setCurrentPage, currentPage, totalUsersCount, pageSize, portionSize, getRequestUsers, term }) => {
+  ({ setCurrentPage, currentPage, totalUsersCount, pageSize, portionSize, getRequestUsers, term, portionNumber, setPortionNumber }) => {
 
     useEffect(() => {
       getRequestUsers(pageSize, currentPage, term)
@@ -33,7 +35,6 @@ const Paginator = React.memo<PropTypes>(
 
     const portionCount = Math.ceil(pageCount / portionSize)
     const lastElemPageNumber = pageCount / portionSize * portionSize
-    const [portionNumber, setPortionNumber] = useState(1)
     const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
     const rightPortionPageNumber = portionNumber * portionSize
 

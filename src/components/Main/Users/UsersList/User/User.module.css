@@ -1,7 +1,55 @@
-.avatarBox img {
-  border-radius: 50%;
+.user {
+  display: flex;
+  padding: 10px;
 }
 
 .user:not(:last-child) {
-  margin-bottom: 7px
+  border-bottom: 1px solid #444446;
+}
+
+.avatarBox img {
+  border-radius: 50%;
+  width: 82px;
+}
+
+.info {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  text-decoration: none;
+  font-weight: bold;
+  width: max-content;
+}
+
+.userName:hover,
+.followButton:hover,
+.sendMessage:hover {
+  text-decoration: underline;
+}
+
+.followButton {
+  margin-top: 5px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  text-align: start;
+  cursor: pointer;
+  width: max-content;
+}
+
+.followButton:disabled {
+  color: #a3a3a3;;
+}
+
+.userStatus {
+  margin-top: 5px;
+  color: #8a8a8a;
+}
+
+.sendMessage {
+  margin-top: 5px;
+  text-decoration: none;
 }
