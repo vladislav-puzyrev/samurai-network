@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import styles from './App.module.css'
 import Footer from './Footer/Footer'
 import Sidebar from './Sidebar/Sidebar'
-import Content from './Main/Content'
-import HeaderContainer from './Header/HeaderContainer'
+import Main from './Main/Main'
+import Header from './Header/Header'
 import { initializeApp } from '../redux/init-reducer'
 import { AppStateType } from '../redux/store'
 import { HashRouter } from 'react-router-dom'
@@ -20,28 +20,29 @@ type MapDispatchPropTypes = {
 
 type PropTypes = MapStatePropTypes & MapDispatchPropTypes
 
-const App: React.FC<PropTypes> = (props) => {
+const App: React.FC<PropTypes> = ({ initializeApp, initialized }) => {
+  console.log('app render')
   useEffect(() => {
-    if (!props.initialized) {
-      props.initializeApp()
-    }
-  }, [props])
+    initializeApp()
+  }, [initializeApp])
 
-  if (!props.initialized) {
+  if (!initialized) {
     return <Preloader fullscreen/>
   }
 
   return (
-    <HashRouter>
-      <div className={styles.page}>
-        <HeaderContainer/>
-        <main className={styles.main}>
-          <Sidebar/>
-          <Content/>
-        </main>
-        <Footer/>
-      </div>
-    </HashRouter>
+    <React.StrictMode>
+      <HashRouter>
+        <div className={styles.page}>
+          <Header/>
+          <main className={styles.main}>
+            <Sidebar/>
+            <Main/>
+          </main>
+          <Footer/>
+        </div>
+      </HashRouter>
+    </React.StrictMode>
   )
 }
 

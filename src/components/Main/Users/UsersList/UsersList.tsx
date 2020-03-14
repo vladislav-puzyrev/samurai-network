@@ -12,23 +12,27 @@ type PropTypes = {
   isFetching: boolean
 }
 
-const UsersList: React.FC<PropTypes> = ({ users, followingInProgress, follow, unfollow, isFetching }) => {
-  const usersOrMessage = (users.length) ?
-    users.map((user) => (
-      <User key={user.id}
-            user={user}
-            followingInProgress={followingInProgress}
-            follow={follow}
-            unfollow={unfollow}
-      />
-    )) : 'Ничего не найдено'
+const UsersList = React.memo<PropTypes>(
+  ({ users, followingInProgress, follow, unfollow, isFetching }) => {
 
-  return (
-    isFetching ? <Preloader/> :
-      <ul className={styles.users}>
-        {usersOrMessage}
-      </ul>
-  )
-}
+    const usersOrMessage = (users.length) ?
+      users.map((user) => (
+        <User key={user.id}
+              user={user}
+              followingInProgress={followingInProgress}
+              follow={follow}
+              unfollow={unfollow}
+        />
+      )) : 'Ничего не найдено'
+
+    return (
+      isFetching ? <Preloader/> :
+        <ul className={styles.users}>
+          {usersOrMessage}
+        </ul>
+    )
+
+  }
+)
 
 export default UsersList

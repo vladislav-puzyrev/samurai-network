@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import styles from './Content.module.css'
+import styles from './Main.module.css'
 import Users from './Users/Users'
 import News from './News/News'
 import Music from './Music/Music'
@@ -15,7 +15,7 @@ const ProfileContainer = React.lazy(
   () => import('./Profile/ProfileContainer')
 )
 
-function Content () {
+function Main () {
   return (
     <div className={styles.content}>
       <Switch>
@@ -33,4 +33,4 @@ function Content () {
   )
 }
 
-export default Content
+export default Main

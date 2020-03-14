@@ -12,60 +12,61 @@ type PropTypes = {
   setCurrentPage: (page: number) => void
 }
 
-const Paginator: React.FC<PropTypes> = ({
-  setCurrentPage, currentPage, totalUsersCount, pageSize, portionSize, getRequestUsers, term
-}) => {
-  useEffect(() => {
-    getRequestUsers(pageSize, currentPage, term)
-  }, [getRequestUsers, pageSize, currentPage, term])
+const Paginator = React.memo<PropTypes>(
+  ({ setCurrentPage, currentPage, totalUsersCount, pageSize, portionSize, getRequestUsers, term }) => {
 
-  const onPageChanged = (currentPage: number) => {
-    getRequestUsers(pageSize, currentPage, term)
-    setCurrentPage(currentPage)
-  }
+    useEffect(() => {
+      getRequestUsers(pageSize, currentPage, term)
+    }, [getRequestUsers, pageSize, currentPage, term])
 
-  const pageCount = Math.ceil(totalUsersCount / pageSize)
-  const pages = []
-
-  for (let i = 1; i < totalUsersCount; i++) {
-    pages.push(i)
-  }
-
-  const portionCount = Math.ceil(pageCount / portionSize)
-  const lastElemPageNumber = pageCount / portionSize * portionSize
-  const [portionNumber, setPortionNumber] = useState(1)
-  const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
-  const rightPortionPageNumber = portionNumber * portionSize
-
-  const changePage = (event: any) => {
-    const pageNumber = +event.target.dataset.number
-
-    if (pageNumber) {
-      onPageChanged(pageNumber)
+    const onPageChanged = (currentPage: number) => {
+      getRequestUsers(pageSize, currentPage, term)
+      setCurrentPage(currentPage)
     }
-  }
 
-  return (
-    <div onClick={changePage} className={styles.paginationItems}>
-      {
-        totalUsersCount > 0 &&
-        <button disabled={portionNumber === 1} className={styles.button}
-                onClick={() => {setPortionNumber(portionNumber - 1)}}>Влево</button>
+    const pageCount = Math.ceil(totalUsersCount / pageSize)
+    const pages = []
+
+    for (let i = 1; i < totalUsersCount; i++) {
+      pages.push(i)
+    }
+
+    const portionCount = Math.ceil(pageCount / portionSize)
+    const lastElemPageNumber = pageCount / portionSize * portionSize
+    const [portionNumber, setPortionNumber] = useState(1)
+    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
+    const rightPortionPageNumber = portionNumber * portionSize
+
+    const changePage = (event: any) => {
+      const pageNumber = +event.target.dataset.number
+
+      if (pageNumber) {
+        onPageChanged(pageNumber)
       }
-      {
-        pages.filter(
-          (num) => (num >= leftPortionPageNumber && num <= rightPortionPageNumber && num <= lastElemPageNumber))
-          .map((num) => (
-            <PaginationItem key={num} number={num} active={+currentPage === num}/>
-          ))
-      }
-      {
-        totalUsersCount > 0 &&
-        <button disabled={portionCount === portionNumber} className={styles.button}
-                onClick={() => {setPortionNumber(portionNumber + 1)}}>Вправо</button>
-      }
-    </div>
-  )
-}
+    }
+
+    return (
+      <div onClick={changePage} className={styles.paginationItems}>
+        {
+          totalUsersCount > 0 &&
+          <button disabled={portionNumber === 1} className={styles.button}
+                  onClick={() => {setPortionNumber(portionNumber - 1)}}>Влево</button>
+        }
+        {
+          pages.filter(
+            (num) => (num >= leftPortionPageNumber && num <= rightPortionPageNumber && num <= lastElemPageNumber))
+            .map((num) => (
+              <PaginationItem key={num} number={num} active={+currentPage === num}/>
+            ))
+        }
+        {
+          totalUsersCount > 0 &&
+          <button disabled={portionCount === portionNumber} className={styles.button}
+                  onClick={() => {setPortionNumber(portionNumber + 1)}}>Вправо</button>
+        }
+      </div>
+    )
+  }
+)
 
 export default Paginator
