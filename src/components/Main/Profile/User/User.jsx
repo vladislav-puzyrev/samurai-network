@@ -35,8 +35,9 @@ function User ({ profile, savePhoto, status, updateStatus, isOwner, saveProfile 
         </div>
         {
           isOwner &&
-          <div>
-            <input onChange={onMainPhotoSelected} type='file'/>
+          <div className={styles.upload}>
+            <input className={styles.uploadInput} onChange={onMainPhotoSelected} type='file' id='UserPhotoUpload'/>
+            <label className={styles.uploadLabel} htmlFor='UserPhotoUpload'>Обновить фотографию</label>
           </div>
         }
       </div>

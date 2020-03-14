@@ -11,9 +11,6 @@
   flex-direction: column;
   flex-basis: 25%;
   min-width: 200px;
-}
-
-.avatarWrapper {
   padding: 15px;
 }
 
@@ -45,4 +42,29 @@
 
 .contLI {
   margin-top: 10px;
+}
+
+.upload {
+  display: flex;
+  justify-content: center;
+}
+
+.uploadInput {
+  width: 0;
+  height: 0;
+}
+
+.uploadInput:focus + .uploadLabel {
+  box-shadow: 0 0 0 2px #106fc1;
+}
+
+.uploadLabel {
+  background-color: #29292c;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #141414;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  color: #eeeeee;
 }
