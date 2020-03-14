@@ -1,7 +1,6 @@
 import { usersAPI } from '../api/api'
 import { UserType } from '../types/AppTypes'
 import { AppStateType } from './store'
-import { Dispatch } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 
 /* Action types */
@@ -154,7 +153,7 @@ export const setTerm = (term: string): setTermActionType => ({
 
 /* Thunk creators */
 // type GetStateType = () => AppStateType
-type DispatchType = Dispatch<ActionTypes>
+// type DispatchType = Dispatch<ActionTypes>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
 export const getRequestUsers = (pageSize: number, currentPage: number, term = ''): ThunkType => {
@@ -168,7 +167,7 @@ export const getRequestUsers = (pageSize: number, currentPage: number, term = ''
 }
 
 export const follow = (userID: number): ThunkType => {
-  return async (dispatch: DispatchType) => {
+  return async (dispatch) => {
     dispatch(toggleFollowingProgress(true, userID))
     const response = await usersAPI.follow(userID)
     if (response.resultCode === 0) dispatch(acceptFollow(userID))
@@ -177,7 +176,7 @@ export const follow = (userID: number): ThunkType => {
 }
 
 export const unfollow = (userID: number): ThunkType => {
-  return async (dispatch: DispatchType) => {
+  return async (dispatch) => {
     dispatch(toggleFollowingProgress(true, userID))
     const response = await usersAPI.unfollow(userID)
     if (response.resultCode === 0) dispatch(acceptUnfollow(userID))
