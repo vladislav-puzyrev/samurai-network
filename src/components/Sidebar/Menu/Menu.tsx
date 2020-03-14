@@ -9,42 +9,48 @@ function Menu () {
         <NavLink
           exact to='/profile' className={styles.menuLink}
           activeClassName={styles.active}
-        >Профиль
+        >
+          Моя страница
         </NavLink>
       </li>
       <li className={styles.menuItem}>
         <NavLink
           to='/messages' className={styles.menuLink}
           activeClassName={styles.active}
-        >Сообщения
+        >
+          Сообщения
         </NavLink>
       </li>
       <li className={styles.menuItem}>
         <NavLink
           to='/users' className={styles.menuLink}
           activeClassName={styles.active}
-        >Пользователи
+        >
+          Пользователи
         </NavLink>
       </li>
       <li className={styles.menuItem}>
         <NavLink
           to='/news' className={styles.menuLink}
           activeClassName={styles.active}
-        >Новости
+        >
+          Новости
         </NavLink>
       </li>
       <li className={styles.menuItem}>
         <NavLink
           to='/music' className={styles.menuLink}
           activeClassName={styles.active}
-        >Музыка
+        >
+          Музыка
         </NavLink>
       </li>
       <li className={styles.menuItem}>
         <NavLink
           to='/settings' className={styles.menuLink}
           activeClassName={styles.active}
-        >Настройки
+        >
+          Настройки
         </NavLink>
       </li>
     </ul>

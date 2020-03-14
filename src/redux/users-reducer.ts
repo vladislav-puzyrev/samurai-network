@@ -182,30 +182,22 @@ export const getRequestUsers = (pageSize: number, currentPage: number, term = ''
   }
 }
 
-export const follow = (userId: number): ThunkType => {
+export const follow = (userID: number): ThunkType => {
   return async (dispatch: DispatchType, getState: GetStateType) => {
-    let apiMethod = usersAPI.follow.bind(usersAPI)
-    _followUnfollowFlow(dispatch, userId, apiMethod, acceptFollow)
+    dispatch(toggleFollowingProgress(true, userID))
+    const response = await usersAPI.follow(userID)
+    if (response.resultCode === 0) dispatch(acceptFollow(userID))
+    dispatch(toggleFollowingProgress(false, userID))
   }
 }
 
-export const unfollow = (userId: number): ThunkType => {
+export const unfollow = (userID: number): ThunkType => {
   return async (dispatch: DispatchType, getState: GetStateType) => {
-    let apiMethod = usersAPI.unfollow.bind(usersAPI)
-    _followUnfollowFlow(dispatch, userId, apiMethod, acceptUnfollow)
+    dispatch(toggleFollowingProgress(true, userID))
+    const response = await usersAPI.unfollow(userID)
+    if (response.resultCode === 0) dispatch(acceptUnfollow(userID))
+    dispatch(toggleFollowingProgress(false, userID))
   }
-}
-
-const _followUnfollowFlow = async (
-  dispatch: DispatchType,
-  userId: number,
-  apiMethod: any,
-  actionCreator: (userID: number) => AcceptFollowActionType | AcceptUnfollowActionType
-) => {
-  dispatch(toggleFollowingProgress(true, userId))
-  const response = await apiMethod(userId)
-  if (response.resultCode === 0) dispatch(actionCreator(userId))
-  dispatch(toggleFollowingProgress(false, userId))
 }
 
 export default usersReducer
