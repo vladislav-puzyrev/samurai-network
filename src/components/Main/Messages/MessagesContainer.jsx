@@ -18,11 +18,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-/*
-let AuthRedirectComponent = withAuthRedirect(Messages);
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
-export default MessagesContainer; */
-
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withAuthRedirect

@@ -1,16 +1,24 @@
 .page {
   display: flex;
   flex-direction: column;
-  min-width: 1200px;
   min-height: 100%;
   background-color: #0e0e10;
+
+  min-width: 1000px;
 }
 
 .main {
   display: flex;
-  width: 60%;
-  min-width: 650px;
   margin: 0 auto;
   flex: 1 0 auto;
   padding: 20px 0;
+
+  width: 60%;
+  min-width: 700px;
+}
+
+@media screen and (max-width: 1200px) {
+  .main {
+    width: 80%;
+  }
 }
