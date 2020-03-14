@@ -8,12 +8,6 @@ import { Redirect } from 'react-router-dom'
 
 const Input = createField('input')
 
-// type PropTypes = {
-//   isAuth: boolean
-//   captchaUrl: string
-//   login: (login: string, password: string, rememberMe: boolean, captcha: string) => void
-// }
-
 function Login (props) {
   const onSubmit = async (formData) => {
     const { login, password, rememberMe, captcha } = formData
@@ -26,7 +20,7 @@ function Login (props) {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Авторизация</h1>
       <LoginReduxForm captchaUrl={props.captchaUrl} onSubmit={onSubmit}/>
     </div>
   )

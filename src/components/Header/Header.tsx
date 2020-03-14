@@ -37,7 +37,11 @@ const Header: React.FC<PropTypes> = ({ isAuth, logout, myProfile }) => {
                 <Button onClick={logout}>Выйти</Button>
               </div>
             )
-            : <NavLink to='/login' className={styles.login}>Login</NavLink>
+            : (
+              <NavLink to='/login' className={styles.login}>
+                <Button>Авторизоваться</Button>
+              </NavLink>
+            )
         }
       </div>
     </header>
