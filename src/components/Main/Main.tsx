@@ -6,22 +6,17 @@ import News from './News/News'
 import Music from './Music/Music'
 import Settings from './Settings/Settings'
 import Login from './Login/Login'
-import { withSuspense } from '../../hoc/withSuspense'
-
-const MessagesContainer = React.lazy(
-  () => import('./Messages/MessagesContainer')
-)
-const ProfileContainer = React.lazy(
-  () => import('./Profile/ProfileContainer')
-)
+import MessagesContainer from './Messages/MessagesContainer'
+import Profile from './Profile/Profile'
 
 function Main () {
   return (
     <div className={styles.content}>
       <Switch>
         <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
-        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
-        <Route path='/messages' render={withSuspense(MessagesContainer)}/>
+        // @ts-ignore
+        <Route path='/profile/:userID?' render={() => <Profile/>}/>
+        <Route path='/messages' render={() => <MessagesContainer/>}/>
         <Route path='/users' render={() => <Users/>}/>
         <Route path='/news' component={News}/>
         <Route path='/music' component={Music}/>

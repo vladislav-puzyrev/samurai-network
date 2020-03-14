@@ -30,18 +30,16 @@ const App: React.FC<PropTypes> = ({ initializeApp, initialized }) => {
   }
 
   return (
-    <React.StrictMode>
-      <HashRouter>
-        <div className={styles.page}>
-          <Header/>
-          <main className={styles.main}>
-            <Sidebar/>
-            <Main/>
-          </main>
-          <Footer/>
-        </div>
-      </HashRouter>
-    </React.StrictMode>
+    <HashRouter>
+      <div className={styles.page}>
+        <Header/>
+        <main className={styles.main}>
+          <Sidebar/>
+          <Main/>
+        </main>
+        <Footer/>
+      </div>
+    </HashRouter>
   )
 }
 

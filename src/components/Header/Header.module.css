@@ -22,14 +22,29 @@
 }
 
 .avatar {
+  margin-right: 10px;
+}
+
+.avatar > img {
   border-radius: 50%;
   width: 40px;
-  margin-right: 10px;
+}
+
+.avatar > img:hover {
+  transform: scale(1.05);
 }
 
 .infoMe {
   display: flex;
   align-items: center;
+}
+
+.infoMe a {
+  text-decoration: none;
+}
+
+.infoMe a:hover {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 1200px) {

@@ -26,10 +26,14 @@ const Header: React.FC<PropTypes> = ({ isAuth, logout, myProfile }) => {
         {
           isAuth && myProfile && myProfile.photos.small ? (
               <div className={styles.infoMe}>
-                <span className={styles.userName}>
-                  {myProfile.fullName.split(' ')[0]}
-                </span>
-                <img className={styles.avatar} src={myProfile.photos.small} alt="avatar"/>
+                <NavLink to='/profile' className={styles.userName}>
+                  <span>
+                    {myProfile.fullName.split(' ')[0]}
+                  </span>
+                </NavLink>
+                <NavLink to='/profile' className={styles.avatar}>
+                  <img src={myProfile.photos.small} alt='avatar'/>
+                </NavLink>
                 <Button onClick={logout}>Выйти</Button>
               </div>
             )

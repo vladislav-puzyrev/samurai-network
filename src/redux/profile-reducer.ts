@@ -92,10 +92,10 @@ export const setProfilePhoto = (photos: PhotosType): setProfilePhotoActionType =
 /* Thunk creators */
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
-export const getUsersProfile = (userId: number | null): ThunkType => {
+export const getUsersProfile = (userID: number | null): ThunkType => {
   return async (dispatch) => {
-    if (userId) {
-      const response = await profileAPI.getProfile(userId)
+    if (userID) {
+      const response = await profileAPI.getProfile(userID)
       dispatch(setUserProfile(response))
     }
   }
