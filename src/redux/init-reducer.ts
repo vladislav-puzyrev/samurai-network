@@ -1,18 +1,20 @@
 import { getAuthUserData, setMyProfile } from './auth-reducer'
 import { profileAPI } from '../api/api'
+import { ThunkAction } from 'redux-thunk'
+import { AppStateType } from './store'
 
 /* Action types */
 const INITIALIZED_SUCCESS = 'samurai-network/app/INITIALIZED_SUCCESS'
 
-export type InitialStateType = {
-  initialized: boolean
-};
-
-const initialState: InitialStateType = {
+const initialState = {
   initialized: false,
 }
 
-function initReducer (state = initialState, action: any): InitialStateType {
+type InitialStateType = typeof initialState
+
+type ActionTypes = InitializedSuccessType
+
+function initReducer (state = initialState, action: ActionTypes): InitialStateType {
   switch (action.type) {
     case INITIALIZED_SUCCESS:
       return {
@@ -26,26 +28,35 @@ function initReducer (state = initialState, action: any): InitialStateType {
 }
 
 /* Action creators */
-type InitializedSuccessType = {
-  type: typeof INITIALIZED_SUCCESS
-};
-
-export const initializedSuccess = (): InitializedSuccessType => ({ type: INITIALIZED_SUCCESS })
+type InitializedSuccessType = { type: typeof INITIALIZED_SUCCESS };
+export const initializedSuccess = (): InitializedSuccessType => ({
+  type: INITIALIZED_SUCCESS
+})
 
 /* Thunk creators */
-export const initializeApp = () => (dispatch: any) => {
-  dispatch(getAuthUserData())
-    .then(() => {
-      dispatch(getMyProfile()).then(() => {
-        dispatch(initializedSuccess())
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
+
+export const initializeApp = (): ThunkType => {
+  return async (dispatch) => {
+    dispatch(getAuthUserData())
+      .then(() => {
+        dispatch(getMyProfile()).then(() => {
+          dispatch(initializedSuccess())
+        })
       })
-    })
+  }
 }
 
-export const getMyProfile = () => async (dispatch: any, getState: any) => {
-  if (getState().auth.isAuth) {
-    const response = await profileAPI.getProfile(getState().auth.userId)
-    dispatch(setMyProfile(response))
+export const getMyProfile = (): ThunkType => {
+  return async (dispatch, getState) => {
+    const isAuth = getState().auth.isAuth
+    const userID = getState().auth.userId
+
+    if (isAuth && userID) {
+      const response = await profileAPI.getProfile(userID)
+      // @ts-ignore
+      dispatch(setMyProfile(response))
+    }
   }
 }
 

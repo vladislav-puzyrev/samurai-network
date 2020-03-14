@@ -20,7 +20,7 @@ const initialState = {
   myProfile: null as ProfileType | null,
 }
 
-export type InitialStateType = typeof initialState;
+type InitialStateType = typeof initialState
 
 type ActionTypes =
   SetAuthUserDataActionType |
@@ -64,21 +64,13 @@ export const setAuthUserData = (
   { type: SET_USER_DATA, payload: { userId, email, login, isAuth } }
 )
 
-type GetCaptchaUrlSuccessType = {
-  type: typeof GET_CAPTCHA_URL
-  captchaUrl: string
-};
-
+type GetCaptchaUrlSuccessType = { type: typeof GET_CAPTCHA_URL, captchaUrl: string };
 export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessType => ({
   type: GET_CAPTCHA_URL,
   captchaUrl: captchaUrl,
 })
 
-type SetMyProfileType = {
-  type: typeof SET_MY_PROFILE
-  profile: ProfileType
-}
-
+type SetMyProfileType = { type: typeof SET_MY_PROFILE, profile: ProfileType }
 export const setMyProfile = (profile: ProfileType): SetMyProfileType => ({
   type: SET_MY_PROFILE,
   profile,
