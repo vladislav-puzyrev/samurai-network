@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from 'react'
 import styles from './Search.module.css'
+import Button from '../../../common/Button/Button'
 
 type PropTypes = {
   setTerm: (term: string) => void
@@ -42,7 +43,7 @@ const Search = React.memo<PropTypes>(
           className={styles.button}>
           Найти
         </button>
-        <button onClick={onReset} className={styles.reset}>Сброс</button>
+        <Button margin='0 0 0 10px' onClick={onReset}>Сброс</Button>
       </div>
     )
   }

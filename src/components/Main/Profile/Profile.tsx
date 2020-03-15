@@ -4,7 +4,8 @@ import {
   getUsersProfile,
   savePhoto,
   saveProfile,
-  updateStatus
+  updateStatus,
+  setAvatarIsFetching
 } from '../../../redux/profile-reducer'
 import { connect } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
@@ -12,7 +13,6 @@ import { compose } from 'redux'
 import { ProfileType } from '../../../types/AppTypes'
 import User from './User/User'
 import PostsContainer from './Posts/PostsContainer'
-import styles from './Profile.module.css'
 import { AppStateType } from '../../../redux/store'
 
 type PathParamsType = {
@@ -23,6 +23,7 @@ type MapStatePropTypes = {
   userID: number | null
   profile: ProfileType | null
   status: string
+  avatarIsFetching: boolean
 }
 
 type MapDispatchPropTypes = {
@@ -31,12 +32,24 @@ type MapDispatchPropTypes = {
   savePhoto: (photo: Blob) => void
   updateStatus: (newStatus: string) => void
   saveProfile: (profile: ProfileType) => void
+  setAvatarIsFetching: (isFetching: boolean) => void
 }
 
 type PropTypes = RouteComponentProps<PathParamsType> & MapStatePropTypes & MapDispatchPropTypes
 
 const Profile: React.FC<PropTypes> = ({
-  savePhoto, profile, status, updateStatus, saveProfile, match, userID, history, getUsersProfile, getStatus
+  savePhoto,
+  profile,
+  status,
+  updateStatus,
+  saveProfile,
+  match,
+  userID,
+  history,
+  getUsersProfile,
+  getStatus,
+  avatarIsFetching,
+  setAvatarIsFetching,
 }) => {
 
   const userURL = +match.params.userID || userID || +history.push('/login')
@@ -54,7 +67,7 @@ const Profile: React.FC<PropTypes> = ({
   }, [userURL, getUsersProfile, getStatus])
 
   return (
-    <div className={styles.profile}>
+    <>
       <User
         savePhoto={savePhoto}
         profile={profile}
@@ -62,9 +75,11 @@ const Profile: React.FC<PropTypes> = ({
         updateStatus={updateStatus}
         isOwner={isOwner}
         saveProfile={saveProfile}
+        avatarIsFetching={avatarIsFetching}
+        setAvatarIsFetching={setAvatarIsFetching}
       />
       <PostsContainer/>
-    </div>
+    </>
   )
 }
 
@@ -72,7 +87,8 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
   return {
     profile: state.profilePage.profile,
     status: state.profilePage.status,
-    userID: state.auth.userId
+    userID: state.auth.userId,
+    avatarIsFetching: state.profilePage.avatarIsFetching,
   }
 }
 
@@ -83,6 +99,7 @@ export default compose(
     updateStatus,
     savePhoto,
     saveProfile,
+    setAvatarIsFetching,
   }),
   withRouter,
 )(Profile)

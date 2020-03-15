@@ -2,20 +2,14 @@ import React, { useState } from 'react'
 import styles from './User.module.css'
 import Preloader from '../../../common/Preloader/Preloader'
 import Status from './Status/StatusHooks'
-import defaultAvatar from '../../../../assets/images/defaultAvatar.png'
 import ProfileDataForm from './ProfileDataForm'
+import Avatar from './Avatar/Avatar'
 
-function User ({ profile, savePhoto, status, updateStatus, isOwner, saveProfile }) {
+function User ({ profile, savePhoto, status, updateStatus, isOwner, saveProfile, avatarIsFetching, setAvatarIsFetching }) {
   const [editMode, setEditMode] = useState(false)
 
   if (!profile) {
     return <Preloader/>
-  }
-
-  function onMainPhotoSelected (e) {
-    if (e.target.files.length) {
-      savePhoto(e.target.files[0])
-    }
   }
 
   function onSubmit (formData) {
@@ -26,21 +20,13 @@ function User ({ profile, savePhoto, status, updateStatus, isOwner, saveProfile 
 
   return (
     <div className={styles.user}>
-      <div className={styles.avatar}>
-        <div className={styles.avatarWrapper}>
-          <img
-            className={styles.avatarIMG}
-            src={profile.photos.large || defaultAvatar} alt='avatar'
-          />
-        </div>
-        {
-          isOwner &&
-          <div className={styles.upload}>
-            <input className={styles.uploadInput} onChange={onMainPhotoSelected} type='file' id='UserPhotoUpload'/>
-            <label className={styles.uploadLabel} htmlFor='UserPhotoUpload'>Обновить фотографию</label>
-          </div>
-        }
-      </div>
+      <Avatar
+        savePhoto={savePhoto}
+        profile={profile}
+        isOwner={isOwner}
+        avatarIsFetching={avatarIsFetching}
+        setAvatarIsFetching={setAvatarIsFetching}
+      />
 
       <div className={styles.info}>
         <h1 className={styles.name}>

@@ -9,6 +9,7 @@ const ADD_POST = 'samurai-network/profile/ADD_POST'
 const SET_USER_PROFILE = 'samurai-network/profile/SET_USER_PROFILE'
 const SET_STATUS = 'samurai-network/profile/SET_STATUS'
 const SET_PROFILE_PHOTO = 'samurai-network/profile/SET_PROFILE_PHOTO'
+const SET_AVATAR_FETCHING = 'samurai-network/profile/SET_AVATAR_FETCHING'
 
 const initialState = {
   posts: [
@@ -17,6 +18,7 @@ const initialState = {
   ] as Array<PostType>,
   profile: null as ProfileType | null,
   status: '',
+  avatarIsFetching: false,
 }
 
 type InitialStateType = typeof initialState
@@ -25,7 +27,8 @@ type ActionTypes =
   AddPostActionType |
   SetUserProfileActionType |
   SetStatusActionType |
-  setProfilePhotoActionType
+  setProfilePhotoActionType |
+  setAvatarIsFetchingActionType
 
 function profileReducer (state = initialState, action: ActionTypes): InitialStateType {
   switch (action.type) {
@@ -59,6 +62,12 @@ function profileReducer (state = initialState, action: ActionTypes): InitialStat
         profile: { ...state.profile, photos: action.photos } as ProfileType,
       }
 
+    case SET_AVATAR_FETCHING:
+      return {
+        ...state,
+        avatarIsFetching: action.isFetching
+      }
+
     default:
       return state
   }
@@ -71,8 +80,8 @@ export const addPost = (formData: { newPost: string }): AddPostActionType => ({
   text: formData.newPost
 })
 
-type SetUserProfileActionType = { type: typeof SET_USER_PROFILE, profile: ProfileType }
-export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({
+type SetUserProfileActionType = { type: typeof SET_USER_PROFILE, profile: ProfileType | null }
+export const setUserProfile = (profile: ProfileType | null): SetUserProfileActionType => ({
   type: SET_USER_PROFILE,
   profile: profile
 })
@@ -89,11 +98,18 @@ export const setProfilePhoto = (photos: PhotosType): setProfilePhotoActionType =
   photos: photos
 })
 
+type setAvatarIsFetchingActionType = { type: typeof SET_AVATAR_FETCHING, isFetching: boolean }
+export const setAvatarIsFetching = (isFetching: boolean): setAvatarIsFetchingActionType => ({
+  type: SET_AVATAR_FETCHING,
+  isFetching
+})
+
 /* Thunk creators */
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
 export const getUsersProfile = (userID: number | null): ThunkType => {
   return async (dispatch) => {
+    dispatch(setUserProfile(null))
     if (userID) {
       const response = await profileAPI.getProfile(userID)
       dispatch(setUserProfile(response))
@@ -122,6 +138,7 @@ export const savePhoto = (file: any): ThunkType => {
     const response = await profileAPI.updatePhoto(file)
     if (response.resultCode === 0) {
       dispatch(setProfilePhoto(response.data.photos))
+      dispatch(setAvatarIsFetching(false))
     }
   }
 }
