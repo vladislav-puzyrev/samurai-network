@@ -14,5 +14,9 @@
 }
 
 .error {
-  border: 2px solid red;
+  background-color: #ff837b;
+  border-radius: 5px;
+  padding: 5px;
+  display: block;
+  margin-top: 5px;
 }

@@ -23,7 +23,8 @@ function UserInfo ({ profile, status, isOwner, saveProfile, updateStatus }) {
         {(status || isOwner) && <hr/>}
 
         {
-          editMode ? <ProfileDataForm profile={profile} initialValues={profile} onSubmit={onSubmit}/> :
+          editMode ?
+            <ProfileDataForm setEditMode={setEditMode} profile={profile} initialValues={profile} onSubmit={onSubmit}/> :
             <ProfileData isOwner={isOwner} profile={profile}/>
         }
       </div>

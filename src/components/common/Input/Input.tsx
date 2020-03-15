@@ -15,8 +15,7 @@ const Input: React.FC<PropTypes> = ({ width, margin, placeholder, meta, input, t
   const isError = meta.error && meta.touched
 
   return (
-    <span className={(isError || null) && styles.error}>
-      {isError && <span>{meta.error}</span>}
+    <span>
       <input
         {...input}
         id={id}
@@ -25,6 +24,7 @@ const Input: React.FC<PropTypes> = ({ width, margin, placeholder, meta, input, t
         className={styles.input}
         placeholder={placeholder}
       />
+      {isError && <span className={(isError || null) && styles.error}>{meta.error}</span>}
     </span>
   )
 }

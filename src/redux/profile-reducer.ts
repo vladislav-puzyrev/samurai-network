@@ -3,6 +3,7 @@ import { stopSubmit } from 'redux-form'
 import { PhotosType, PostType, ProfileType } from '../types/AppTypes'
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType } from './store'
+import { setMyPhoto, SetMyPhotoType } from './auth-reducer'
 
 /* Action types */
 const ADD_POST = 'samurai-network/profile/ADD_POST'
@@ -28,7 +29,8 @@ type ActionTypes =
   SetUserProfileActionType |
   SetStatusActionType |
   setProfilePhotoActionType |
-  setAvatarIsFetchingActionType
+  setAvatarIsFetchingActionType |
+  SetMyPhotoType
 
 function profileReducer (state = initialState, action: ActionTypes): InitialStateType {
   switch (action.type) {
@@ -138,6 +140,7 @@ export const savePhoto = (file: any): ThunkType => {
     const response = await profileAPI.updatePhoto(file)
     if (response.resultCode === 0) {
       dispatch(setProfilePhoto(response.data.photos))
+      dispatch(setMyPhoto(response.data.photos))
       dispatch(setAvatarIsFetching(false))
     }
   }

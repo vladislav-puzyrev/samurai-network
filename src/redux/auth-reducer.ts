@@ -1,6 +1,6 @@
 import { authAPI, securityAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
-import { ProfileType } from '../types/AppTypes'
+import { PhotosType, ProfileType } from '../types/AppTypes'
 import { getMyProfile } from './init-reducer'
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType } from './store'
@@ -9,6 +9,7 @@ import { AppStateType } from './store'
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
 const GET_CAPTCHA_URL = 'samurai-network/auth/GET_CAPTCHA_URL'
 const SET_MY_PROFILE = 'samurai-network/auth/SET_MY_PROFILE'
+const SET_MY_PHOTO = 'samurai-network/auth/SET_MY_PHOTO'
 
 const initialState = {
   userId: null as number | null,
@@ -25,7 +26,8 @@ type InitialStateType = typeof initialState
 type ActionTypes =
   SetAuthUserDataActionType |
   GetCaptchaUrlSuccessType |
-  SetMyProfileType
+  SetMyProfileType |
+  SetMyPhotoType
 
 function authReducer (state = initialState, action: ActionTypes): InitialStateType {
   switch (action.type) {
@@ -45,6 +47,15 @@ function authReducer (state = initialState, action: ActionTypes): InitialStateTy
       return {
         ...state,
         myProfile: action.profile,
+      }
+
+    case SET_MY_PHOTO:
+      return {
+        ...state,
+        myProfile: {
+          ...state.myProfile,
+          photos: action.photos
+        } as ProfileType,
       }
 
     default:
@@ -74,6 +85,12 @@ type SetMyProfileType = { type: typeof SET_MY_PROFILE, profile: ProfileType }
 export const setMyProfile = (profile: ProfileType): SetMyProfileType => ({
   type: SET_MY_PROFILE,
   profile,
+})
+
+export type SetMyPhotoType = { type: typeof SET_MY_PHOTO, photos: PhotosType }
+export const setMyPhoto = (photos: PhotosType): SetMyPhotoType => ({
+  type: SET_MY_PHOTO,
+  photos,
 })
 
 /* Thunk creators */

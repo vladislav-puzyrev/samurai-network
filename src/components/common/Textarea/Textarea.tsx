@@ -16,8 +16,7 @@ const Textarea: React.FC<PropTypes> = ({ width, margin, placeholder, rows = 1, c
   const isError = meta.error && meta.touched
 
   return (
-    <span className={(isError || null) && styles.error}>
-      {isError && <span>{meta.error}</span>}
+    <span>
       <textarea
         {...input}
         rows={rows}
@@ -27,6 +26,7 @@ const Textarea: React.FC<PropTypes> = ({ width, margin, placeholder, rows = 1, c
         placeholder={placeholder}
         id={id}
       />
+      {isError && <span className={(isError || null) && styles.error}>{meta.error}</span>}
     </span>
   )
 }

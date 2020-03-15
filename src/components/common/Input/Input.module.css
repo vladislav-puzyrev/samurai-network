@@ -13,6 +13,10 @@
 }
 
 .error {
-  border: 2px solid red;
+  background-color: #ff837b;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 5px;
+  display: inline-block;
+  margin-left: 10px;
 }
-

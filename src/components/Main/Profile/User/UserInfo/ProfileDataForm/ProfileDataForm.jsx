@@ -6,7 +6,7 @@ import Input from '../../../../../common/Input/Input'
 import Textarea from '../../../../../common/Textarea/Textarea'
 import styles from './ProfileDataForm.module.css'
 
-function ProfileDataForm ({ handleSubmit, error, profile }) {
+function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       {error && <div className={styles.error}>{error}</div>}
@@ -72,6 +72,7 @@ function ProfileDataForm ({ handleSubmit, error, profile }) {
       </div>
 
       <Button>Сохранить</Button>
+      <Button margin='0 0 0 10px' onClick={() => {setEditMode(false)}}>Отмена</Button>
     </form>
   )
 }

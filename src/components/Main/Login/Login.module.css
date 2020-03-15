@@ -1,0 +1,7 @@
+.form label:not([for=rememberMe]) {
+  display: block;
+}
+
+.form > div:not(:first-child) {
+  margin-top: 10px;
+}
