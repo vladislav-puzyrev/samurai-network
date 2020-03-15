@@ -1,0 +1,24 @@
+.about {
+  margin-top: 10px;
+}
+
+.contactsList {
+  list-style: none;
+}
+
+.about dd {
+  display: inline;
+}
+
+.about dt {
+  display: inline-block;
+  width: 100px;
+}
+
+.contacts dt {
+  width: 105px;
+}
+
+.contacts {
+  margin-top: 15px;
+}

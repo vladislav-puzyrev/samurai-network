@@ -1,0 +1,38 @@
+.statusBox {
+
+}
+
+.status {
+  background-color: transparent;
+  border: none;
+  display: block;
+  width: calc(100% + 5px);
+  text-align: start;
+  padding: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  transform: translateX(-5px);
+}
+
+.status:hover {
+  background-color: #464848;
+}
+
+.statusNotExist {
+  color: #7c8080;
+}
+
+.statusExist {
+  color: white;
+}
+
+.statusInput {
+  background-color: #404048;
+  display: block;
+  width: calc(100% + 5px);
+  transform: translateX(-5px);
+  border-radius: 2px;
+  border: none;
+  padding: 5px;
+  color: white;
+}

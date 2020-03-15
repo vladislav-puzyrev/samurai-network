@@ -1,25 +1,18 @@
-import React, { useState } from 'react'
-import styles from './User.module.css'
+import React from 'react'
 import Preloader from '../../../common/Preloader/Preloader'
-import Status from './Status/StatusHooks'
-import ProfileDataForm from './ProfileDataForm'
 import Avatar from './Avatar/Avatar'
+import UserInfo from './UserInfo/UserInfo'
 
-function User ({ profile, savePhoto, status, updateStatus, isOwner, saveProfile, avatarIsFetching, setAvatarIsFetching }) {
-  const [editMode, setEditMode] = useState(false)
+function User ({
+  profile, savePhoto, status, updateStatus, isOwner, saveProfile, avatarIsFetching, setAvatarIsFetching
+}) {
 
   if (!profile) {
     return <Preloader/>
   }
 
-  function onSubmit (formData) {
-    saveProfile(formData).then(() => {
-      setEditMode(false)
-    })
-  }
-
   return (
-    <div className={styles.user}>
+    <div style={{ display: 'flex' }}>
       <Avatar
         savePhoto={savePhoto}
         profile={profile}
@@ -28,52 +21,14 @@ function User ({ profile, savePhoto, status, updateStatus, isOwner, saveProfile,
         setAvatarIsFetching={setAvatarIsFetching}
       />
 
-      <div className={styles.info}>
-        <h1 className={styles.name}>
-          {profile && profile.fullName}
-        </h1>
-        <Status status={status} updateStatus={updateStatus}/>
-        {editMode
-          ? <ProfileDataForm
-            profile={profile} initialValues={profile}
-            onSubmit={onSubmit}
-          />
-          : <ProfileData
-            goToEditMode={() => { setEditMode(true) }}
-            isOwner={isOwner} profile={profile}
-          />}
-      </div>
+      <UserInfo
+        status={status}
+        updateStatus={updateStatus}
+        saveProfile={saveProfile}
+        profile={profile}
+        isOwner={isOwner}
+      />
     </div>
-  )
-}
-
-function Contact ({ contactTitle, contactValue }) {
-  return <li>{contactTitle}: {contactValue}</li>
-}
-
-function ProfileData ({ profile, isOwner, goToEditMode }) {
-  return (
-    <>
-      {isOwner && <button onClick={goToEditMode}>Редактировать</button>}
-      <ul className={styles.about}>
-        <li>Ищу работу: {profile.lookingForAJob ? 'да' : 'нет'}</li>
-        {profile.lookingForAJob && <li>Мои профессиональные
-          навыки: {profile.lookingForAJobDescription}
-        </li>}
-        {profile.aboutMe && <li>Обо мне: {profile.aboutMe}</li>}
-        <li className={styles.contLI}>
-          Мои контакты:
-          <ul className={styles.contacts}>
-            {Object.keys(profile.contacts).map((key) =>
-              <Contact
-                key={key} contactTitle={key}
-                contactValue={profile.contacts[key]}
-              />,
-            )}
-          </ul>
-        </li>
-      </ul>
-    </>
   )
 }
 

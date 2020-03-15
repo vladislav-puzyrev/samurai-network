@@ -2,7 +2,7 @@ import React from 'react'
 import Status from './Status'
 import { create } from 'react-test-renderer'
 
-describe('Status component', () => {
+describe('ProfileData component', () => {
   test('статус из пропсов поступает в стейт', () => {
     const component = create(<Status status='REACT!!!' />)
     const instance = component.getInstance()
@@ -10,7 +10,7 @@ describe('Status component', () => {
   })
 
   // test('нету спана при создании', () => {
-  //     const component = create(<Status status='REACT!!!'/>);
+  //     const component = create(<ProfileData status='REACT!!!'/>);
   //     const root = component.root;
   //     let span = root.findByType('div');
   //     expect(span).toBe(undefined);

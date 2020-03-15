@@ -109,8 +109,8 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
 export const getUsersProfile = (userID: number | null): ThunkType => {
   return async (dispatch) => {
-    dispatch(setUserProfile(null))
     if (userID) {
+      dispatch(setUserProfile(null))
       const response = await profileAPI.getProfile(userID)
       dispatch(setUserProfile(response))
     }

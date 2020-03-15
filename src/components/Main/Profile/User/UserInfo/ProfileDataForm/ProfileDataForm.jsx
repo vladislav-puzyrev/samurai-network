@@ -1,19 +1,15 @@
 import React from 'react'
-import { createField } from '../../../common/FormsControls/createField'
-import { required } from '../../../../utils/validators'
+import { required } from '../../../../../../utils/validators'
 import { Field, reduxForm } from 'redux-form'
+import Button from '../../../../../common/Button/Button'
+import Input from '../../../../../common/Input/Input'
+import Textarea from '../../../../../common/Textarea/Textarea'
 
-const Input = createField('input')
-const Textarea = createField('textarea')
+function ProfileDataForm ({ handleSubmit, error, profile }) {
 
-function ProfileDataForm (props) {
   return (
-    <form onSubmit={props.handleSubmit}>
-      <div>
-        <button>Сохранить</button>
-      </div>
-
-      {props.error && <div>{props.error}</div>}
+    <form onSubmit={handleSubmit}>
+      {error && <div>{error}</div>}
 
       <div>
         <div>
@@ -53,7 +49,7 @@ function ProfileDataForm (props) {
         <div>
           <b>Контакты</b>
           {
-            Object.keys(props.profile.contacts).map(key => {
+            Object.keys(profile.contacts).map(key => {
               return <div key={key}>
                 <b>{key}</b>:
                 <Field
@@ -66,6 +62,8 @@ function ProfileDataForm (props) {
         </div>
 
       </div>
+
+      <Button>Сохранить</Button>
     </form>
   )
 }

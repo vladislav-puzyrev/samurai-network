@@ -1,18 +1,13 @@
-.button {
+.input {
   color: white;
   background-color: #29292c;
   border: none;
   padding: 10px;
   outline: none;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: 5px;
   box-shadow: 0 0 5px #141414;
 }
 
-.button:focus {
+.input:focus {
   box-shadow: 0 0 5px #108de2;
-}
-
-.button:hover {
-  background-color: #37373b;
 }
