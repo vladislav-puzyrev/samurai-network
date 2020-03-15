@@ -151,7 +151,7 @@ export const saveProfile = (profile: ProfileType): ThunkType => {
     }
     else {
       // @ts-ignore
-      dispatch(stopSubmit('edit-profile', { _error: 'response.data.messages[0]' }))
+      dispatch(stopSubmit('edit-profile', { _error: response.messages[0] }))
       return Promise.reject()
     }
   }

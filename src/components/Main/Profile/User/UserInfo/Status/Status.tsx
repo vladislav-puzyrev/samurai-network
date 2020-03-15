@@ -38,7 +38,7 @@ const Status: React.FC<PropTypes> = ({ status, updateStatus, isOwner }) => {
       {
         !editMode ? (
           (isOwner && <button className={statusClass} onClick={activateEditMode}>{status || 'изменить статус'}</button>)
-          || <span className={statusClass}>{status}</span>
+          || <div className={styles.statusNotMe}>{status}</div>
         ) : (
           <input
             autoFocus

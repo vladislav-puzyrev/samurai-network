@@ -20,6 +20,8 @@ function UserInfo ({ profile, status, isOwner, saveProfile, updateStatus }) {
         <h1 className={styles.userName}>{profile.fullName}</h1>
         <Status status={status} updateStatus={updateStatus} isOwner={isOwner}/>
 
+        {(status || isOwner) && <hr/>}
+
         {
           editMode ? <ProfileDataForm profile={profile} initialValues={profile} onSubmit={onSubmit}/> :
             <ProfileData isOwner={isOwner} profile={profile}/>

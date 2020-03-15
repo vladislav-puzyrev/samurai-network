@@ -12,3 +12,7 @@
 .textarea:focus {
   box-shadow: 0 0 5px #108de2;
 }
+
+.error {
+  border: 2px solid red;
+}

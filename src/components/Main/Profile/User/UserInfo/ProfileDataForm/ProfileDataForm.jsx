@@ -4,63 +4,71 @@ import { Field, reduxForm } from 'redux-form'
 import Button from '../../../../../common/Button/Button'
 import Input from '../../../../../common/Input/Input'
 import Textarea from '../../../../../common/Textarea/Textarea'
+import styles from './ProfileDataForm.module.css'
 
 function ProfileDataForm ({ handleSubmit, error, profile }) {
-
   return (
-    <form onSubmit={handleSubmit}>
-      {error && <div>{error}</div>}
+    <form onSubmit={handleSubmit} className={styles.form}>
+      {error && <div className={styles.error}>{error}</div>}
 
-      <div>
+      <h3>Основная информация</h3>
+
+      <div className={styles.aboutMe}>
         <div>
-          <label>
-            Имя:
-            <Field
-              type='text' placeholder='Имя' name='fullName'
-              component={Input} validate={[required]}
-            />
-          </label>
+          <label htmlFor='dataFormName'>ФИО:</label>
+          <Field
+            type='text'
+            width='300px'
+            placeholder='Имя'
+            name='fullName'
+            component={Input}
+            validate={[required]}
+            id='dataFormName'
+          />
         </div>
 
         <div>
-          <label>
-            Ищу работу:
-            <Field type='checkbox' name='lookingForAJob' component={Input}/>
-          </label>
+          <label htmlFor='dataFormWork'>Ищите работу:</label>
+          <Field type='checkbox' name='lookingForAJob' component={Input} id='dataFormWork'/>
         </div>
 
         <div>
-          <label>
-            Мои навыки:
-            <Field
-              name='lookingForAJobDescription' component={Textarea}
-              validate={[required]}
-            />
-          </label>
+          <label htmlFor='dataFormSkills'>Ваши навыки:</label>
+          <Field
+            rows={2}
+            width='300px'
+            name='lookingForAJobDescription'
+            component={Textarea}
+            validate={[required]}
+            id='dataFormSkills'
+          />
         </div>
 
         <div>
-          <label>
-            Обо мне:
-            <Field name='aboutMe' component={Textarea} validate={[required]}/>
-          </label>
+          <label htmlFor='dataFormAbout'>О Вас:</label>
+          <Field rows={2} width='300px' name='aboutMe' component={Textarea} validate={[required]} id='dataFormAbout'/>
         </div>
+      </div>
 
-        <div>
-          <b>Контакты</b>
-          {
-            Object.keys(profile.contacts).map(key => {
-              return <div key={key}>
-                <b>{key}</b>:
-                <Field
-                  type='text' placeholder={key} name={'contacts.' + key}
-                  component={Input}
-                />
-              </div>
-            })
-          }
-        </div>
+      <hr/>
 
+      <h3>Ваши контакты</h3>
+
+      <div className={styles.myContacts}>
+        {
+          Object.keys(profile.contacts).map(key => (
+            <div key={key}>
+              <label htmlFor={'dataForm' + key}>{key[0].toUpperCase() + key.slice(1)}:</label>
+              <Field
+                type='text'
+                width='300px'
+                name={'contacts.' + key}
+                component={Input}
+                id={'dataForm' + key}
+              />
+            </div>
+          ))
+        }
       </div>
 
       <Button>Сохранить</Button>

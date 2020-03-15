@@ -2,6 +2,8 @@ import React from 'react'
 import styles from './ProfileData.module.css'
 
 function ProfileData ({ profile }) {
+  const isContactsExists = Object.values(profile.contacts).some((contact) => (contact !== null))
+
   return (
     <dl className={styles.about}>
       <div>
@@ -19,8 +21,10 @@ function ProfileData ({ profile }) {
         <dd> {profile.aboutMe || 'не заполнено'}</dd>
       </div>
 
+      {isContactsExists && <hr/>}
+
       {
-        Object.values(profile.contacts).some((contact) => (contact !== null)) && (
+        isContactsExists && (
           <div className={styles.contacts}>
             <dt>Мои контакты:</dt>
             <dd>

@@ -4,6 +4,7 @@ import Post from './Post/Post'
 import { Field, reduxForm } from 'redux-form'
 import { required, maxLengthCreator } from '../../../../utils/validators'
 import { createField } from '../../../common/FormsControls/createField'
+import Button from '../../../common/Button/Button'
 
 const maxLength = maxLengthCreator(10)
 const Textarea = createField('textarea')
@@ -36,7 +37,7 @@ function AddNewPostForm (props) {
         />
       </div>
       <div>
-        <button className={styles.button}>Отправить</button>
+        <Button margin='10px 0 0 0' className={styles.button}>Отправить</Button>
       </div>
     </form>
   )

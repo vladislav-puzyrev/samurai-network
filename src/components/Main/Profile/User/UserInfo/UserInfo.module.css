@@ -12,3 +12,9 @@
   font-size: 1.4em;
   font-weight: normal;
 }
+
+.info hr {
+  border: none;
+  border-bottom: 1px solid #444446;
+  margin: 10px 0;
+}
