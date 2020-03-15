@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/samurai-network/static/css/main.e0ffa0fd.chunk.css",
-    "main.js": "/samurai-network/static/js/main.17051c4e.chunk.js",
-    "main.js.map": "/samurai-network/static/js/main.17051c4e.chunk.js.map",
+    "main.js": "/samurai-network/static/js/main.7f957fb1.chunk.js",
+    "main.js.map": "/samurai-network/static/js/main.7f957fb1.chunk.js.map",
     "runtime-main.js": "/samurai-network/static/js/runtime-main.da4e6650.js",
     "runtime-main.js.map": "/samurai-network/static/js/runtime-main.da4e6650.js.map",
     "static/js/2.a76e8d4d.chunk.js": "/samurai-network/static/js/2.a76e8d4d.chunk.js",
     "static/js/2.a76e8d4d.chunk.js.map": "/samurai-network/static/js/2.a76e8d4d.chunk.js.map",
     "index.html": "/samurai-network/index.html",
-    "precache-manifest.d406aa76f9d0958aced89b564b91db8f.js": "/samurai-network/precache-manifest.d406aa76f9d0958aced89b564b91db8f.js",
+    "precache-manifest.0487b88c4d07762e500dd9faf20756ce.js": "/samurai-network/precache-manifest.0487b88c4d07762e500dd9faf20756ce.js",
     "service-worker.js": "/samurai-network/service-worker.js",
     "static/css/main.e0ffa0fd.chunk.css.map": "/samurai-network/static/css/main.e0ffa0fd.chunk.css.map",
     "static/js/2.a76e8d4d.chunk.js.LICENSE": "/samurai-network/static/js/2.a76e8d4d.chunk.js.LICENSE",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.da4e6650.js",
     "static/js/2.a76e8d4d.chunk.js",
     "static/css/main.e0ffa0fd.chunk.css",
-    "static/js/main.17051c4e.chunk.js"
+    "static/js/main.7f957fb1.chunk.js"
   ]
 }
