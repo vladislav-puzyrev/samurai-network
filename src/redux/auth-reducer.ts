@@ -7,7 +7,7 @@ import { AppStateType } from './store'
 
 /* Action types */
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
-const GET_CAPTCHA_URL = 'samurai-network/auth/GET_CAPTCHA_URL'
+const SET_CAPTCHA_URL = 'samurai-network/auth/SET_CAPTCHA_URL'
 const SET_MY_PROFILE = 'samurai-network/auth/SET_MY_PROFILE'
 const SET_MY_PHOTO = 'samurai-network/auth/SET_MY_PHOTO'
 
@@ -37,7 +37,7 @@ function authReducer (state = initialState, action: ActionTypes): InitialStateTy
         ...action.payload,
       }
 
-    case GET_CAPTCHA_URL:
+    case SET_CAPTCHA_URL:
       return {
         ...state,
         captchaUrl: action.captchaUrl,
@@ -75,9 +75,9 @@ export const setAuthUserData = (
   { type: SET_USER_DATA, payload: { userId, email, login, isAuth } }
 )
 
-type GetCaptchaUrlSuccessType = { type: typeof GET_CAPTCHA_URL, captchaUrl: string };
+type GetCaptchaUrlSuccessType = { type: typeof SET_CAPTCHA_URL, captchaUrl: string };
 export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessType => ({
-  type: GET_CAPTCHA_URL,
+  type: SET_CAPTCHA_URL,
   captchaUrl: captchaUrl,
 })
 

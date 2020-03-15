@@ -64,7 +64,7 @@ export interface GetDialogResponse extends ItemsResult {
   }>
 }
 
-export interface messagesNewerThanDateResponse {
+export interface messagesAfterDateResponse {
   id: string
   body: string
   translatedBody: null
@@ -82,6 +82,6 @@ export interface messagesNewerThanDateResponse {
 
 export interface SendMessageResponse extends OperationResult {
   data: {
-    message: messagesNewerThanDateResponse
+    message: messagesAfterDateResponse
   }
 }

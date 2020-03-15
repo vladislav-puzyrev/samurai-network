@@ -6,7 +6,7 @@ import News from './News/News'
 import Music from './Music/Music'
 import Settings from './Settings/Settings'
 import Login from './Login/Login'
-import MessagesContainer from './Messages/MessagesContainer'
+// import MessagesContainer from './Messages/MessagesContainer'
 import Profile from './Profile/Profile'
 
 function Main () {
@@ -16,7 +16,7 @@ function Main () {
         <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
         // @ts-ignore
         <Route path='/profile/:userID?' render={() => <Profile/>}/>
-        <Route path='/messages' render={() => <MessagesContainer/>}/>
+        {/*<Route path='/messages' render={() => <MessagesContainer/>}/>*/}
         <Route path='/users' render={() => <Users/>}/>
         <Route path='/news' component={News}/>
         <Route path='/music' component={Music}/>

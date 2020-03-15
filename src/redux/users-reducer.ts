@@ -9,9 +9,9 @@ const UNFOLLOW = 'samurai-network/users/UNFOLLOW'
 const SET_USERS = 'samurai-network/users/SET_USERS'
 const SET_CURRENT_PAGE = 'samurai-network/users/SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'samurai-network/users/SET_TOTAL_USERS_COUNT'
+const SET_TERM = 'samurai-network/users/SET_TERM'
 const TOGGLE_IS_FETCHING = 'samurai-network/users/TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'samurai-network/users/TOGGLE_IS_FOLLOWING_PROGRESS'
-const SET_TERM = 'samurai-network/users/SET_TERM'
 
 const initialState = {
   users: [] as Array<UserType>,

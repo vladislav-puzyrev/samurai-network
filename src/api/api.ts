@@ -7,7 +7,7 @@ import {
   LoginResponse,
   GetCaptchaResponse,
   GetAllDialogsResponse,
-  GetDialogResponse, SendMessageResponse, messagesNewerThanDateResponse
+  GetDialogResponse, SendMessageResponse, messagesAfterDateResponse
 } from '../types/APITypes'
 import { ProfileType } from '../types/AppTypes'
 
@@ -95,13 +95,11 @@ export const securityAPI = {
 }
 
 export const dialogsAPI = {
-  // Сортировка человека вверх при начале чатинга
   async startChatting (userID: number) {
     const res = await server.put<OperationResult>(`dialogs/${userID}`)
     return res.data
   },
-  // Получить все диалоги (без сообщений просто для вывода)
-  async getAllDialogs () {
+  async getAllMessages () {
     const res = await server.get<Array<GetAllDialogsResponse>>(`dialogs`)
     return res.data
   },
@@ -129,13 +127,13 @@ export const dialogsAPI = {
     const res = await server.put<OperationResult>(`dialogs/messages/${messageID}/restore`)
     return res.data
   },
-  async messagesNewerThanDate (userID: number, date: string) {
-    const res = await server.get<Array<messagesNewerThanDateResponse>>(
+  async messagesAfterDate (userID: number, date: string) {
+    const res = await server.get<Array<messagesAfterDateResponse>>(
       `dialogs/${userID}/messages/new?newerThen=${date}`
     )
     return res.data
   },
-  async getNewMessages () {
+  async getNewMessagesCount () {
     const res = await server.get<number>(`dialogs/messages/new/count`)
     return res.data
   },
