@@ -50,7 +50,7 @@ const Profile: React.FC<PropTypes> = ({
   saveMyProfile,
 }) => {
 
-  const { id } = useParams()
+  const { userID: id } = useParams()
 
   const userURL = (id) ? +id : userID
   const isOwner = userID === userURL

@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './Menu.module.css'
 
-function Menu () {
+function Menu ({newMessagesCount}: any) {
   return (
     <ul className={styles.menu}>
       <li className={styles.menuItem}>
@@ -18,7 +18,7 @@ function Menu () {
           to='/messages' className={styles.menuLink}
           activeClassName={styles.active}
         >
-          Сообщения
+          Сообщения ({newMessagesCount})
         </NavLink>
       </li>
       <li className={styles.menuItem}>

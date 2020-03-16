@@ -11,7 +11,7 @@ function UserInfo ({ profile, status, isOwner, saveProfile, updateStatus }) {
   function onSubmit (formData) {
     saveProfile(formData).then(() => {
       setEditMode(false)
-    })
+    }).catch(() => {})
   }
 
   return (

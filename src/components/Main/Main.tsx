@@ -14,8 +14,8 @@ function Main () {
     <div className={styles.content}>
       <Switch>
         <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
-        <Route path='/profile/:id?' render={() => <Profile/>}/>
-        <Route path='/messages' render={() => <Messages/>}/>
+        <Route path='/profile/:userID?' render={() => <Profile/>}/>
+        <Route path='/messages:userID?' render={() => <Messages/>}/>
         <Route path='/users' render={() => <Users/>}/>
         <Route path='/news' component={News}/>
         <Route path='/music' component={Music}/>
