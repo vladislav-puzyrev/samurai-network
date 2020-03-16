@@ -7,10 +7,11 @@ import {
   updateStatus,
   setAvatarIsFetching
 } from '../../../redux/profile-reducer'
+import { saveMyProfile } from '../../../redux/auth-reducer'
 import { connect } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { compose } from 'redux'
-import { ProfileType } from '../../../types/AppTypes'
+import { ProfileType } from '../../../types/types'
 import User from './User/User'
 import PostsContainer from './Posts/PostsContainer'
 import { AppStateType } from '../../../redux/store'
@@ -24,6 +25,7 @@ type MapStatePropTypes = {
   profile: ProfileType | null
   status: string
   avatarIsFetching: boolean
+  myProfile: ProfileType | null
 }
 
 type MapDispatchPropTypes = {
@@ -31,8 +33,9 @@ type MapDispatchPropTypes = {
   getStatus: (userID: number) => void
   savePhoto: (photo: Blob) => void
   updateStatus: (newStatus: string) => void
-  saveProfile: (profile: ProfileType) => void
   setAvatarIsFetching: (isFetching: boolean) => void
+  saveProfile: (profile: ProfileType) => void
+  saveMyProfile: (profile: ProfileType) => void
 }
 
 type PropTypes = RouteComponentProps<PathParamsType> & MapStatePropTypes & MapDispatchPropTypes
@@ -50,6 +53,8 @@ const Profile: React.FC<PropTypes> = ({
   getStatus,
   avatarIsFetching,
   setAvatarIsFetching,
+  myProfile,
+  saveMyProfile,
 }) => {
 
   const userURL = +match.params.userID || userID || +history.push('/login')
@@ -70,11 +75,11 @@ const Profile: React.FC<PropTypes> = ({
     <>
       <User
         savePhoto={savePhoto}
-        profile={profile}
+        profile={isOwner ? myProfile : profile}
         status={status}
         updateStatus={updateStatus}
         isOwner={isOwner}
-        saveProfile={saveProfile}
+        saveProfile={isOwner ? saveMyProfile : saveProfile}
         avatarIsFetching={avatarIsFetching}
         setAvatarIsFetching={setAvatarIsFetching}
       />
@@ -89,6 +94,7 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
     status: state.profilePage.status,
     userID: state.auth.userId,
     avatarIsFetching: state.profilePage.avatarIsFetching,
+    myProfile: state.auth.myProfile,
   }
 }
 
@@ -100,6 +106,7 @@ export default compose(
     savePhoto,
     saveProfile,
     setAvatarIsFetching,
+    saveMyProfile,
   }),
   withRouter,
 )(Profile)

@@ -1,6 +1,6 @@
-import { authAPI, securityAPI } from '../api/api'
+import { authAPI, profileAPI, securityAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
-import { PhotosType, ProfileType } from '../types/AppTypes'
+import { PhotosType, ProfileType } from '../types/types'
 import { getMyProfile } from './init-reducer'
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType } from './store'
@@ -95,6 +95,21 @@ export const setMyPhoto = (photos: PhotosType): SetMyPhotoType => ({
 
 /* Thunk creators */
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
+
+export const saveMyProfile = (profile: ProfileType): ThunkType => {
+  return async (dispatch) => {
+    const response = await profileAPI.updateProfile(profile)
+    if (response.resultCode === 0) {
+      await dispatch(setMyProfile(profile))
+    }
+    else {
+      // @ts-ignore
+      dispatch(stopSubmit('edit-profile', { _error: response.messages[0] }))
+      return Promise.reject()
+    }
+
+  }
+}
 
 export const getAuthUserData = (): ThunkType => {
   return async (dispatch) => {

@@ -1,15 +1,17 @@
 import axios from 'axios'
 import {
-  GetUsersResponse,
+  UsersType,
   OperationResult,
-  SavePhotoResponse,
-  MeResponse,
-  LoginResponse,
-  GetCaptchaResponse,
-  GetAllDialogsResponse,
-  GetDialogResponse, SendMessageResponse, messagesAfterDateResponse
-} from '../types/APITypes'
-import { ProfileType } from '../types/AppTypes'
+  SavePhotoType,
+  MeType,
+  LoginType,
+  CaptchaType,
+  AllMessagesType,
+  DialogsType,
+  SendMessageType,
+  MessagesAfterDateType,
+  ProfileType
+} from '../types/types'
 
 const server = axios.create({
   withCredentials: true,
@@ -23,7 +25,7 @@ const server = axios.create({
 
 export const usersAPI = {
   async getUsers (count: number, page: number, term = '') {
-    const res = await server.get<GetUsersResponse>(`users?count=${count}&page=${page}&term=${term}`)
+    const res = await server.get<UsersType>(`users?count=${count}&page=${page}&term=${term}`)
     return res.data
   },
   async isFollowing (userID: number) {
@@ -57,7 +59,7 @@ export const profileAPI = {
     const formData = new FormData()
     formData.append(`image`, photoFile)
 
-    const res = await server.put<SavePhotoResponse>(`profile/photo`, formData, {
+    const res = await server.put<SavePhotoType>(`profile/photo`, formData, {
       headers: {
         'Content-Type':
           'multipart/form-data'
@@ -74,11 +76,11 @@ export const profileAPI = {
 
 export const authAPI = {
   async me () {
-    const res = await server.get<MeResponse>(`auth/me`)
+    const res = await server.get<MeType>(`auth/me`)
     return res.data
   },
   async login (email: string, password: string, rememberMe = true, captcha: string) {
-    const res = await server.post<LoginResponse>(`auth/login`, { email, password, rememberMe, captcha })
+    const res = await server.post<LoginType>(`auth/login`, { email, password, rememberMe, captcha })
     return res.data
   },
   async logout () {
@@ -89,26 +91,26 @@ export const authAPI = {
 
 export const securityAPI = {
   async getCaptcha () {
-    const res = await server.get<GetCaptchaResponse>(`security/get-captcha-url`)
+    const res = await server.get<CaptchaType>(`security/get-captcha-url`)
     return res.data
   },
 }
 
-export const dialogsAPI = {
+export const messagesAPI = {
   async startChatting (userID: number) {
     const res = await server.put<OperationResult>(`dialogs/${userID}`)
     return res.data
   },
   async getAllMessages () {
-    const res = await server.get<Array<GetAllDialogsResponse>>(`dialogs`)
+    const res = await server.get<Array<AllMessagesType>>(`dialogs`)
     return res.data
   },
   async getDialog (userID: number) {
-    const res = await server.get<GetDialogResponse>(`dialogs/${userID}/messages`)
+    const res = await server.get<DialogsType>(`dialogs/${userID}/messages`)
     return res.data
   },
   async sendMessage (userID: number, message: string) {
-    const res = await server.post<SendMessageResponse>(`dialogs/${userID}/messages`, { body: message })
+    const res = await server.post<SendMessageType>(`dialogs/${userID}/messages`, { body: message })
     return res.data
   },
   async isMessageViewed (messageID: string) {
@@ -127,8 +129,8 @@ export const dialogsAPI = {
     const res = await server.put<OperationResult>(`dialogs/messages/${messageID}/restore`)
     return res.data
   },
-  async messagesAfterDate (userID: number, date: string) {
-    const res = await server.get<Array<messagesAfterDateResponse>>(
+  async getMessagesAfterDate (userID: number, date: string) {
+    const res = await server.get<Array<MessagesAfterDateType>>(
       `dialogs/${userID}/messages/new?newerThen=${date}`
     )
     return res.data

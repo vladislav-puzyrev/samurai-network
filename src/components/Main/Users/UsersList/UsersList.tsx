@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './UsersList.module.css'
 import User from './User/User'
-import { UserType } from '../../../../types/AppTypes'
+import { UserType } from '../../../../types/types'
 import Preloader from '../../../common/Preloader/Preloader'
 
 type PropTypes = {

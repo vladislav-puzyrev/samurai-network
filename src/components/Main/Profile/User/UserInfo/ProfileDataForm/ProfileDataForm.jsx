@@ -72,7 +72,7 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
       </div>
 
       <Button>Сохранить</Button>
-      <Button margin='0 0 0 10px' onClick={() => {setEditMode(false)}}>Отмена</Button>
+      <Button type='button' margin='0 0 0 10px' onClick={() => {setEditMode(false)}}>Отмена</Button>
     </form>
   )
 }

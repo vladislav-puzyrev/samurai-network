@@ -1,5 +1,5 @@
 // import profileReducer, { addPost } from './profile-reducer'
-import { PostType, ProfileType } from '../types/AppTypes'
+import { PostType, ProfileType } from '../types/types'
 
 const initialState = {
   posts: [

@@ -1,6 +1,6 @@
 import { profileAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
-import { PhotosType, PostType, ProfileType } from '../types/AppTypes'
+import { PhotosType, PostType, ProfileType } from '../types/types'
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType } from './store'
 import { setMyPhoto, SetMyPhotoType } from './auth-reducer'

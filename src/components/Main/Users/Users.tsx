@@ -16,7 +16,7 @@ import {
   getUsersSelector,
 } from '../../../redux/users-selectors'
 import { AppStateType } from '../../../redux/store'
-import { UserType } from '../../../types/AppTypes'
+import { UserType } from '../../../types/types'
 import { compose } from 'redux'
 import Search from './Search/Search'
 import Paginator from './Paginator/Paginator'
