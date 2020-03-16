@@ -7,18 +7,13 @@ import {
   updateStatus,
   setAvatarIsFetching
 } from '../../../redux/profile-reducer'
-import { saveMyProfile } from '../../../redux/auth-reducer'
 import { connect } from 'react-redux'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { compose } from 'redux'
+import { useParams, Redirect } from 'react-router-dom'
+import { saveMyProfile } from '../../../redux/auth-reducer'
 import { ProfileType } from '../../../types/types'
-import User from './User/User'
 import PostsContainer from './Posts/PostsContainer'
 import { AppStateType } from '../../../redux/store'
-
-type PathParamsType = {
-  userID: string
-}
+import User from './User/User'
 
 type MapStatePropTypes = {
   userID: number | null
@@ -38,7 +33,7 @@ type MapDispatchPropTypes = {
   saveMyProfile: (profile: ProfileType) => void
 }
 
-type PropTypes = RouteComponentProps<PathParamsType> & MapStatePropTypes & MapDispatchPropTypes
+type PropTypes = MapStatePropTypes & MapDispatchPropTypes
 
 const Profile: React.FC<PropTypes> = ({
   savePhoto,
@@ -46,9 +41,7 @@ const Profile: React.FC<PropTypes> = ({
   status,
   updateStatus,
   saveProfile,
-  match,
   userID,
-  history,
   getUsersProfile,
   getStatus,
   avatarIsFetching,
@@ -57,7 +50,9 @@ const Profile: React.FC<PropTypes> = ({
   saveMyProfile,
 }) => {
 
-  const userURL = +match.params.userID || userID || +history.push('/login')
+  const { id } = useParams()
+
+  const userURL = (id) ? +id : userID
   const isOwner = userID === userURL
 
   useEffect(() => {
@@ -70,6 +65,10 @@ const Profile: React.FC<PropTypes> = ({
 
     updateProfile()
   }, [userURL, getUsersProfile, getStatus])
+
+  if (!userURL) {
+    return <Redirect to='/login'/>
+  }
 
   return (
     <>
@@ -98,15 +97,12 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
   }
 }
 
-export default compose(
-  connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>(mapStateToProps, {
-    getUsersProfile,
-    getStatus,
-    updateStatus,
-    savePhoto,
-    saveProfile,
-    setAvatarIsFetching,
-    saveMyProfile,
-  }),
-  withRouter,
-)(Profile)
+export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>(mapStateToProps, {
+  getUsersProfile,
+  getStatus,
+  updateStatus,
+  savePhoto,
+  saveProfile,
+  setAvatarIsFetching,
+  saveMyProfile,
+})(Profile)

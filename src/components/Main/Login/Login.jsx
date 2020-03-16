@@ -25,7 +25,12 @@ function Login ({ login, isAuth, captchaUrl }) {
   return (
     <div>
       <h1>Авторизация</h1>
-      <LoginReduxForm logTestAccount={logTestAccount} captchaUrl={captchaUrl} onSubmit={onSubmit}/>
+      <LoginReduxForm
+        initialValues={{ rememberMe: true }}
+        logTestAccount={logTestAccount}
+        captchaUrl={captchaUrl}
+        onSubmit={onSubmit}
+      />
     </div>
   )
 }
@@ -85,7 +90,7 @@ function LoginForm ({ handleSubmit, error, captchaUrl, logTestAccount }) {
 
       {error ? <div style={{ color: 'red' }}>{error}</div> : null}
       <div>
-        <Button width='100px'>Войти</Button>
+        <Button type='submit' width='100px'>Войти</Button>
         <Button type='button' margin='0 0 0 10px' onClick={logTestAccount}>Войти под тестовым аккаунтом</Button>
       </div>
     </form>

@@ -6,17 +6,16 @@ import News from './News/News'
 import Music from './Music/Music'
 import Settings from './Settings/Settings'
 import Login from './Login/Login'
-// import MessagesContainer from './Messages/MessagesContainer'
 import Profile from './Profile/Profile'
+import Messages from './Messages/Messages'
 
 function Main () {
   return (
     <div className={styles.content}>
       <Switch>
         <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
-        // @ts-ignore
-        <Route path='/profile/:userID?' render={() => <Profile/>}/>
-        {/*<Route path='/messages' render={() => <MessagesContainer/>}/>*/}
+        <Route path='/profile/:id?' render={() => <Profile/>}/>
+        <Route path='/messages' render={() => <Messages/>}/>
         <Route path='/users' render={() => <Users/>}/>
         <Route path='/news' component={News}/>
         <Route path='/music' component={Music}/>
