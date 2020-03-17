@@ -1,0 +1,32 @@
+.wrapper {
+  flex-basis: 35%;
+}
+
+.li:hover {
+  background-color: #3a3a43;
+}
+
+.a {
+  display: flex;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.active {
+  background-color: #3a3a43;
+}
+
+.avatar {
+  width: 60px;
+  border-radius: 50%;
+}
+
+.info {
+  width: 100%;
+  margin-left: 20px;
+}
+
+.infoMessage {
+  display: flex;
+  justify-content: space-between;
+}

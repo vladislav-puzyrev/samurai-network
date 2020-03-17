@@ -79,7 +79,7 @@ export interface CaptchaType {
   url: string
 }
 
-export interface AllMessagesType {
+export interface InterlocutorType {
   id: number
   userName: string
   hasNewMessages: boolean
@@ -112,8 +112,9 @@ export interface MessagesAfterDateType {
   senderId: number
   senderName: string
   recipientId: number
-  recipientName: string
   viewed: boolean
+
+  recipientName: string
   deletedBySender: boolean
   deletedByRecipient: boolean
   isSpam: boolean

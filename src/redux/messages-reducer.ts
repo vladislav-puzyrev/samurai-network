@@ -1,4 +1,4 @@
-import { AllMessagesType, DialogType, MessagesAfterDateType } from '../types/types'
+import { InterlocutorType, DialogType, MessagesAfterDateType } from '../types/types'
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType } from './store'
 import { messagesAPI } from '../api/api'
@@ -11,13 +11,13 @@ const SET_NEW_MESSAGES_COUNT = 'samurai-network/messages/SET_NEW_MESSAGES_COUNT'
 const TOGGLE_IS_FETCHING = 'samurai-network/messages/TOGGLE_IS_FETCHING'
 
 const initialState = {
-  allMessages: null as Array<AllMessagesType> | null,
+  interlocutors: null as Array<InterlocutorType> | null,
   currentDialog: null as Array<DialogType> | null,
   messagesAfterDate: null as Array<MessagesAfterDateType> | null,
   newMessagesCount: 0,
 
   fetching: {
-    allMessages: false,
+    interlocutors: false,
     currentDialog: false,
     messagesAfterDate: false,
     newMessagesCount: false,
@@ -38,7 +38,7 @@ function messagesReducer (state = initialState, action: ActionTypes): InitialSta
     case SET_ALL_MESSAGES:
       return {
         ...state,
-        allMessages: action.messages
+        interlocutors: action.messages
       }
 
     case SET_CURRENT_DIALOG:
@@ -74,8 +74,8 @@ function messagesReducer (state = initialState, action: ActionTypes): InitialSta
 }
 
 /* Action creators */
-type setAllMessagesActionType = { type: typeof SET_ALL_MESSAGES, messages: Array<AllMessagesType> };
-export const setAllMessages = (messages: Array<AllMessagesType>): setAllMessagesActionType => ({
+type setAllMessagesActionType = { type: typeof SET_ALL_MESSAGES, messages: Array<InterlocutorType> };
+export const setAllMessages = (messages: Array<InterlocutorType>): setAllMessagesActionType => ({
   type: SET_ALL_MESSAGES,
   messages
 })
@@ -119,10 +119,10 @@ export const startChatting = (userID: number): ThunkType => {
   }
 }
 
-export const getAllMessages = (): ThunkType => {
+export const getInterlocutorsList = (): ThunkType => {
   return async (dispatch) => {
     dispatch(toggleIsFetching('allMessages', true))
-    const res = await messagesAPI.getAllMessages()
+    const res = await messagesAPI.getInterlocutorsList()
     dispatch(setAllMessages(res))
     dispatch(toggleIsFetching('allMessages', false))
   }

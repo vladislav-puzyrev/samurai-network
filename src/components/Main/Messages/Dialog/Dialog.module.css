@@ -1,0 +1,4 @@
+.wrapper {
+  flex-basis: calc(65% - 2px);
+  background-color: #26262c;
+}

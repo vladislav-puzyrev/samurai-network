@@ -6,7 +6,7 @@ import {
   MeType,
   LoginType,
   CaptchaType,
-  AllMessagesType,
+  InterlocutorType,
   DialogsType,
   SendMessageType,
   MessagesAfterDateType,
@@ -101,8 +101,8 @@ export const messagesAPI = {
     const res = await server.put<OperationResult>(`dialogs/${userID}`)
     return res.data
   },
-  async getAllMessages () {
-    const res = await server.get<Array<AllMessagesType>>(`dialogs`)
+  async getInterlocutorsList () {
+    const res = await server.get<Array<InterlocutorType>>(`dialogs`)
     return res.data
   },
   async getDialog (userID: number) {
@@ -113,7 +113,7 @@ export const messagesAPI = {
     const res = await server.post<SendMessageType>(`dialogs/${userID}/messages`, { body: message })
     return res.data
   },
-  async isMessageViewed (messageID: string) {
+  async readMessage (messageID: string) {
     const res = await server.get<boolean>(`dialogs/messages/${messageID}/viewed`)
     return res.data
   },
@@ -140,14 +140,3 @@ export const messagesAPI = {
     return res.data
   },
 }
-
-// dialogsAPI.startChatting(5).then(r => {console.log(r)})
-// dialogsAPI.getAllDialogs().then(r => {console.log(r)})
-// dialogsAPI.getDialog(5).then(r => {console.log(r)})
-// dialogsAPI.sendMessage(5856, 'test').then(r => {console.log(r)})
-// dialogsAPI.isMessageViewed('3e755133-76bf-4d8e-9ba4-80a1683973cd').then(r => {console.log(r)})
-// dialogsAPI.putMessageInSpam('3e755133-76bf-4d8e-9ba4-80a1683973cd').then(r => {console.log(r)})
-// dialogsAPI.deleteMessage('3e755133-76bf-4d8e-9ba4-80a1683973cd').then(r => {console.log(r)})
-// dialogsAPI.restoreMessage('3e755133-76bf-4d8e-9ba4-80a1683973cd').then(r => {console.log(r)})
-// dialogsAPI.messagesNewerThanDate(5, '2020-03-11T17:11:10.403').then(r => {console.log(r)})
-// dialogsAPI.getNewMessages().then(r => {console.log(r)})

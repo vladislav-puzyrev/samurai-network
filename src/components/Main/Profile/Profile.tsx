@@ -21,6 +21,7 @@ type MapStatePropTypes = {
   status: string
   avatarIsFetching: boolean
   myProfile: ProfileType | null
+  isAuth: boolean
 }
 
 type MapDispatchPropTypes = {
@@ -48,6 +49,7 @@ const Profile: React.FC<PropTypes> = ({
   setAvatarIsFetching,
   myProfile,
   saveMyProfile,
+  isAuth,
 }) => {
 
   const { userID: id } = useParams()
@@ -66,7 +68,7 @@ const Profile: React.FC<PropTypes> = ({
     updateProfile()
   }, [userURL, getUsersProfile, getStatus])
 
-  if (!userURL) {
+  if (!isAuth) {
     return <Redirect to='/login'/>
   }
 
@@ -94,6 +96,7 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
     userID: state.auth.userId,
     avatarIsFetching: state.profilePage.avatarIsFetching,
     myProfile: state.auth.myProfile,
+    isAuth: state.auth.isAuth,
   }
 }
 
