@@ -1,0 +1,27 @@
+.wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  flex-basis: calc(65% - 2px);
+  background-color: #26262c;
+}
+
+.elem {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -80%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.messagesIMG {
+  background-image: url("../../../../../assets/images/messages.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './MessageListItem.module.css'
+import styles from './InterlocutorsListItem.module.css'
 import { PhotosType } from '../../../../../../types/types'
 import { NavLink } from 'react-router-dom'
 import defaultAvatar from '../../../../../../assets/images/defaultAvatar.png'
@@ -14,7 +14,7 @@ type PropTypes = {
   photos: PhotosType
 }
 
-const MessageListItem: React.FC<PropTypes> = ({
+const InterlocutorsListItem: React.FC<PropTypes> = ({
   id, userName, hasNewMessages, lastDialogActivityDate, lastUserActivityDate, newMessagesCount, photos
 }) => {
   const [isToday, setIsToday] = useState(false)
@@ -34,7 +34,7 @@ const MessageListItem: React.FC<PropTypes> = ({
         <img className={styles.avatar} src={photos.small || defaultAvatar} alt="avatar"/>
         <div className={styles.info}>
           <div className={styles.infoMessage}>
-            <span>{userName}</span>
+            <span className={styles.userName}>{userName}</span>
             {hasNewMessages && <span>{newMessagesCount}<span role='img' aria-label='сообщение'>💬</span></span>}
           </div>
           <div className={styles.lastMessage}>
@@ -49,4 +49,4 @@ const MessageListItem: React.FC<PropTypes> = ({
   )
 }
 
-export default MessageListItem
+export default InterlocutorsListItem

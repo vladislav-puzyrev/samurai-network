@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { AppStateType } from '../../../redux/store'
-import { InterlocutorType, DialogType, MessagesAfterDateType } from '../../../types/types'
+import { InterlocutorType, DialogType, MessagesAfterDateType, ProfileType } from '../../../types/types'
 import {
   getInterlocutorsList,
   getDialog,
@@ -10,8 +10,9 @@ import {
   sendMessage
 } from '../../../redux/messages-reducer'
 import { Redirect, useParams } from 'react-router-dom'
-import AllMessages from './AllMessages/AllMessages'
+import Interlocutors from './Interlocutors/Interlocutors'
 import Dialog from './Dialog/Dialog'
+import styles from './Messages.module.css'
 
 type MapStatePropTypes = {
   interlocutors: Array<InterlocutorType> | null
@@ -25,6 +26,7 @@ type MapStatePropTypes = {
   }
 
   isAuth: boolean
+  myProfile: ProfileType | null
 }
 
 type MapDispatchPropTypes = {
@@ -46,8 +48,10 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   sendMessage,
   getMessagesAfterDate,
   isAuth,
+  myProfile,
 }) => {
   const { userID } = useParams()
+  const [interlocutor, setInterlocutor] = useState<InterlocutorType | null>(null)
 
   useEffect(() => {
     getInterlocutorsList()
@@ -59,19 +63,26 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
     }
   }, [getDialog, userID])
 
+  useEffect(() => {
+    if (userID && interlocutors) {
+      setInterlocutor(interlocutors.find((item) => item.id === +userID) || null)
+    }
+  }, [userID, interlocutors, setInterlocutor])
+
   if (!isAuth) {
     return <Redirect to='/login'/>
   }
 
-  let interlocutor
-  if (userID) {
-    interlocutor = interlocutors?.find((item) => item.id === +userID)
-  }
-
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', height: 'calc(100vh - 60px - 60px - 40px)' }}>
-      <AllMessages interlocutors={interlocutors}/>
-      <Dialog interlocutor={interlocutor} currentDialog={currentDialog}/>
+    <div className={styles.messages}>
+      <Interlocutors interlocutors={interlocutors}/>
+      <Dialog
+        userID={userID ? +userID : null}
+        interlocutor={interlocutor}
+        currentDialog={currentDialog}
+        myPhoto={myProfile ? myProfile.photos.small : null}
+        myID={myProfile ? myProfile.userId : null}
+      />
     </div>
   )
 }
@@ -83,6 +94,7 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
     messagesAfterDate: state.messagesPage.messagesAfterDate,
     fetching: state.messagesPage.fetching,
     isAuth: state.auth.isAuth,
+    myProfile: state.auth.myProfile,
   }
 }
 

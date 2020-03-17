@@ -1,0 +1,28 @@
+.wrapper {
+  background-color: #26262c;
+  display: flex;
+  margin-bottom: 2px;
+  align-items: center;
+  height: 50px;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.userName {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.online {
+  margin-left: 20px;
+}

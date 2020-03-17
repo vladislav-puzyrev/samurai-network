@@ -1,0 +1,5 @@
+.messages {
+  display: flex;
+  justify-content: space-between;
+  height: calc(100vh - 60px - 60px - 40px);
+}

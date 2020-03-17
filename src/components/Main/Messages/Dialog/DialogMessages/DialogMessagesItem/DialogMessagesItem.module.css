@@ -1,0 +1,32 @@
+.wrapper {
+  position: relative;
+}
+
+.avatar {
+  width: 40px;
+  border-radius: 50%;
+  position: absolute;
+  transform: translateX(-60px);
+  display: block;
+}
+
+.name {
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.time {
+  color: #999;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.aName {
+  color: #999;
+  text-decoration: none;
+}
+
+.aName:hover {
+  text-decoration: underline;
+}

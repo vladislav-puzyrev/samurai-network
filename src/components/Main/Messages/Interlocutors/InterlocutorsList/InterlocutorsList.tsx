@@ -1,18 +1,18 @@
 import React from 'react'
-import styles from './MessageList.module.css'
+import styles from './InterlocutorsList.module.css'
 import { InterlocutorType } from '../../../../../types/types'
-import MessageListItem from './MessageListItem/MessageListItem'
+import InterlocutorsListItem from './InterlocutorsListItem/InterlocutorsListItem'
 
 type PropTypes = {
   interlocutors: Array<InterlocutorType>
 }
 
-const MessageList: React.FC<PropTypes> = ({ interlocutors }) => {
+const InterlocutorsList: React.FC<PropTypes> = ({ interlocutors }) => {
   return (
     <ul className={styles.ul}>
       {
         interlocutors.map((message) => (
-          <MessageListItem
+          <InterlocutorsListItem
             key={message.id}
             id={message.id}
             userName={message.userName}
@@ -28,4 +28,4 @@ const MessageList: React.FC<PropTypes> = ({ interlocutors }) => {
   )
 }
 
-export default MessageList
+export default InterlocutorsList

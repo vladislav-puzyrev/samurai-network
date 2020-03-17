@@ -2,6 +2,10 @@
   flex-basis: 35%;
 }
 
+.userName {
+  font-weight: bold;
+}
+
 .li:hover {
   background-color: #3a3a43;
 }
