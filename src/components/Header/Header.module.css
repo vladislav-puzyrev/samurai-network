@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
+
 .header {
   background-color: #18181b;
   box-shadow: 0 -4px 2px 6px black;
@@ -45,6 +47,11 @@
 
 .infoMe a:hover {
   text-decoration: underline;
+}
+
+.title {
+  font-size: 18px;
+  font-family: 'Righteous', cursive;
 }
 
 @media screen and (max-width: 1200px) {

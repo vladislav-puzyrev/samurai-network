@@ -22,7 +22,7 @@ const Header: React.FC<PropTypes> = ({ isAuth, logout, myProfile }) => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <div>Samurai-Network</div>
+        <div className={styles.title}>Samurai Network</div>
         {
           isAuth && myProfile && myProfile.photos.small ? (
               <div className={styles.infoMe}>

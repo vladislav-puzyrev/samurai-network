@@ -31,7 +31,11 @@ function UserInfo ({ profile, status, isOwner, saveProfile, updateStatus }) {
       </div>
 
       {isOwner && !editMode && <div><Button onClick={() => { setEditMode(true) }}>Редактировать</Button></div>}
-      {!isOwner && <NavLink to={`/messages/${profile.userId}`}><Button>Написать сообщение</Button></NavLink>}
+      {
+        !isOwner && <NavLink className={styles.sendMessage} to={`/messages/${profile.userId}`}>
+          <Button>Написать сообщение</Button>
+        </NavLink>
+      }
     </div>
   )
 }

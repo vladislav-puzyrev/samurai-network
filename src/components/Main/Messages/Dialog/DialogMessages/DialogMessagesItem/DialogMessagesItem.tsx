@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './DialogMessagesItem.module.css'
 import { NavLink } from 'react-router-dom'
+import defaultAvatar from '../../../../../../assets/images/defaultAvatar.png'
 
 type PropTypes = {
   messageID: string
@@ -42,7 +43,7 @@ const DialogMessagesItem: React.FC<PropTypes> = ({
       {
         isNewSender && <>
           <NavLink to={`/profile/${senderID}`}>
-            <img className={styles.avatar} src={senderPhoto || undefined} alt='avatar'/>
+            <img className={styles.avatar} src={senderPhoto || defaultAvatar} alt='avatar'/>
           </NavLink>
           <NavLink className={styles.aName} to={`/profile/${senderID}`}>
             <span className={styles.name}>{senderName}</span>
