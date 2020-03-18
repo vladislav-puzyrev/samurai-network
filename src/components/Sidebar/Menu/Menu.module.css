@@ -18,3 +18,12 @@
 .active {
   text-decoration: underline;
 }
+
+.messagesCount {
+  display: block !important;
+  margin-left: 50px !important;
+  text-decoration: none !important;
+  color: red !important;
+  background-color: red !important;
+  transform: scale(2) !important;
+}

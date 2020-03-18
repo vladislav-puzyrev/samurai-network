@@ -7,7 +7,8 @@ import {
   getDialog,
   getMessagesAfterDate,
   startChatting,
-  sendMessage
+  sendMessage,
+  getNewInterlocutor
 } from '../../../redux/messages-reducer'
 import { Redirect, useParams } from 'react-router-dom'
 import Interlocutors from './Interlocutors/Interlocutors'
@@ -16,11 +17,13 @@ import styles from './Messages.module.css'
 
 type MapStatePropTypes = {
   interlocutors: Array<InterlocutorType> | null
+  newInterlocutor: ProfileType | null
   currentDialog: Array<DialogType> | null
   messagesAfterDate: Array<MessagesAfterDateType> | null
 
   fetching: {
     interlocutors: boolean
+    newInterlocutor: boolean
     currentDialog: boolean
     messagesAfterDate: boolean
   }
@@ -32,6 +35,7 @@ type MapStatePropTypes = {
 type MapDispatchPropTypes = {
   startChatting: (userID: number) => void
   getInterlocutorsList: () => void
+  getNewInterlocutor: (userID: number) => void
   getDialog: (userID: number) => void
   sendMessage: (userID: number, message: string) => void
   getMessagesAfterDate: (userID: number, date: string) => void
@@ -39,6 +43,8 @@ type MapDispatchPropTypes = {
 
 const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   interlocutors,
+  newInterlocutor,
+  getNewInterlocutor,
   currentDialog,
   messagesAfterDate,
   fetching,
@@ -67,7 +73,7 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
     if (userID && interlocutors) {
       setInterlocutor(interlocutors.find((item) => item.id === +userID) || null)
     }
-  }, [userID, interlocutors, setInterlocutor])
+  }, [userID, interlocutors])
 
   if (!isAuth) {
     return <Redirect to='/login'/>
@@ -82,6 +88,11 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
         currentDialog={currentDialog}
         myPhoto={myProfile ? myProfile.photos.small : null}
         myID={myProfile ? myProfile.userId : null}
+        isFetching={fetching.currentDialog}
+        newInterlocutor={newInterlocutor}
+        newInterlocutorFetching={fetching.newInterlocutor}
+        getNewInterlocutor={getNewInterlocutor}
+        interlocutorsFetching={fetching.interlocutors}
       />
     </div>
   )
@@ -90,6 +101,7 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
 function mapStateToProps (state: AppStateType): MapStatePropTypes {
   return {
     interlocutors: state.messagesPage.interlocutors,
+    newInterlocutor: state.messagesPage.newInterlocutor,
     currentDialog: state.messagesPage.currentDialog,
     messagesAfterDate: state.messagesPage.messagesAfterDate,
     fetching: state.messagesPage.fetching,
@@ -101,6 +113,7 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
 export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>(mapStateToProps, {
   startChatting,
   getInterlocutorsList,
+  getNewInterlocutor,
   getDialog,
   getMessagesAfterDate,
   sendMessage

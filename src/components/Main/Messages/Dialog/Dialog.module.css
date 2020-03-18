@@ -1,5 +1,5 @@
 .wrapper {
-  flex-basis: calc(65% - 2px);
+  flex-basis: calc(70% - 2px);
   display: flex;
   flex-direction: column;
 }

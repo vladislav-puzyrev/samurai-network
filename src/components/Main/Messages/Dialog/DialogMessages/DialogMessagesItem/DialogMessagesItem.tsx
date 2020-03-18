@@ -15,6 +15,7 @@ type PropTypes = {
   interlocutorPhoto: string | null
   myPhoto: string | null
   myID: number | null
+  firstMessage: boolean
 }
 
 const DialogMessagesItem: React.FC<PropTypes> = ({
@@ -30,13 +31,14 @@ const DialogMessagesItem: React.FC<PropTypes> = ({
   interlocutorPhoto,
   myPhoto,
   myID,
+  firstMessage,
 }) => {
   const isNewSender = lastSenderID !== senderID
   const iSender = senderID === myID
   const senderPhoto = iSender ? myPhoto : interlocutorPhoto
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} style={{ marginTop: isNewSender ? (firstMessage) ? '0' : '30px' : '15px' }}>
       {
         isNewSender && <>
           <NavLink to={`/profile/${senderID}`}>
@@ -49,7 +51,7 @@ const DialogMessagesItem: React.FC<PropTypes> = ({
         </>
       }
 
-      <div className={styles.message}>message</div>
+      <div className={styles.message}>{message}</div>
     </div>
   )
 }

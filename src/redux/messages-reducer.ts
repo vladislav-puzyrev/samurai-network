@@ -1,10 +1,11 @@
-import { InterlocutorType, DialogType, MessagesAfterDateType } from '../types/types'
+import { InterlocutorType, DialogType, MessagesAfterDateType, ProfileType } from '../types/types'
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType } from './store'
-import { messagesAPI } from '../api/api'
+import { messagesAPI, profileAPI } from '../api/api'
 
 /* Action types */
-const SET_ALL_MESSAGES = 'samurai-network/messages/GET_ALL_MESSAGES'
+const SET_INTERLOCUTORS = 'samurai-network/messages/SET_INTERLOCUTORS'
+const SET_NEW_INTERLOCUTOR = 'samurai-network/messages/SET_NEW_INTERLOCUTOR'
 const SET_CURRENT_DIALOG = 'samurai-network/messages/SET_CURRENT_DIALOG'
 const SET_MESSAGES_AFTER_DATE = 'samurai-network/messages/SET_MESSAGES_AFTER_DATE'
 const SET_NEW_MESSAGES_COUNT = 'samurai-network/messages/SET_NEW_MESSAGES_COUNT'
@@ -12,12 +13,14 @@ const TOGGLE_IS_FETCHING = 'samurai-network/messages/TOGGLE_IS_FETCHING'
 
 const initialState = {
   interlocutors: null as Array<InterlocutorType> | null,
+  newInterlocutor: null as ProfileType | null,
   currentDialog: null as Array<DialogType> | null,
   messagesAfterDate: null as Array<MessagesAfterDateType> | null,
   newMessagesCount: 0,
 
   fetching: {
     interlocutors: false,
+    newInterlocutor: false,
     currentDialog: false,
     messagesAfterDate: false,
     newMessagesCount: false,
@@ -27,7 +30,8 @@ const initialState = {
 type InitialStateType = typeof initialState;
 
 type ActionTypes =
-  setAllMessagesActionType |
+  setInterlocutorsActionType |
+  setNewInterlocutorActionType |
   setCurrentDialogActionType |
   setNewMessagesCountActionType |
   setMessagesAfterDateActionType |
@@ -35,10 +39,16 @@ type ActionTypes =
 
 function messagesReducer (state = initialState, action: ActionTypes): InitialStateType {
   switch (action.type) {
-    case SET_ALL_MESSAGES:
+    case SET_INTERLOCUTORS:
       return {
         ...state,
         interlocutors: action.messages
+      }
+
+    case SET_NEW_INTERLOCUTOR:
+      return {
+        ...state,
+        newInterlocutor: action.profile
       }
 
     case SET_CURRENT_DIALOG:
@@ -74,10 +84,16 @@ function messagesReducer (state = initialState, action: ActionTypes): InitialSta
 }
 
 /* Action creators */
-type setAllMessagesActionType = { type: typeof SET_ALL_MESSAGES, messages: Array<InterlocutorType> };
-export const setAllMessages = (messages: Array<InterlocutorType>): setAllMessagesActionType => ({
-  type: SET_ALL_MESSAGES,
+type setInterlocutorsActionType = { type: typeof SET_INTERLOCUTORS, messages: Array<InterlocutorType> };
+export const setInterlocutors = (messages: Array<InterlocutorType>): setInterlocutorsActionType => ({
+  type: SET_INTERLOCUTORS,
   messages
+})
+
+type setNewInterlocutorActionType = { type: typeof SET_NEW_INTERLOCUTOR, profile: ProfileType };
+export const setNewInterlocutor = (profile: ProfileType): setNewInterlocutorActionType => ({
+  type: SET_NEW_INTERLOCUTOR,
+  profile
 })
 
 type setCurrentDialogActionType = { type: typeof SET_CURRENT_DIALOG, currentDialog: Array<DialogType> };
@@ -98,7 +114,12 @@ export const setNewMessagesCount = (count: number): setNewMessagesCountActionTyp
   count
 })
 
-type toggleIsFetchingPropertyType = 'allMessages' | 'currentDialog' | 'messagesAfterDate' | 'newMessagesCount'
+type toggleIsFetchingPropertyType =
+  'interlocutors' |
+  'newInterlocutor' |
+  'currentDialog' |
+  'messagesAfterDate' |
+  'newMessagesCount'
 type toggleIsFetchingActionType = {
   type: typeof TOGGLE_IS_FETCHING,
   property: toggleIsFetchingPropertyType,
@@ -121,10 +142,19 @@ export const startChatting = (userID: number): ThunkType => {
 
 export const getInterlocutorsList = (): ThunkType => {
   return async (dispatch) => {
-    dispatch(toggleIsFetching('allMessages', true))
+    dispatch(toggleIsFetching('interlocutors', true))
     const res = await messagesAPI.getInterlocutorsList()
-    dispatch(setAllMessages(res))
-    dispatch(toggleIsFetching('allMessages', false))
+    dispatch(setInterlocutors(res))
+    dispatch(toggleIsFetching('interlocutors', false))
+  }
+}
+
+export const getNewInterlocutor = (userID: number): ThunkType => {
+  return async (dispatch) => {
+    dispatch(toggleIsFetching('newInterlocutor', true))
+    const res = await profileAPI.getProfile(userID)
+    dispatch(setNewInterlocutor(res))
+    dispatch(toggleIsFetching('newInterlocutor', false))
   }
 }
 

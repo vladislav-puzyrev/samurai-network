@@ -2,7 +2,11 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './Menu.module.css'
 
-function Menu ({newMessagesCount}: any) {
+type PropTypes = {
+  newMessagesCount: number
+}
+
+const Menu: React.FC<PropTypes> = ({ newMessagesCount }) => {
   return (
     <ul className={styles.menu}>
       <li className={styles.menuItem}>
@@ -18,7 +22,7 @@ function Menu ({newMessagesCount}: any) {
           to='/messages' className={styles.menuLink}
           activeClassName={styles.active}
         >
-          Сообщения ({newMessagesCount})
+          Сообщения {newMessagesCount > 0 && `(${newMessagesCount})`}
         </NavLink>
       </li>
       <li className={styles.menuItem}>

@@ -18,7 +18,3 @@
   background-color: #35353b;
   border-radius: 3px;
 }
-
-.wrapper > div:not(:first-child) > div {
-  margin-top: 15px;
-}

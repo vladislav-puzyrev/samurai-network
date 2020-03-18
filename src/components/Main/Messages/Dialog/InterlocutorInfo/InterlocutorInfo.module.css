@@ -18,9 +18,18 @@
   border-radius: 50%;
 }
 
+.avatar:hover {
+  transform: scale(1.05);
+}
+
 .userName {
   font-weight: bold;
   font-size: 1.1em;
+  text-decoration: none;
+}
+
+.userName:hover {
+  text-decoration: underline;
 }
 
 .online {
