@@ -36,17 +36,24 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
           <label htmlFor='dataFormSkills'>Ваши навыки:</label>
           <Field
             rows={2}
-            width='300px'
             name='lookingForAJobDescription'
             component={Textarea}
             validate={[required]}
             id='dataFormSkills'
+            style={{ width: '300px' }}
           />
         </div>
 
         <div>
           <label htmlFor='dataFormAbout'>О Вас:</label>
-          <Field rows={2} width='300px' name='aboutMe' component={Textarea} validate={[required]} id='dataFormAbout'/>
+          <Field
+            rows={2}
+            style={{ width: '300px' }}
+            name='aboutMe'
+            component={Textarea}
+            validate={[required]}
+            id='dataFormAbout'
+          />
         </div>
       </div>
 

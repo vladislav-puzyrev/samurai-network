@@ -1,0 +1,8 @@
+.wrapper {
+  background-color: #26262c;
+  margin-top: 2px;
+  flex-basis: 70px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}

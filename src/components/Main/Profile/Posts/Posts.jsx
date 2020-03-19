@@ -2,11 +2,11 @@ import React from 'react'
 import styles from './Posts.module.css'
 import Post from './Post/Post'
 import { Field, reduxForm } from 'redux-form'
-import { required, maxLengthCreator } from '../../../../utils/validators'
+import { required, maxLength } from '../../../../utils/validators'
 import Button from '../../../common/Button/Button'
 import Textarea from '../../../common/Textarea/Textarea'
 
-const maxLength = maxLengthCreator(10)
+const maxLength = maxLength(10)
 
 function Posts (props) {
   const postsElements = props.state.profilePage.posts.map(
@@ -36,9 +36,8 @@ function AddNewPostForm (props) {
           component={Textarea}
           placeholder='Что у вас нового?'
           validate={[required, maxLength]}
-          width='100%'
           rows={2}
-          margin='10px 0 0 0'
+          style={{marginTop: '10px', width: '100%'}}
         />
       </div>
       <div>

@@ -24,6 +24,7 @@ const initialState = {
     currentDialog: false,
     messagesAfterDate: false,
     newMessagesCount: false,
+    sendMessage: false,
   },
 }
 
@@ -119,7 +120,8 @@ type toggleIsFetchingPropertyType =
   'newInterlocutor' |
   'currentDialog' |
   'messagesAfterDate' |
-  'newMessagesCount'
+  'newMessagesCount' |
+  'sendMessage'
 type toggleIsFetchingActionType = {
   type: typeof TOGGLE_IS_FETCHING,
   property: toggleIsFetchingPropertyType,
@@ -170,8 +172,14 @@ export const getDialog = (userID: number): ThunkType => {
 }
 
 export const sendMessage = (userID: number, message: string): ThunkType => {
-  return async () => {
-    await messagesAPI.sendMessage(userID, message)
+  return async (dispatch, getState, extraArgument) => {
+    dispatch(toggleIsFetching('sendMessage', true))
+    const res = await messagesAPI.sendMessage(userID, message)
+    if (res.resultCode === 0) {
+      dispatch(toggleIsFetching('sendMessage', false))
+      getDialog(userID)(dispatch, getState, extraArgument)
+      getInterlocutorsList()(dispatch, getState, extraArgument)
+    }
   }
 }
 

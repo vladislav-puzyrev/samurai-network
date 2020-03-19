@@ -16,9 +16,3 @@
   width: 60%;
   min-width: 700px;
 }
-
-@media screen and (max-width: 1200px) {
-  .main {
-    width: 80%;
-  }
-}

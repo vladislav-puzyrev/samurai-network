@@ -5,9 +5,9 @@ export const getUsers = (state: AppStateType) => {
   return state.usersPage.users
 }
 
-export const getUsersSelector__BadRender = (state: AppStateType) => {
-  return getUsers(state).filter(() => true)
-}
+// export const getUsersSelector__BadRender = (state: AppStateType) => {
+//   return getUsers(state).filter(() => true)
+// }
 
 export const getUsersSelector = createSelector(getUsers, (users) => {
     return users.filter(() => true)

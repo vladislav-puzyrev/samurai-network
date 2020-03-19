@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './Dialog.module.css'
 import { DialogType, InterlocutorType, PhotosType, ProfileType } from '../../../../types/types'
 import SelectInterlocutor from './SelectIntercutor/SelectInterlocutor'
 import InterlocutorInfo from './InterlocutorInfo/InterlocutorInfo'
 import DialogMessages from './DialogMessages/DialogMessages'
+import DialogForm from './DialogForm/DialogForm'
 
 type PropTypes = {
   currentDialog: Array<DialogType> | null
@@ -16,6 +17,8 @@ type PropTypes = {
   getNewInterlocutor: (userID: number) => void
   newInterlocutorFetching: boolean
   interlocutorsFetching: boolean
+  sendMessage: (userID: number, message: string) => void
+  startChatting: (userID: number) => void
 }
 
 const Dialog: React.FC<PropTypes> = ({
@@ -28,14 +31,18 @@ const Dialog: React.FC<PropTypes> = ({
   newInterlocutor,
   getNewInterlocutor,
   newInterlocutorFetching,
-  interlocutorsFetching
+  interlocutorsFetching,
+  sendMessage,
+  startChatting,
 }) => {
+  useEffect(() => {
+    if (!interlocutor && !newInterlocutorFetching && !interlocutorsFetching && userID && !newInterlocutor) {
+      getNewInterlocutor(userID)
+    }
+  }, [userID, getNewInterlocutor, newInterlocutorFetching, interlocutor, interlocutorsFetching, newInterlocutor])
+
   if (!userID) {
     return <SelectInterlocutor/>
-  }
-
-  if (!interlocutor && !newInterlocutorFetching && !interlocutorsFetching) {
-    getNewInterlocutor(userID)
   }
 
   const user = {
@@ -66,15 +73,18 @@ const Dialog: React.FC<PropTypes> = ({
   return (
     <div className={styles.wrapper}>
       <InterlocutorInfo interlocutor={user}/>
-      {
-        currentDialog && <DialogMessages
-          myID={myID}
-          dialog={currentDialog}
-          interlocutorPhoto={user.photos ? user.photos.small : null}
-          myPhoto={myPhoto}
-          isFetching={isFetching}
-        />
-      }
+      <DialogMessages
+        myID={myID}
+        dialog={currentDialog}
+        interlocutorPhoto={user.photos ? user.photos.small : null}
+        myPhoto={myPhoto}
+        isFetching={isFetching}
+      />
+      <DialogForm
+        sendMessage={sendMessage}
+        startChatting={startChatting}
+        userID={userID}
+      />
     </div>
   )
 }

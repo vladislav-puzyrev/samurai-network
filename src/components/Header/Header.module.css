@@ -53,9 +53,3 @@
   font-size: 18px;
   font-family: 'Righteous', cursive;
 }
-
-@media screen and (max-width: 1200px) {
-  .container {
-    width: 80%;
-  }
-}

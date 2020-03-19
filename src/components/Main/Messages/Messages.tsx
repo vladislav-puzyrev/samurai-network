@@ -93,6 +93,8 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
         newInterlocutorFetching={fetching.newInterlocutor}
         getNewInterlocutor={getNewInterlocutor}
         interlocutorsFetching={fetching.interlocutors}
+        sendMessage={sendMessage}
+        startChatting={startChatting}
       />
     </div>
   )

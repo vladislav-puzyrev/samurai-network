@@ -2,29 +2,33 @@ import React from 'react'
 import styles from './Textarea.module.css'
 
 type PropTypes = {
-  width?: number
-  margin?: string
   placeholder?: string
   rows?: number
   cols?: number
-  meta: any
-  input: any
-  id: string
+  meta?: any
+  input?: any
+  id?: string
+  style?: any
+  flexGrow?: boolean
+  value?: string
+  onChange?: any
 }
 
-const Textarea: React.FC<PropTypes> = ({ width, margin, placeholder, rows = 1, cols, meta, input, id }) => {
-  const isError = meta.error && meta.touched
+const Textarea: React.FC<PropTypes> = ({ style, placeholder, rows = 1, cols, meta, input, id, flexGrow, value, onChange }) => {
+  const isError = meta ? meta.error && meta.touched : null
 
   return (
-    <span>
+    <span style={flexGrow ? { flexGrow: 1 } : undefined}>
       <textarea
         {...input}
         rows={rows}
         cols={cols}
-        style={{ width, margin }}
+        style={flexGrow ? Object.assign(style, { width: '100%' }) : style}
         className={styles.textarea}
         placeholder={placeholder}
         id={id}
+        value={value}
+        onChange={onChange}
       />
       {isError && <span className={(isError || null) && styles.error}>{meta.error}</span>}
     </span>
