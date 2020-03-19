@@ -26,6 +26,7 @@ type MapStatePropTypes = {
     newInterlocutor: boolean
     currentDialog: boolean
     messagesAfterDate: boolean
+    sendMessage: boolean
   }
 
   isAuth: boolean
@@ -34,7 +35,7 @@ type MapStatePropTypes = {
 
 type MapDispatchPropTypes = {
   startChatting: (userID: number) => void
-  getInterlocutorsList: () => void
+  getInterlocutorsList: () => any
   getNewInterlocutor: (userID: number) => void
   getDialog: (userID: number) => void
   sendMessage: (userID: number, message: string) => void
@@ -65,6 +66,12 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
 
   useEffect(() => {
     if (userID) {
+      getNewInterlocutor(+userID)
+    }
+  }, [getNewInterlocutor, userID])
+
+  useEffect(() => {
+    if (userID) {
       getDialog(+userID)
     }
   }, [getDialog, userID])
@@ -88,13 +95,11 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
         currentDialog={currentDialog}
         myPhoto={myProfile ? myProfile.photos.small : null}
         myID={myProfile ? myProfile.userId : null}
-        isFetching={fetching.currentDialog}
+        dialogFetching={fetching.currentDialog}
         newInterlocutor={newInterlocutor}
-        newInterlocutorFetching={fetching.newInterlocutor}
-        getNewInterlocutor={getNewInterlocutor}
-        interlocutorsFetching={fetching.interlocutors}
         sendMessage={sendMessage}
         startChatting={startChatting}
+        sendMessageFetching={fetching.sendMessage}
       />
     </div>
   )

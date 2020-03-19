@@ -176,9 +176,13 @@ export const sendMessage = (userID: number, message: string): ThunkType => {
     dispatch(toggleIsFetching('sendMessage', true))
     const res = await messagesAPI.sendMessage(userID, message)
     if (res.resultCode === 0) {
-      dispatch(toggleIsFetching('sendMessage', false))
-      getDialog(userID)(dispatch, getState, extraArgument)
-      getInterlocutorsList()(dispatch, getState, extraArgument)
+      Promise.resolve().then(() => {
+        getDialog(userID)(dispatch, getState, extraArgument)
+        getInterlocutorsList()(dispatch, getState, extraArgument)
+      })
+        .then(() => {
+          dispatch(toggleIsFetching('sendMessage', false))
+        })
     }
   }
 }

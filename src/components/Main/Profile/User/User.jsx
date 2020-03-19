@@ -4,7 +4,19 @@ import Avatar from './Avatar/Avatar'
 import UserInfo from './UserInfo/UserInfo'
 
 function User ({
-  profile, savePhoto, status, updateStatus, isOwner, saveProfile, avatarIsFetching, setAvatarIsFetching
+  profile,
+  savePhoto,
+  status,
+  updateStatus,
+  isOwner,
+  saveProfile,
+  avatarIsFetching,
+  setAvatarIsFetching,
+  follow,
+  unfollow,
+  followingInProgress,
+  isFollowingUser,
+  userURL,
 }) {
 
   if (!profile) {
@@ -19,6 +31,11 @@ function User ({
         isOwner={isOwner}
         avatarIsFetching={avatarIsFetching}
         setAvatarIsFetching={setAvatarIsFetching}
+        follow={follow}
+        unfollow={unfollow}
+        followingInProgress={followingInProgress}
+        isFollowingUser={isFollowingUser}
+        userURL={userURL}
       />
 
       <UserInfo

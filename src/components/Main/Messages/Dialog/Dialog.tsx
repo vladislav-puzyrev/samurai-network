@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Dialog.module.css'
 import { DialogType, InterlocutorType, PhotosType, ProfileType } from '../../../../types/types'
 import SelectInterlocutor from './SelectIntercutor/SelectInterlocutor'
@@ -12,13 +12,11 @@ type PropTypes = {
   userID: number | null
   myPhoto: string | null
   myID: number | null
-  isFetching: boolean
+  dialogFetching: boolean
   newInterlocutor: ProfileType | null
-  getNewInterlocutor: (userID: number) => void
-  newInterlocutorFetching: boolean
-  interlocutorsFetching: boolean
   sendMessage: (userID: number, message: string) => void
   startChatting: (userID: number) => void
+  sendMessageFetching: boolean
 }
 
 const Dialog: React.FC<PropTypes> = ({
@@ -27,47 +25,40 @@ const Dialog: React.FC<PropTypes> = ({
   userID,
   myPhoto,
   myID,
-  isFetching,
+  dialogFetching,
   newInterlocutor,
-  getNewInterlocutor,
-  newInterlocutorFetching,
-  interlocutorsFetching,
   sendMessage,
   startChatting,
+  sendMessageFetching,
 }) => {
-  useEffect(() => {
-    if (!interlocutor && !newInterlocutorFetching && !interlocutorsFetching && userID && !newInterlocutor) {
-      getNewInterlocutor(userID)
-    }
-  }, [userID, getNewInterlocutor, newInterlocutorFetching, interlocutor, interlocutorsFetching, newInterlocutor])
-
-  if (!userID) {
-    return <SelectInterlocutor/>
-  }
-
-  const user = {
+  const [user, setUser] = useState({
     id: null as number | null,
     userName: null as string | null,
     lastUserActivityDate: null as string | null,
     photos: null as PhotosType | null
-  }
+  })
 
-  if (!interlocutor && newInterlocutor) {
-    user.id = newInterlocutor.userId
-    user.userName = newInterlocutor.fullName
-    user.photos = newInterlocutor.photos
-  }
-  if (interlocutor && !newInterlocutor) {
-    user.id = interlocutor.id
-    user.userName = interlocutor.userName
-    user.lastUserActivityDate = interlocutor.lastUserActivityDate
-    user.photos = interlocutor.photos
-  }
-  if (interlocutor && newInterlocutor) {
-    user.id = interlocutor.id
-    user.userName = interlocutor.userName
-    user.lastUserActivityDate = interlocutor.lastUserActivityDate
-    user.photos = interlocutor.photos
+  useEffect(() => {
+    if (!interlocutor && newInterlocutor) {
+      setUser({
+        id: newInterlocutor.userId,
+        userName: newInterlocutor.fullName,
+        lastUserActivityDate: null,
+        photos: newInterlocutor.photos
+      })
+    }
+    if ((interlocutor && !newInterlocutor) || (interlocutor && newInterlocutor)) {
+      setUser({
+        id: interlocutor.id,
+        userName: interlocutor.userName,
+        lastUserActivityDate: interlocutor.lastUserActivityDate,
+        photos: interlocutor.photos
+      })
+    }
+  }, [interlocutor, newInterlocutor])
+
+  if (!userID) {
+    return <SelectInterlocutor/>
   }
 
   return (
@@ -78,12 +69,13 @@ const Dialog: React.FC<PropTypes> = ({
         dialog={currentDialog}
         interlocutorPhoto={user.photos ? user.photos.small : null}
         myPhoto={myPhoto}
-        isFetching={isFetching}
+        isFetching={dialogFetching}
       />
       <DialogForm
         sendMessage={sendMessage}
         startChatting={startChatting}
         userID={userID}
+        sendMessageFetching={sendMessageFetching}
       />
     </div>
   )

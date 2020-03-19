@@ -20,7 +20,6 @@ const Textarea: React.FC<PropTypes> = ({ style, placeholder, rows = 1, cols, met
   return (
     <span style={flexGrow ? { flexGrow: 1 } : undefined}>
       <textarea
-        {...input}
         rows={rows}
         cols={cols}
         style={flexGrow ? Object.assign(style, { width: '100%' }) : style}
@@ -29,6 +28,7 @@ const Textarea: React.FC<PropTypes> = ({ style, placeholder, rows = 1, cols, met
         id={id}
         value={value}
         onChange={onChange}
+        {...input}
       />
       {isError && <span className={(isError || null) && styles.error}>{meta.error}</span>}
     </span>

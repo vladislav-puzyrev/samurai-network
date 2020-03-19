@@ -7,10 +7,16 @@ type PropTypes = {
   sendMessage: (userID: number, message: string) => void
   startChatting: (userID: number) => void
   userID: number
+  sendMessageFetching: boolean
 }
 
-const DialogForm: React.FC<PropTypes> = ({ sendMessage, startChatting, userID }) => {
+const DialogForm: React.FC<PropTypes> = ({ sendMessage, startChatting, userID, sendMessageFetching }) => {
   const [message, setMessage] = useState('')
+
+  const onSendMessage = () => {
+    setMessage('')
+    sendMessage(userID, message)
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -21,7 +27,9 @@ const DialogForm: React.FC<PropTypes> = ({ sendMessage, startChatting, userID })
         style={{ height: '100%', resize: 'none' }}
         placeholder='Напишите сообщение…'
       />
-      <Button onClick={() => {sendMessage(userID, message)}} margin='0 0 0 20px'>Отправить</Button>
+      <Button disabled={sendMessageFetching || !message} onClick={onSendMessage} margin='0 0 0 20px'>
+        Отправить
+      </Button>
     </div>
   )
 }

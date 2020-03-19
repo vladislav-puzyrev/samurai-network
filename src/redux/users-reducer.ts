@@ -12,14 +12,16 @@ const SET_TOTAL_USERS_COUNT = 'samurai-network/users/SET_TOTAL_USERS_COUNT'
 const SET_TERM = 'samurai-network/users/SET_TERM'
 const TOGGLE_IS_FETCHING = 'samurai-network/users/TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'samurai-network/users/TOGGLE_IS_FOLLOWING_PROGRESS'
+const TOGGLE_IS_FOLLOWING_USER = 'samurai-network/users/TOGGLE_IS_FOLLOWING_USER'
 
 const initialState = {
   users: [] as Array<UserType>,
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
-  followingInProgress: [] as Array<number>, // array of users ids
+  followingInProgress: [] as Array<number>,
   term: '',
+  isFollowingUser: false,
 }
 
 type InitialStateType = typeof initialState
@@ -32,7 +34,8 @@ type ActionTypes =
   SetTotalUsersActionType |
   SetIsFetchingActionType |
   ToggleFollowingProgressActionType |
-  setTermActionType
+  setTermActionType |
+  toggleFollowedUserActionType
 
 function usersReducer (state = initialState, action: ActionTypes): InitialStateType {
   switch (action.type) {
@@ -96,6 +99,12 @@ function usersReducer (state = initialState, action: ActionTypes): InitialStateT
         term: action.term,
       }
 
+    case TOGGLE_IS_FOLLOWING_USER:
+      return {
+        ...state,
+        isFollowingUser: action.following
+      }
+
     default:
       return state
   }
@@ -151,6 +160,12 @@ export const setTerm = (term: string): setTermActionType => ({
   term,
 })
 
+type toggleFollowedUserActionType = { type: typeof TOGGLE_IS_FOLLOWING_USER, following: boolean }
+export const toggleFollowedUser = (following: boolean): toggleFollowedUserActionType => ({
+  type: TOGGLE_IS_FOLLOWING_USER,
+  following,
+})
+
 /* Thunk creators */
 // type GetStateType = () => AppStateType
 // type DispatchType = Dispatch<ActionTypes>
@@ -170,7 +185,10 @@ export const follow = (userID: number): ThunkType => {
   return async (dispatch) => {
     dispatch(toggleFollowingProgress(true, userID))
     const response = await usersAPI.follow(userID)
-    if (response.resultCode === 0) dispatch(acceptFollow(userID))
+    if (response.resultCode === 0) {
+      dispatch(acceptFollow(userID))
+      dispatch(toggleFollowedUser(true))
+    }
     dispatch(toggleFollowingProgress(false, userID))
   }
 }
@@ -179,8 +197,18 @@ export const unfollow = (userID: number): ThunkType => {
   return async (dispatch) => {
     dispatch(toggleFollowingProgress(true, userID))
     const response = await usersAPI.unfollow(userID)
-    if (response.resultCode === 0) dispatch(acceptUnfollow(userID))
+    if (response.resultCode === 0) {
+      dispatch(acceptUnfollow(userID))
+      dispatch(toggleFollowedUser(false))
+    }
     dispatch(toggleFollowingProgress(false, userID))
+  }
+}
+
+export const isFollowing = (userID: number): ThunkType => {
+  return async (dispatch) => {
+    const response = await usersAPI.isFollowing(userID)
+    dispatch(toggleFollowedUser(response))
   }
 }
 

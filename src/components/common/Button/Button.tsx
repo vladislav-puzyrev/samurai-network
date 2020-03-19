@@ -6,11 +6,14 @@ type PropTypes = {
   onClick?: () => any
   margin?: string
   type?: any
+  disabled?: boolean
 }
 
-const Button: React.FC<PropTypes> = ({ width, children, onClick, margin, type }) => {
+const Button: React.FC<PropTypes> = ({ width, children, onClick, margin, type, disabled }) => {
   return (
-    <button type={type} onClick={onClick} style={{ width, margin }} className={styles.button}>{children}</button>
+    <button disabled={disabled} type={type} onClick={onClick} style={{ width, margin }} className={styles.button}>
+      {children}
+    </button>
   )
 }
 

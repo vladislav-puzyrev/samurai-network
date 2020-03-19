@@ -14,6 +14,7 @@ import { ProfileType } from '../../../types/types'
 import PostsContainer from './Posts/PostsContainer'
 import { AppStateType } from '../../../redux/store'
 import User from './User/User'
+import { follow, isFollowing, unfollow } from '../../../redux/users-reducer'
 
 type MapStatePropTypes = {
   userID: number | null
@@ -22,6 +23,8 @@ type MapStatePropTypes = {
   avatarIsFetching: boolean
   myProfile: ProfileType | null
   isAuth: boolean
+  followingInProgress: Array<number>
+  isFollowingUser: boolean
 }
 
 type MapDispatchPropTypes = {
@@ -32,6 +35,9 @@ type MapDispatchPropTypes = {
   setAvatarIsFetching: (isFetching: boolean) => void
   saveProfile: (profile: ProfileType) => void
   saveMyProfile: (profile: ProfileType) => void
+  follow: (userID: number) => void
+  unfollow: (userID: number) => void
+  isFollowing: (userID: number) => void
 }
 
 type PropTypes = MapStatePropTypes & MapDispatchPropTypes
@@ -50,12 +56,23 @@ const Profile: React.FC<PropTypes> = ({
   myProfile,
   saveMyProfile,
   isAuth,
+  follow,
+  unfollow,
+  followingInProgress,
+  isFollowing,
+  isFollowingUser,
 }) => {
 
   const { userID: id } = useParams()
 
   const userURL = (id) ? +id : userID
   const isOwner = userID === userURL
+
+  useEffect(() => {
+    if (userURL) {
+      isFollowing(+userURL)
+    }
+  }, [userURL, isFollowing])
 
   useEffect(() => {
     const updateProfile = () => {
@@ -83,6 +100,11 @@ const Profile: React.FC<PropTypes> = ({
         saveProfile={isOwner ? saveMyProfile : saveProfile}
         avatarIsFetching={avatarIsFetching}
         setAvatarIsFetching={setAvatarIsFetching}
+        follow={follow}
+        unfollow={unfollow}
+        followingInProgress={followingInProgress}
+        isFollowingUser={isFollowingUser}
+        userURL={userURL}
       />
       <PostsContainer/>
     </>
@@ -97,6 +119,8 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
     avatarIsFetching: state.profilePage.avatarIsFetching,
     myProfile: state.auth.myProfile,
     isAuth: state.auth.isAuth,
+    followingInProgress: state.usersPage.followingInProgress,
+    isFollowingUser: state.usersPage.isFollowingUser,
   }
 }
 
@@ -108,4 +132,7 @@ export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStat
   saveProfile,
   setAvatarIsFetching,
   saveMyProfile,
+  follow,
+  unfollow,
+  isFollowing,
 })(Profile)

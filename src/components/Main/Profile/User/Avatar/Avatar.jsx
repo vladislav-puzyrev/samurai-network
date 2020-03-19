@@ -2,9 +2,24 @@ import React from 'react'
 import styles from './Avatar.module.css'
 import defaultAvatar from '../../../../../assets/images/defaultAvatar.png'
 import Preloader from '../../../../common/Preloader/Preloader'
+import { NavLink } from 'react-router-dom'
+import Button from '../../../../common/Button/Button'
 
-function Avatar ({ isOwner, savePhoto, profile, setAvatarIsFetching, avatarIsFetching }) {
+function Avatar ({
+  isOwner,
+  savePhoto,
+  profile,
+  setAvatarIsFetching,
+  avatarIsFetching,
+  follow,
+  unfollow,
+  followingInProgress,
+  isFollowingUser,
+  userURL,
+}) {
   const uploadLabel = React.createRef()
+
+  console.log(isFollowingUser)
 
   function onUploadPhoto (e) {
     if (e.target.files.length) {
@@ -12,6 +27,17 @@ function Avatar ({ isOwner, savePhoto, profile, setAvatarIsFetching, avatarIsFet
       uploadLabel.current.textContent = photo.name
       setAvatarIsFetching(true)
       savePhoto(photo)
+    }
+  }
+
+  const followingFetching = followingInProgress.some((id) => (id === userURL))
+
+  const followUnfollow = () => {
+    if (isFollowingUser) {
+      unfollow(userURL)
+    }
+    else {
+      follow(userURL)
     }
   }
 
@@ -39,6 +65,16 @@ function Avatar ({ isOwner, savePhoto, profile, setAvatarIsFetching, avatarIsFet
             Обновить фотографию
           </label>
         </div>
+      }
+      {
+        !isOwner && <NavLink className={styles.sendMessage} to={`/messages/${profile.userId}`}>
+          <Button width='100%'>Написать сообщение</Button>
+        </NavLink>
+      }
+      {
+        !isOwner && <Button margin='10px 0 0 0' disabled={followingFetching} width='100%' onClick={followUnfollow}>
+          {isFollowingUser ? 'Отписаться ❌' : 'Подписаться ✅'}
+        </Button>
       }
     </div>
   )

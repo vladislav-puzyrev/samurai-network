@@ -6,7 +6,7 @@ import { required, maxLength } from '../../../../utils/validators'
 import Button from '../../../common/Button/Button'
 import Textarea from '../../../common/Textarea/Textarea'
 
-const maxLength = maxLength(10)
+const maxLengthValidator = maxLength(10)
 
 function Posts (props) {
   const postsElements = props.state.profilePage.posts.map(
@@ -35,9 +35,9 @@ function AddNewPostForm (props) {
           name='newPost'
           component={Textarea}
           placeholder='Что у вас нового?'
-          validate={[required, maxLength]}
+          validate={[required, maxLengthValidator]}
           rows={2}
-          style={{marginTop: '10px', width: '100%'}}
+          style={{ marginTop: '10px', width: '100%' }}
         />
       </div>
       <div>
