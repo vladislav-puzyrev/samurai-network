@@ -2,6 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Социальная сеть на React, Redux, TypeScript
 
+Заходите под тестовым аккаунтом!
+<br>
+**Ссылка на GitHub pages - [Samurai Network](https://vladislav-puzyrev.github.io/samurai-network/#/login)**
+
 ## Страница профиля
 ![Screenshot](https://github.com/vladislav-puzyrev/samurai-network/raw/master/README-IMG/profile.png)
 
