@@ -19,8 +19,6 @@ function Avatar ({
 }) {
   const uploadLabel = React.createRef()
 
-  console.log(isFollowingUser)
-
   function onUploadPhoto (e) {
     if (e.target.files.length) {
       const photo = e.target.files[0]
