@@ -2,10 +2,10 @@ import React from 'react'
 import styles from './Button.module.css'
 
 type PropTypes = {
-  width?: number
+  width?: string
   onClick?: () => any
   margin?: string
-  type?: any
+  type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
   height?: string
 }

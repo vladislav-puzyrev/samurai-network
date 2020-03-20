@@ -1,12 +1,11 @@
 import React from 'react'
 import styles from './Textarea.module.css'
+import { WrappedFieldInputProps, WrappedFieldMetaProps } from 'redux-form'
 
 type PropTypes = {
   placeholder?: string
   rows?: number
   cols?: number
-  meta?: any
-  input?: any
   id?: string
   style?: any
   flexGrow?: boolean
@@ -14,6 +13,8 @@ type PropTypes = {
   onChange?: any
   onKeyDown?: any
   bottom?: boolean
+  input?: WrappedFieldInputProps
+  meta?: WrappedFieldMetaProps
 }
 
 const Textarea: React.FC<PropTypes> = ({
@@ -32,10 +33,10 @@ const Textarea: React.FC<PropTypes> = ({
         id={id}
         value={value}
         onChange={onChange}
-        {...input}
         onKeyDown={onKeyDown}
+        {...input}
       />
-      {isError && <span className={(isError || null) && styles.error}>{meta.error}</span>}
+      {isError && <span className={(isError || null) && styles.error}>{meta ? meta.error : ''}</span>}
     </span>
   )
 }

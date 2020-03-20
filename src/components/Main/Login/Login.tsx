@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { required } from '../../../utils/validators'
 import { connect } from 'react-redux'
 import { login } from '../../../redux/auth-reducer'
@@ -7,14 +7,24 @@ import { Redirect } from 'react-router-dom'
 import Input from '../../common/Input/Input'
 import styles from './Login.module.css'
 import Button from '../../common/Button/Button'
+import { AppStateType } from '../../../redux/store'
 
-function Login ({ login, isAuth, captchaUrl }) {
-  const onSubmit = (formData) => {
+type MapStatePropTypes = {
+  isAuth: boolean
+  captchaUrl: string | null
+}
+
+type MapDispatchPropTypes = {
+  login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
+}
+
+const Login: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ login, isAuth, captchaUrl }) => {
+  const onSubmit = (formData: formNames) => {
     const { userLogin, password, rememberMe, captcha } = formData
     login(userLogin, password, rememberMe, captcha)
   }
 
-  const logTestAccount = () => {
+  const loginTestAccount = () => {
     login('free@samuraijs.com', 'free', true, '')
   }
 
@@ -27,7 +37,7 @@ function Login ({ login, isAuth, captchaUrl }) {
       <h1>Авторизация</h1>
       <LoginReduxForm
         initialValues={{ rememberMe: true }}
-        logTestAccount={logTestAccount}
+        logTestAccount={loginTestAccount}
         captchaUrl={captchaUrl}
         onSubmit={onSubmit}
       />
@@ -35,7 +45,19 @@ function Login ({ login, isAuth, captchaUrl }) {
   )
 }
 
-function LoginForm ({ handleSubmit, error, captchaUrl, logTestAccount }) {
+type formProps = {
+  captchaUrl: string | null
+  logTestAccount: () => void
+}
+
+type formNames = {
+  userLogin: string
+  password: string
+  rememberMe: boolean
+  captcha: string
+}
+
+const LoginForm: React.FC<InjectedFormProps<formNames, formProps> & formProps> = ({ handleSubmit, error, captchaUrl, logTestAccount }) => {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <div>
@@ -97,8 +119,9 @@ function LoginForm ({ handleSubmit, error, captchaUrl, logTestAccount }) {
   )
 }
 
-const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm)
+const LoginReduxForm = reduxForm<formNames, formProps>({ form: 'login' })(LoginForm)
 
-export default connect((state) => ({
-  isAuth: state.auth.isAuth, captchaUrl: state.auth.captchaUrl
+export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>((state) => ({
+  isAuth: state.auth.isAuth,
+  captchaUrl: state.auth.captchaUrl
 }), { login })(Login)
