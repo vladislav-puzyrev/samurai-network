@@ -18,7 +18,7 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
           <label htmlFor='dataFormName'>ФИО:</label>
           <Field
             type='text'
-            width='300px'
+            width='280px'
             placeholder='Имя'
             name='fullName'
             component={Input}
@@ -40,7 +40,7 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
             component={Textarea}
             validate={[required]}
             id='dataFormSkills'
-            style={{ width: '300px' }}
+            style={{ width: '280px' }}
           />
         </div>
 
@@ -48,7 +48,7 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
           <label htmlFor='dataFormAbout'>О Вас:</label>
           <Field
             rows={2}
-            style={{ width: '300px' }}
+            style={{ width: '280px' }}
             name='aboutMe'
             component={Textarea}
             validate={[required]}
@@ -68,7 +68,7 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
               <label htmlFor={'dataForm' + key}>{key[0].toUpperCase() + key.slice(1)}:</label>
               <Field
                 type='text'
-                width='300px'
+                width='280px'
                 name={'contacts.' + key}
                 component={Input}
                 id={'dataForm' + key}
@@ -78,8 +78,8 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
         }
       </div>
 
-      <Button>Сохранить</Button>
-      <Button type='button' margin='0 0 0 10px' onClick={() => {setEditMode(false)}}>Отмена</Button>
+      <Button margin='15px 0 0 0'>Сохранить</Button>
+      <Button type='button' margin='15px 0 0 10px' onClick={() => {setEditMode(false)}}>Отмена</Button>
     </form>
   )
 }

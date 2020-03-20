@@ -12,9 +12,13 @@ type PropTypes = {
   flexGrow?: boolean
   value?: string
   onChange?: any
+  onKeyDown?: any
+  bottom?: boolean
 }
 
-const Textarea: React.FC<PropTypes> = ({ style, placeholder, rows = 1, cols, meta, input, id, flexGrow, value, onChange }) => {
+const Textarea: React.FC<PropTypes> = ({
+  style, placeholder, rows = 1, cols, meta, input, id, flexGrow, value, onChange, onKeyDown, bottom
+}) => {
   const isError = meta ? meta.error && meta.touched : null
 
   return (
@@ -22,13 +26,14 @@ const Textarea: React.FC<PropTypes> = ({ style, placeholder, rows = 1, cols, met
       <textarea
         rows={rows}
         cols={cols}
-        style={flexGrow ? Object.assign(style, { width: '100%' }) : style}
+        style={flexGrow ? Object.assign(style, { width: '100%', transform: bottom ? 'translateY(3px)' : null }) : style}
         className={styles.textarea}
         placeholder={placeholder}
         id={id}
         value={value}
         onChange={onChange}
         {...input}
+        onKeyDown={onKeyDown}
       />
       {isError && <span className={(isError || null) && styles.error}>{meta.error}</span>}
     </span>
