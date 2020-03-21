@@ -8,6 +8,7 @@ import Input from '../../common/Input/Input'
 import styles from './Login.module.css'
 import Button from '../../common/Button/Button'
 import { RootReducerType } from '../../../redux/store'
+import useSetTitle from '../../../hooks/useSetTitle'
 
 type MapStatePropTypes = {
   isAuth: boolean
@@ -19,6 +20,8 @@ type MapDispatchPropTypes = {
 }
 
 const Login: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ login, isAuth, captchaUrl }) => {
+  useSetTitle('Авторизация')
+
   const onSubmit = (formData: formNames) => {
     const { userLogin, password, rememberMe, captcha } = formData
     login(userLogin, password, rememberMe, captcha)
