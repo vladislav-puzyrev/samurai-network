@@ -14,6 +14,7 @@ import { Redirect, useParams } from 'react-router-dom'
 import Interlocutors from './Interlocutors/Interlocutors'
 import Dialog from './Dialog/Dialog'
 import styles from './Messages.module.css'
+import useSetTitle from '../../../hooks/useSetTitle'
 
 type MapStatePropTypes = {
   interlocutors: Array<IInterlocutor> | null
@@ -59,6 +60,8 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
 }) => {
   const { userID } = useParams()
   const [interlocutor, setInterlocutor] = useState<IInterlocutor | null>(null)
+
+  useSetTitle('Сообщения')
 
   useEffect(() => {
     getInterlocutors()

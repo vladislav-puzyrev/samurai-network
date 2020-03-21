@@ -16,6 +16,7 @@ import { RootReducerType } from '../../../redux/store'
 import User from './User/User'
 import { addPost } from '../../../redux/profile-reducer'
 import { follow, isFollowing, unfollow } from '../../../redux/users-reducer'
+import useSetTitle from '../../../hooks/useSetTitle'
 
 type MapStatePropTypes = {
   userID: number | null
@@ -70,6 +71,8 @@ const Profile: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
 
   const userURL = (id) ? +id : userID
   const isOwner = userID === userURL
+
+  useSetTitle(profile ? profile.fullName : null)
 
   useEffect(() => {
     if (userURL) {

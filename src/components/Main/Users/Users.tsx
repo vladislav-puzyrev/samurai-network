@@ -20,6 +20,7 @@ import { IUser } from '../../../types/types'
 import Search from './Search/Search'
 import Paginator from './Paginator/Paginator'
 import UsersList from './UsersList/UsersList'
+import useSetTitle from '../../../hooks/useSetTitle'
 
 type MapStatePropTypes = {
   currentPage: number
@@ -54,6 +55,8 @@ const Users: React.FC<PropTypes> = ({
   getRequestUsers,
   term,
 }) => {
+
+  useSetTitle('Поиск пользователей')
 
   useEffect(() => {
     return () => {
