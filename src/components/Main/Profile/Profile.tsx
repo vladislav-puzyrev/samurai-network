@@ -10,10 +10,11 @@ import {
 import { connect } from 'react-redux'
 import { useParams, Redirect } from 'react-router-dom'
 import { saveMyProfile } from '../../../redux/auth-reducer'
-import { IProfile } from '../../../types/types'
-import PostsContainer from './Posts/PostsContainer'
+import { IPost, IProfile } from '../../../types/types'
+import Posts from './Posts/Posts'
 import { RootReducerType } from '../../../redux/store'
 import User from './User/User'
+import { addPost } from '../../../redux/profile-reducer'
 import { follow, isFollowing, unfollow } from '../../../redux/users-reducer'
 
 type MapStatePropTypes = {
@@ -25,6 +26,7 @@ type MapStatePropTypes = {
   isAuth: boolean
   followingInProgress: Array<number>
   isFollowingUser: boolean
+  posts: Array<IPost>
 }
 
 type MapDispatchPropTypes = {
@@ -38,11 +40,10 @@ type MapDispatchPropTypes = {
   follow: (userID: number) => void
   unfollow: (userID: number) => void
   isFollowing: (userID: number) => void
+  addPost: (formData: { newPost: string }) => void
 }
 
-type PropTypes = MapStatePropTypes & MapDispatchPropTypes
-
-const Profile: React.FC<PropTypes> = ({
+const Profile: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   savePhoto,
   profile,
   status,
@@ -61,6 +62,8 @@ const Profile: React.FC<PropTypes> = ({
   followingInProgress,
   isFollowing,
   isFollowingUser,
+  posts,
+  addPost,
 }) => {
 
   const { userID: id } = useParams()
@@ -104,9 +107,12 @@ const Profile: React.FC<PropTypes> = ({
         unfollow={unfollow}
         followingInProgress={followingInProgress}
         isFollowingUser={isFollowingUser}
-        userURL={userURL}
+        userURL={userURL ? +userURL : null}
       />
-      <PostsContainer/>
+      <Posts
+        posts={posts}
+        addPost={addPost}
+      />
     </>
   )
 }
@@ -121,6 +127,7 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
     isAuth: state.auth.isAuth,
     followingInProgress: state.users.followingInProgress,
     isFollowingUser: state.users.isFollowingUser,
+    posts: state.profile.posts,
   }
 }
 
@@ -135,4 +142,5 @@ export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootRed
   follow,
   unfollow,
   isFollowing,
+  addPost,
 })(Profile)

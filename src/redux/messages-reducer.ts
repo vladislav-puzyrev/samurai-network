@@ -142,7 +142,7 @@ export const startChatting = (userID: number): ThunkType => {
   }
 }
 
-export const getInterlocutorsList = (): ThunkType => {
+export const getInterlocutors = (): ThunkType => {
   return async (dispatch) => {
     dispatch(toggleIsFetching('interlocutors', true))
     const res = await messagesAPI.getInterlocutors()
@@ -178,7 +178,7 @@ export const sendMessage = (userID: number, message: string): ThunkType => {
     if (res.resultCode === 0) {
       Promise.resolve().then(() => {
         getDialog(userID)(dispatch, getState, extraArgument)
-        getInterlocutorsList()(dispatch, getState, extraArgument)
+        getInterlocutors()(dispatch, getState, extraArgument)
       })
         .then(() => {
           dispatch(toggleIsFetching('sendMessage', false))

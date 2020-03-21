@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useRef, ChangeEvent } from 'react'
 import styles from './Avatar.module.css'
 import defaultAvatar from '../../../../../assets/images/defaultAvatar.png'
 import Preloader from '../../../../common/Preloader/Preloader'
 import { NavLink } from 'react-router-dom'
 import Button from '../../../../common/Button/Button'
+import { IProfile } from '../../../../../types/types'
 
-function Avatar ({
+type PropTypes = {
+  isOwner: boolean
+  profile: IProfile | null
+  avatarIsFetching: boolean
+  isFollowingUser: boolean
+  followingInProgress: Array<number>
+  userURL: number | null
+
+  savePhoto: (photo: File) => void
+  setAvatarIsFetching: (isFetching: boolean) => void
+  follow: (userID: number) => void
+  unfollow: (userID: number) => void
+}
+
+const Avatar: React.FC<PropTypes> = ({
   isOwner,
   savePhoto,
   profile,
@@ -16,26 +31,31 @@ function Avatar ({
   followingInProgress,
   isFollowingUser,
   userURL,
-}) {
-  const uploadLabel = React.createRef()
+}) => {
+  const uploadLabel = useRef<HTMLLabelElement>(null)
 
-  function onUploadPhoto (e) {
-    if (e.target.files.length) {
-      const photo = e.target.files[0]
+  function onUploadPhoto (e: ChangeEvent<HTMLInputElement>) {
+    const target = e.target as HTMLInputElement
+    const photo: File = (target.files as FileList)[0]
+
+    if (uploadLabel.current) {
       uploadLabel.current.textContent = photo.name
-      setAvatarIsFetching(true)
-      savePhoto(photo)
     }
+    setAvatarIsFetching(true)
+    savePhoto(photo)
+
   }
 
   const followingFetching = followingInProgress.some((id) => (id === userURL))
 
   const followUnfollow = () => {
-    if (isFollowingUser) {
-      unfollow(userURL)
-    }
-    else {
-      follow(userURL)
+    if (userURL) {
+      if (isFollowingUser) {
+        unfollow(userURL)
+      }
+      else {
+        follow(userURL)
+      }
     }
   }
 
@@ -43,7 +63,7 @@ function Avatar ({
     <div className={styles.avatar}>
       <div className={styles.avatarWrapper}>
         {
-          avatarIsFetching ? <Preloader stretch/> : (
+          avatarIsFetching || !profile ? <Preloader stretch/> : (
             <img
               className={styles.avatarIMG}
               src={profile.photos.large || defaultAvatar} alt='avatar'
@@ -65,7 +85,7 @@ function Avatar ({
         </div>
       }
       {
-        !isOwner && <NavLink className={styles.sendMessage} to={`/messages/${profile.userId}`}>
+        !isOwner && <NavLink className={styles.sendMessage} to={`/messages/${userURL}`}>
           <Button style={{ width: '100%' }}>Написать сообщение</Button>
         </NavLink>
       }

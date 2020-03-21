@@ -1,22 +1,26 @@
 import React from 'react'
 import styles from './Posts.module.css'
 import Post from './Post/Post'
-import { Field, reduxForm } from 'redux-form'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { required, maxLength } from '../../../../utils/validators'
 import Button from '../../../common/Button/Button'
 import Textarea from '../../../common/Textarea/Textarea'
+import { IPost } from '../../../../types/types'
 
-const maxLengthValidator = maxLength(10)
+type PropTypes = {
+  posts: Array<IPost>
+  addPost: (formData: formNames) => void
+}
 
-function Posts (props) {
-  const postsElements = props.state.profile.posts.map(
+const Posts: React.FC<PropTypes> = ({ posts, addPost }) => {
+  const postsElements = posts.map(
     post => <Post key={post.id} text={post.text} likes={post.likes}/>
   ).reverse()
 
   return (
     <div className={styles.posts}>
       <h2 className={styles.title}>Посты</h2>
-      <AddNewPostFormRedux onSubmit={(formData) => { props.addPost(formData) }}/>
+      <AddNewPostFormRedux onSubmit={(formData) => { addPost(formData) }}/>
       <div className={styles.postsList}>
         {postsElements}
       </div>
@@ -24,11 +28,15 @@ function Posts (props) {
   )
 }
 
-const AddNewPostFormRedux = reduxForm({ form: 'profileAddNewPost' })(AddNewPostForm)
+type formNames = {
+  newPost: string
+}
 
-function AddNewPostForm (props) {
+const maxLengthValidator = maxLength(10)
+
+const AddNewPostForm: React.FC<InjectedFormProps<formNames>> = ({ handleSubmit }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
         <Field
           className={styles.textarea}
@@ -41,10 +49,12 @@ function AddNewPostForm (props) {
         />
       </div>
       <div>
-        <Button style={{ marginTop: '10px' }} className={styles.button}>Отправить</Button>
+        <Button style={{ marginTop: '10px' }}>Отправить</Button>
       </div>
     </form>
   )
 }
+
+const AddNewPostFormRedux = reduxForm<formNames>({ form: 'profileAddNewPost' })(AddNewPostForm)
 
 export default Posts

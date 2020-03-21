@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { RootReducerType } from '../../../redux/store'
 import { IInterlocutor, IDialog, IMessagesAfterDate, IProfile } from '../../../types/types'
 import {
-  getInterlocutorsList,
+  getInterlocutors,
   getDialog,
   getMessagesAfterDate,
   startChatting,
@@ -35,7 +35,7 @@ type MapStatePropTypes = {
 
 type MapDispatchPropTypes = {
   startChatting: (userID: number) => void
-  getInterlocutors: () => any
+  getInterlocutors: () => void
   getNewInterlocutor: (userID: number) => void
   getDialog: (userID: number) => void
   sendMessage: (userID: number, message: string) => void
@@ -119,7 +119,7 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
 
 export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>(mapStateToProps, {
   startChatting,
-  getInterlocutors: getInterlocutorsList,
+  getInterlocutors,
   getNewInterlocutor,
   getDialog,
   getMessagesAfterDate,

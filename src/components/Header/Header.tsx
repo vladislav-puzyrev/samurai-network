@@ -16,9 +16,7 @@ type MapDispatchPropTypes = {
   logout: () => void
 }
 
-type PropTypes = MapStatePropTypes & MapDispatchPropTypes
-
-const Header: React.FC<PropTypes> = ({ isAuth, logout, myProfile }) => {
+const Header: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ isAuth, logout, myProfile }) => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>

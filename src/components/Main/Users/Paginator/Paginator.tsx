@@ -38,11 +38,12 @@ const Paginator = React.memo<PropTypes>(
     const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
     const rightPortionPageNumber = portionNumber * portionSize
 
-    const changePage = (event: any) => {
-      const pageNumber = +event.target.dataset.number
+    const changePage = (event: React.MouseEvent<HTMLDivElement>) => {
+      const target = event.target as HTMLInputElement
+      const pageNumber = target.dataset.number
 
       if (pageNumber) {
-        onPageChanged(pageNumber)
+        onPageChanged(+pageNumber)
       }
     }
 

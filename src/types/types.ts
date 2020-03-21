@@ -30,6 +30,7 @@ export interface IProfile {
   lookingForAJob: boolean
   lookingForAJobDescription: string
   fullName: string
+  aboutMe: string
   contacts: IContacts
   photos: IPhotos
 }

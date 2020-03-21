@@ -2,8 +2,26 @@ import React from 'react'
 import Preloader from '../../../common/Preloader/Preloader'
 import Avatar from './Avatar/Avatar'
 import UserInfo from './UserInfo/UserInfo'
+import { IProfile } from '../../../../types/types'
 
-function User ({
+type PropTypes = {
+  profile: IProfile | null
+  status: string
+  isOwner: boolean
+  avatarIsFetching: boolean
+  followingInProgress: Array<number>
+  isFollowingUser: boolean
+  userURL: number | null
+
+  follow: (userID: number) => void
+  unfollow: (userID: number) => void
+  setAvatarIsFetching: (isFetching: boolean) => void
+  savePhoto: (photo: File) => void
+  updateStatus: (newStatus: string) => void
+  saveProfile: (profile: IProfile) => void
+}
+
+const User: React.FC<PropTypes> = ({
   profile,
   savePhoto,
   status,
@@ -17,7 +35,7 @@ function User ({
   followingInProgress,
   isFollowingUser,
   userURL,
-}) {
+}) => {
 
   if (!profile) {
     return <Preloader/>
