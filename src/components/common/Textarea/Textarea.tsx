@@ -7,27 +7,26 @@ type PropTypes = {
   rows?: number
   cols?: number
   id?: string
-  style?: any
-  flexGrow?: boolean
+  style?: React.CSSProperties
+  spanStyle?: React.CSSProperties
   value?: string
-  onChange?: any
-  onKeyDown?: any
-  bottom?: boolean
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  onKeyDown?: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void
   input?: WrappedFieldInputProps
   meta?: WrappedFieldMetaProps
 }
 
 const Textarea: React.FC<PropTypes> = ({
-  style, placeholder, rows = 1, cols, meta, input, id, flexGrow, value, onChange, onKeyDown, bottom
+  style, placeholder, rows = 1, cols, meta, input, id, value, onChange, onKeyDown, spanStyle
 }) => {
-  const isError = meta ? meta.error && meta.touched : null
+  const isError = meta ? meta.error && meta.touched : false
 
   return (
-    <span style={flexGrow ? { flexGrow: 1 } : undefined}>
+    <span style={spanStyle} className={styles.span}>
       <textarea
         rows={rows}
         cols={cols}
-        style={flexGrow ? Object.assign(style, { width: '100%', transform: bottom ? 'translateY(3px)' : null }) : style}
+        style={style}
         className={styles.textarea}
         placeholder={placeholder}
         id={id}
@@ -36,7 +35,7 @@ const Textarea: React.FC<PropTypes> = ({
         onKeyDown={onKeyDown}
         {...input}
       />
-      {isError && <span className={(isError || null) && styles.error}>{meta ? meta.error : ''}</span>}
+      {isError && meta && <span className={styles.error}>{meta.error}</span>}
     </span>
   )
 }

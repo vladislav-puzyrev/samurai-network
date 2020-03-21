@@ -12,7 +12,7 @@ const Interlocutors: React.FC<PropTypes> = ({ interlocutors }) => {
   return (
     <div className={styles.wrapper}>
       {
-        interlocutors ? <InterlocutorsList interlocutors={interlocutors}/> : <Preloader/>
+        interlocutors ? <InterlocutorsList interlocutors={interlocutors}/> : <Preloader stretch/>
       }
     </div>
   )

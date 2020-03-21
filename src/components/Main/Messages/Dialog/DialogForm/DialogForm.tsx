@@ -26,7 +26,7 @@ const DialogForm: React.FC<PropTypes> = ({ sendMessage, startChatting, userID, s
     }
   }
 
-  const onChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.currentTarget.value)
     e.currentTarget.style.height = 'auto'
     e.currentTarget.style.height = e.currentTarget.scrollHeight + 'px'
@@ -37,14 +37,16 @@ const DialogForm: React.FC<PropTypes> = ({ sendMessage, startChatting, userID, s
       <Textarea
         onChange={onChange}
         value={message}
-        flexGrow
-        style={{ maxHeight: '200px', resize: 'none', minHeight: '40px' }}
+        style={{ maxHeight: '200px', resize: 'none', minHeight: '40px', width: '100%' }}
+        spanStyle={{ flexGrow: 1 }}
         placeholder='Напишите сообщение…'
         onKeyDown={onEnterMessage}
-        bottom={true}
       />
-      <Button height='40px' disabled={sendMessageFetching || !message.trim()} onClick={onSendMessage}
-              margin='0 0 0 20px'>
+      <Button
+        style={{ height: '40px', marginLeft: '20px' }}
+        disabled={sendMessageFetching || !message.trim()}
+        onClick={onSendMessage}
+      >
         Отправить
       </Button>
     </div>

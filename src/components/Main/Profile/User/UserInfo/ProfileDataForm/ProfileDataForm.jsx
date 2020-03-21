@@ -15,10 +15,11 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
 
       <div className={styles.aboutMe}>
         <div>
-          <label htmlFor='dataFormName'>ФИО:</label>
+          <div className={styles.labelWrapper}>
+            <label htmlFor='dataFormName'>ФИО:</label>
+          </div>
           <Field
             type='text'
-            width='280px'
             placeholder='Имя'
             name='fullName'
             component={Input}
@@ -28,24 +29,29 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
         </div>
 
         <div>
-          <label htmlFor='dataFormWork'>Ищите работу:</label>
+          <div className={styles.labelWrapper}>
+            <label htmlFor='dataFormWork'>Ищите работу:</label>
+          </div>
           <Field type='checkbox' name='lookingForAJob' component={Input} id='dataFormWork'/>
         </div>
 
         <div>
-          <label htmlFor='dataFormSkills'>Ваши навыки:</label>
+          <div className={styles.labelWrapper}>
+            <label htmlFor='dataFormSkills'>Ваши навыки:</label>
+          </div>
           <Field
             rows={2}
             name='lookingForAJobDescription'
             component={Textarea}
             validate={[required]}
             id='dataFormSkills'
-            style={{ width: '280px' }}
           />
         </div>
 
         <div>
-          <label htmlFor='dataFormAbout'>О Вас:</label>
+          <div className={styles.labelWrapper}>
+            <label htmlFor='dataFormAbout'>О Вас:</label>
+          </div>
           <Field
             rows={2}
             style={{ width: '280px' }}
@@ -65,10 +71,11 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
         {
           Object.keys(profile.contacts).map(key => (
             <div key={key}>
-              <label htmlFor={'dataForm' + key}>{key[0].toUpperCase() + key.slice(1)}:</label>
+              <div className={styles.labelWrapper}>
+                <label htmlFor={'dataForm' + key}>{key[0].toUpperCase() + key.slice(1)}:</label>
+              </div>
               <Field
                 type='text'
-                width='280px'
                 name={'contacts.' + key}
                 component={Input}
                 id={'dataForm' + key}
@@ -78,8 +85,10 @@ function ProfileDataForm ({ handleSubmit, error, profile, setEditMode }) {
         }
       </div>
 
-      <Button margin='15px 0 0 0'>Сохранить</Button>
-      <Button type='button' margin='15px 0 0 10px' onClick={() => {setEditMode(false)}}>Отмена</Button>
+      <div className={styles.buttons}>
+        <Button type='submit'>Сохранить</Button>
+        <Button style={{ marginLeft: '10px' }} type='button' onClick={() => {setEditMode(false)}}>Отмена</Button>
+      </div>
     </form>
   )
 }

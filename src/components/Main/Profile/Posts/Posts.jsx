@@ -41,7 +41,7 @@ function AddNewPostForm (props) {
         />
       </div>
       <div>
-        <Button margin='10px 0 0 0' className={styles.button}>Отправить</Button>
+        <Button style={{ marginTop: '10px' }} className={styles.button}>Отправить</Button>
       </div>
     </form>
   )

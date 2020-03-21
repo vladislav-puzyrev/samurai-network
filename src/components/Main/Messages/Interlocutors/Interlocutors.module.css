@@ -2,4 +2,5 @@
   flex-basis: 30%;
   background-color: #26262c;
   min-width: 215px;
+  position: relative;
 }

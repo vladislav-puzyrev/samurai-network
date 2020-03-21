@@ -1,5 +1,8 @@
-.form label {
-  display: block;
+.form .labelWrapper {
   margin-top: 10px;
   margin-bottom: 5px;
+}
+
+.buttons {
+  margin-top: 15px;
 }

@@ -63,7 +63,6 @@ const LoginForm: React.FC<InjectedFormProps<formNames, formProps> & formProps> =
       <div>
         <label htmlFor='loginLogin'>Email</label>
         <Field
-          width='250px'
           type='text'
           placeholder='Email'
           name='userLogin'
@@ -81,7 +80,6 @@ const LoginForm: React.FC<InjectedFormProps<formNames, formProps> & formProps> =
           name='password'
           component={Input}
           validate={[required]}
-          width='250px'
           id='loginPassword'
         />
       </div>
@@ -112,8 +110,10 @@ const LoginForm: React.FC<InjectedFormProps<formNames, formProps> & formProps> =
 
       {error ? <div style={{ color: 'red' }}>{error}</div> : null}
       <div>
-        <Button type='submit' width='100px'>Войти</Button>
-        <Button type='button' margin='0 0 0 10px' onClick={logTestAccount}>Войти под тестовым аккаунтом</Button>
+        <Button type='submit' style={{ width: '100px' }}>Войти</Button>
+        <Button type='button' style={{ marginLeft: '10px' }} onClick={logTestAccount}>
+          Войти под тестовым аккаунтом
+        </Button>
       </div>
     </form>
   )

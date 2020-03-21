@@ -7,6 +7,8 @@
   border-radius: 5px;
   box-shadow: 0 0 5px #141414;
   resize: vertical;
+  width: 280px;
+  vertical-align: top;
 }
 
 .textarea:focus {

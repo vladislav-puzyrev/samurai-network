@@ -43,7 +43,7 @@ function Avatar ({
     <div className={styles.avatar}>
       <div className={styles.avatarWrapper}>
         {
-          avatarIsFetching ? <Preloader/> : (
+          avatarIsFetching ? <Preloader stretch/> : (
             <img
               className={styles.avatarIMG}
               src={profile.photos.large || defaultAvatar} alt='avatar'
@@ -66,11 +66,12 @@ function Avatar ({
       }
       {
         !isOwner && <NavLink className={styles.sendMessage} to={`/messages/${profile.userId}`}>
-          <Button width='100%'>Написать сообщение</Button>
+          <Button style={{ width: '100%' }}>Написать сообщение</Button>
         </NavLink>
       }
       {
-        !isOwner && <Button margin='10px 0 0 0' disabled={followingFetching} width='100%' onClick={followUnfollow}>
+        !isOwner &&
+        <Button style={{ width: '100%', marginTop: '10px' }} disabled={followingFetching} onClick={followUnfollow}>
           {isFollowingUser ? 'Отписаться ❌' : 'Подписаться ✅'}
         </Button>
       }

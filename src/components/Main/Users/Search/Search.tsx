@@ -43,7 +43,7 @@ const Search = React.memo<PropTypes>(
           className={styles.button}>
           Найти
         </button>
-        <Button margin='0 0 0 10px' onClick={onReset}>Сброс</Button>
+        <Button style={{ marginLeft: '10px' }} onClick={onReset}>Сброс</Button>
       </div>
     )
   }

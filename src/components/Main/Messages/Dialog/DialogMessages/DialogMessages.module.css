@@ -3,6 +3,7 @@
   background-color: #26262c;
   padding: 30px 80px;
   overflow: auto;
+  position: relative;
 }
 
 .wrapper::-webkit-scrollbar {

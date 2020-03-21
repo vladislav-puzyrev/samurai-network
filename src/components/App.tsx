@@ -24,7 +24,11 @@ const App: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ initializeApp
   }, [initializeApp])
 
   if (!initialized) {
-    return <Preloader fullscreen/>
+    return (
+      <div className={styles.page}>
+        <Preloader stretch/>
+      </div>
+    )
   }
 
   return (

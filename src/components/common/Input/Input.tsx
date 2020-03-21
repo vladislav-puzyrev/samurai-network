@@ -3,30 +3,29 @@ import styles from './Input.module.css'
 import { WrappedFieldInputProps, WrappedFieldMetaProps } from 'redux-form'
 
 type PropTypes = {
-  width?: number
-  margin?: string
-  placeholder: string
-  type: string
-  id: string
+  placeholder?: string
+  type?: string
+  id?: string
   style?: React.CSSProperties
   input?: WrappedFieldInputProps
   meta?: WrappedFieldMetaProps
 }
 
-const Input: React.FC<PropTypes> = ({ width, margin, placeholder, meta, input, type, id, style }) => {
-  const isError = meta ? meta.error && meta.touched : ''
+const Input: React.FC<PropTypes> = ({ placeholder, meta, input, type, id, style = {} }) => {
+  const isError = meta ? meta.error && meta.touched : false
+  const checkBoxStyle = (type === 'checkbox') ? { width: 'auto' } : {}
 
   return (
     <span>
       <input
         id={id}
         type={type}
-        style={Object.assign({ width, margin }, style)}
+        style={Object.assign(style, checkBoxStyle)}
         className={styles.input}
         placeholder={placeholder}
         {...input}
       />
-      {isError && <span className={(isError || null) && styles.error}>{meta ? meta.error : ''}</span>}
+      {isError && meta && <span className={styles.error}>{meta.error}</span>}
     </span>
   )
 }

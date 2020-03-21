@@ -26,10 +26,9 @@ const UsersList = React.memo<PropTypes>(
       )) : 'Ничего не найдено'
 
     return (
-      isFetching ? <Preloader/> :
-        <ul className={styles.users}>
-          {usersOrMessage}
-        </ul>
+      <ul className={styles.users}>
+        {isFetching ? <Preloader stretch/> : usersOrMessage}
+      </ul>
     )
 
   }

@@ -42,7 +42,7 @@ const DialogMessages: React.FC<PropTypes> = ({ dialog, myPhoto, interlocutorPhot
   return (
     <div className={styles.wrapper}>
       {
-        isFetching ? <Preloader/> : dialogMessagesItem ? dialogMessagesItem : <Preloader/>
+        (isFetching && dialogMessagesItem) ? <Preloader stretch/> : dialogMessagesItem
       }
     </div>
   )

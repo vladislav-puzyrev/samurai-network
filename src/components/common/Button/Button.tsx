@@ -2,21 +2,19 @@ import React from 'react'
 import styles from './Button.module.css'
 
 type PropTypes = {
-  width?: string
-  onClick?: () => any
-  margin?: string
+  onClick?: (e: React.MouseEvent) => void
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
-  height?: string
+  style?: React.CSSProperties
 }
 
-const Button: React.FC<PropTypes> = ({ width, children, onClick, margin, type, disabled, height }) => {
+const Button: React.FC<PropTypes> = ({ children, onClick, type, disabled, style }) => {
   return (
     <button
       disabled={disabled}
       type={type}
       onClick={onClick}
-      style={{ width, margin, height }}
+      style={style}
       className={styles.button}
     >
       {children}
