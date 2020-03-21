@@ -94,16 +94,18 @@ export interface IInterlocutor {
 }
 
 export interface IDialogs extends IOperationItems {
-  items: Array<{
-    id: string
-    body: string
-    translatedBody: null
-    addedAt: string
-    senderId: number
-    senderName: string
-    recipientId: number
-    viewed: boolean
-  }>
+  items: Array<IDialog>
+}
+
+export interface IDialog {
+  id: string
+  body: string
+  translatedBody: null
+  addedAt: string
+  senderId: number
+  senderName: string
+  recipientId: number
+  viewed: boolean
 }
 
 export interface ISendMessage extends IOperationData {

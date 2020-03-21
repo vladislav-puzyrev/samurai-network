@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Dialog.module.css'
-import { IDialog, IInterlocutor, IPhotos, IProfile } from '../../../../types/types'
+import { IInterlocutor, IPhotos, IProfile, IDialog } from '../../../../types/types'
 import SelectInterlocutor from './SelectIntercutor/SelectInterlocutor'
 import InterlocutorInfo from './InterlocutorInfo/InterlocutorInfo'
 import DialogMessages from './DialogMessages/DialogMessages'
