@@ -51,6 +51,6 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
   }
 }
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, RootReducerType>(
+export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>(
   mapStateToProps, { initializeApp }
 )(App)

@@ -1,5 +1,5 @@
-// import profileReducer, { addPost } from './profile-reducer'
 import { IPost, IProfile } from '../types/types'
+import profileReducer, { addPost } from './profile-reducer'
 
 const initialState = {
   posts: [
@@ -8,33 +8,32 @@ const initialState = {
   ] as Array<IPost>,
   profile: null as IProfile | null,
   status: '',
-  postText: '',
+  avatarIsFetching: false,
 }
 
-// it('Длина постов была увеличена', () => {
-//   // 1) Arrange
-//   const action = addPost({ newPost: 'hello' })
-//
-//   // 2) Act
-//   const newState = profileReducer(initialState, action)
-//
-//   // 3) Assert
-//   expect(newState.posts.length).toBe(3)
-// })
+it('Длина постов была увеличена', () => {
+  // 1) Arrange
+  const action = addPost({ newPost: 'new post' })
 
-// it('Текст нового поста верный', () => {
-//   // 1) Arrange
-//   const action = addPost({ newPost: 'hello' })
-//
-//   // 2) Act
-//   const newState = profileReducer(initialState, action)
-//
-//   // 3) Assert
-//   expect(newState.posts[2].text).toBe('hello')
-// })
+  // 2) Act
+  const newState = profileReducer(initialState, action)
 
-// TDD
-// it('Длина постов после удаления декрентирована', () => {
+  // 3) Assert
+  expect(newState.posts.length).toBe(3)
+})
+
+it('Текст нового поста верный', () => {
+  // 1) Arrange
+  const action = addPost({ newPost: 'new post' })
+
+  // 2) Act
+  const newState = profileReducer(initialState, action)
+
+  // 3) Assert
+  expect(newState.posts[2].text).toBe('new post')
+})
+
+// it('Длина постов после удаления декрементирована', () => {
 //   // 1) Arrange
 //   const action = deletePost(1)
 //

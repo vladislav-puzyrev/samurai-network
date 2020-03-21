@@ -5,13 +5,9 @@ export const getUsers = (state: RootReducerType) => {
   return state.users.users
 }
 
-// export const getUsersSelector__BadRender = (state: AppStateType) => {
-//   return getUsers(state).filter(() => true)
-// }
-
 export const getUsersSelector = createSelector(getUsers, (users) => {
     return users.filter(() => true)
-  },
+  }
 )
 
 export const getTotalUsersCount = (state: RootReducerType) => {

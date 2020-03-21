@@ -43,4 +43,4 @@ const UserInfo: React.FC<PropTypes> = ({ profile, status, isOwner, saveProfile, 
   )
 }
 
-export default UserInfo
+export default React.memo(UserInfo)

@@ -61,4 +61,4 @@ const Menu: React.FC<PropTypes> = ({ newMessagesCount }) => {
   )
 }
 
-export default Menu
+export default React.memo(Menu)

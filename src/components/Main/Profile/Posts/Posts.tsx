@@ -57,4 +57,4 @@ const AddNewPostForm: React.FC<InjectedFormProps<formNames>> = ({ handleSubmit }
 
 const AddNewPostFormRedux = reduxForm<formNames>({ form: 'profileAddNewPost' })(AddNewPostForm)
 
-export default Posts
+export default React.memo(Posts)

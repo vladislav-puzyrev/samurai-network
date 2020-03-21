@@ -48,4 +48,4 @@ const DialogMessages: React.FC<PropTypes> = ({ dialog, myPhoto, interlocutorPhot
   )
 }
 
-export default DialogMessages
+export default React.memo(DialogMessages)

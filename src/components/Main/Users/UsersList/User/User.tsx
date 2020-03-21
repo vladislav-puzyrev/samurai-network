@@ -11,7 +11,8 @@ type PropTypes = {
   follow: (id: number) => void
 }
 
-function User ({ user, followButtonDisabled, unfollow, follow }: PropTypes) {
+const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follow }) => {
+  console.log('s')
   return (
     <li className={styles.user}>
       <div className={styles.avatarBox}>

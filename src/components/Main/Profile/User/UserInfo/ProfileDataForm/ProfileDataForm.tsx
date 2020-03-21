@@ -99,4 +99,4 @@ const ProfileDataForm: React.FC<InjectedFormProps<PropTypes> & PropTypes> = ({ h
   )
 }
 
-export default reduxForm<any, PropTypes>({ form: 'edit-profile' })(ProfileDataForm)
+export default reduxForm<any, PropTypes>({ form: 'edit-profile' })((React.memo(ProfileDataForm)))

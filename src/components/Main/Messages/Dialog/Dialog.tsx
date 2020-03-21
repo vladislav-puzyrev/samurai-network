@@ -81,4 +81,4 @@ const Dialog: React.FC<PropTypes> = ({
   )
 }
 
-export default Dialog
+export default React.memo(Dialog)

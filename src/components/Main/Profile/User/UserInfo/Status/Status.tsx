@@ -55,4 +55,4 @@ const Status: React.FC<PropTypes> = ({ status, updateStatus, isOwner }) => {
   )
 }
 
-export default Status
+export default React.memo(Status)

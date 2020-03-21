@@ -18,4 +18,4 @@ const Interlocutors: React.FC<PropTypes> = ({ interlocutors }) => {
   )
 }
 
-export default Interlocutors
+export default React.memo(Interlocutors)

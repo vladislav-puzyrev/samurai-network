@@ -67,4 +67,4 @@ const User: React.FC<PropTypes> = ({
   )
 }
 
-export default User
+export default React.memo(User)

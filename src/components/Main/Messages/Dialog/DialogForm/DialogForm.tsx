@@ -53,4 +53,4 @@ const DialogForm: React.FC<PropTypes> = ({ sendMessage, startChatting, userID, s
   )
 }
 
-export default DialogForm
+export default React.memo(DialogForm)

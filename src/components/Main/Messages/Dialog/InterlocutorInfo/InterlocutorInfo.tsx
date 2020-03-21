@@ -14,6 +14,7 @@ type PropTypes = {
 }
 
 const InterlocutorInfo: React.FC<PropTypes> = ({ interlocutor }) => {
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>
@@ -35,4 +36,4 @@ const InterlocutorInfo: React.FC<PropTypes> = ({ interlocutor }) => {
   )
 }
 
-export default InterlocutorInfo
+export default React.memo(InterlocutorInfo)

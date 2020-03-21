@@ -71,4 +71,4 @@ const Paginator = React.memo<PropTypes>(
   }
 )
 
-export default Paginator
+export default React.memo(Paginator)

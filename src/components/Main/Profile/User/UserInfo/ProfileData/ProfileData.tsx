@@ -60,4 +60,4 @@ const ProfileData: React.FC<PropTypes> = ({ profile }) => {
   )
 }
 
-export default ProfileData
+export default React.memo(ProfileData)

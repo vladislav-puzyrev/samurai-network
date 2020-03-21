@@ -99,4 +99,4 @@ const Avatar: React.FC<PropTypes> = ({
   )
 }
 
-export default Avatar
+export default React.memo(Avatar)

@@ -5,17 +5,33 @@ import { connect } from 'react-redux'
 import { RootReducerType } from '../../redux/store'
 import { getNewMessagesCount } from '../../redux/messages-reducer'
 
-type MapStatePropTypes = { newMessagesCount: number, isAuth: boolean }
+type MapStatePropTypes = {
+  newMessagesCount: number
+  isAuth: boolean
+  newMessagesCountFetching: boolean
+}
 
-type MapDispatchPropTypes = { getNewMessagesCount: () => void }
+type MapDispatchPropTypes = {
+  getNewMessagesCount: () => void
+}
 
-const Sidebar: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ newMessagesCount, getNewMessagesCount, isAuth }) => {
+const Sidebar: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
+  newMessagesCount, getNewMessagesCount, isAuth, newMessagesCountFetching
+}) => {
   const timerID = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
     if (isAuth) {
+      getNewMessagesCount()
+    }
+  }, [getNewMessagesCount, isAuth])
+
+  useEffect(() => {
+    if (isAuth && !newMessagesCountFetching) {
       timerID.current = setInterval(() => {
-        getNewMessagesCount()
+        if (!newMessagesCountFetching) {
+          getNewMessagesCount()
+        }
       }, 10000)
     }
 
@@ -24,7 +40,7 @@ const Sidebar: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ newMessag
         clearInterval(timerID.current)
       }
     }
-  }, [getNewMessagesCount, isAuth])
+  }, [getNewMessagesCount, isAuth, newMessagesCountFetching])
 
   return (
     <aside className={styles.aside}>
@@ -37,6 +53,7 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
   return {
     newMessagesCount: state.messages.newMessagesCount,
     isAuth: state.auth.isAuth,
+    newMessagesCountFetching: state.messages.fetching.newMessagesCount
   }
 }
 

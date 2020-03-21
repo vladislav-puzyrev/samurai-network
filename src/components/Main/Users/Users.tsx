@@ -17,7 +17,6 @@ import {
 } from '../../../redux/users-selectors'
 import { RootReducerType } from '../../../redux/store'
 import { IUser } from '../../../types/types'
-import { compose } from 'redux'
 import Search from './Search/Search'
 import Paginator from './Paginator/Paginator'
 import UsersList from './UsersList/UsersList'
@@ -105,13 +104,11 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
   }
 }
 
-export default compose(
-  connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>(mapStateToProps, {
-    setCurrentPage,
-    setIsFetching,
-    getRequestUsers,
-    follow,
-    unfollow,
-    setTerm,
-  }),
-)(Users)
+export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>(mapStateToProps, {
+  setCurrentPage,
+  setIsFetching,
+  getRequestUsers,
+  follow,
+  unfollow,
+  setTerm,
+})(Users)

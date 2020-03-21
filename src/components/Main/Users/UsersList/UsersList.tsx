@@ -34,4 +34,4 @@ const UsersList = React.memo<PropTypes>(
   }
 )
 
-export default UsersList
+export default React.memo(UsersList)
