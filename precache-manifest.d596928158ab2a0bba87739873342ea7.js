@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "96a177184ca3ae56b046df259941698f",
+    "revision": "50f6e8bcfa290e77e32044b586fe5750",
     "url": "/samurai-network/index.html"
   },
   {
