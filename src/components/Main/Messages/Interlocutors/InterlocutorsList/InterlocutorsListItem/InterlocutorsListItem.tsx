@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './InterlocutorsListItem.module.css'
-import { PhotosType } from '../../../../../../types/types'
+import { IPhotos } from '../../../../../../types/types'
 import { NavLink } from 'react-router-dom'
 import defaultAvatar from '../../../../../../assets/images/defaultAvatar.png'
 
@@ -11,7 +11,7 @@ type PropTypes = {
   lastDialogActivityDate: string
   lastUserActivityDate: string
   newMessagesCount: number
-  photos: PhotosType
+  photos: IPhotos
 }
 
 const InterlocutorsListItem: React.FC<PropTypes> = ({

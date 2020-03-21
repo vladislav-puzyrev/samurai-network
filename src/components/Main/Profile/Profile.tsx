@@ -10,7 +10,7 @@ import {
 import { connect } from 'react-redux'
 import { useParams, Redirect } from 'react-router-dom'
 import { saveMyProfile } from '../../../redux/auth-reducer'
-import { ProfileType } from '../../../types/types'
+import { IProfile } from '../../../types/types'
 import PostsContainer from './Posts/PostsContainer'
 import { AppStateType } from '../../../redux/store'
 import User from './User/User'
@@ -18,10 +18,10 @@ import { follow, isFollowing, unfollow } from '../../../redux/users-reducer'
 
 type MapStatePropTypes = {
   userID: number | null
-  profile: ProfileType | null
+  profile: IProfile | null
   status: string
   avatarIsFetching: boolean
-  myProfile: ProfileType | null
+  myProfile: IProfile | null
   isAuth: boolean
   followingInProgress: Array<number>
   isFollowingUser: boolean
@@ -33,8 +33,8 @@ type MapDispatchPropTypes = {
   savePhoto: (photo: Blob) => void
   updateStatus: (newStatus: string) => void
   setAvatarIsFetching: (isFetching: boolean) => void
-  saveProfile: (profile: ProfileType) => void
-  saveMyProfile: (profile: ProfileType) => void
+  saveProfile: (profile: IProfile) => void
+  saveMyProfile: (profile: IProfile) => void
   follow: (userID: number) => void
   unfollow: (userID: number) => void
   isFollowing: (userID: number) => void

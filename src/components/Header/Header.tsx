@@ -5,11 +5,11 @@ import { AppStateType } from '../../redux/store'
 import styles from './Header.module.css'
 import Button from '../common/Button/Button'
 import { NavLink } from 'react-router-dom'
-import { ProfileType } from '../../types/types'
+import { IProfile } from '../../types/types'
 
 type MapStatePropTypes = {
   isAuth: boolean
-  myProfile: ProfileType | null
+  myProfile: IProfile | null
 }
 
 type MapDispatchPropTypes = {

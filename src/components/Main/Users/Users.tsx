@@ -16,7 +16,7 @@ import {
   getUsersSelector,
 } from '../../../redux/users-selectors'
 import { AppStateType } from '../../../redux/store'
-import { UserType } from '../../../types/types'
+import { IUser } from '../../../types/types'
 import { compose } from 'redux'
 import Search from './Search/Search'
 import Paginator from './Paginator/Paginator'
@@ -24,7 +24,7 @@ import UsersList from './UsersList/UsersList'
 
 type MapStatePropTypes = {
   currentPage: number
-  users: Array<UserType>
+  users: Array<IUser>
   totalUsersCount: number
   isFetching: boolean
   followingInProgress: Array<number>

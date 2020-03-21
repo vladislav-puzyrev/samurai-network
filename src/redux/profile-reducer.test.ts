@@ -1,12 +1,12 @@
 // import profileReducer, { addPost } from './profile-reducer'
-import { PostType, ProfileType } from '../types/types'
+import { IPost, IProfile } from '../types/types'
 
 const initialState = {
   posts: [
     { id: 1, text: 'Вам нравится React?', likes: 4 },
     { id: 2, text: 'hey', likes: 2 },
-  ] as Array<PostType>,
-  profile: null as ProfileType | null,
+  ] as Array<IPost>,
+  profile: null as IProfile | null,
   status: '',
   postText: '',
 }

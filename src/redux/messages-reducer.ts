@@ -1,4 +1,4 @@
-import { InterlocutorType, DialogType, MessagesAfterDateType, ProfileType } from '../types/types'
+import { IInterlocutor, IDialog, IMessagesAfterDate, IProfile } from '../types/types'
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType } from './store'
 import { messagesAPI, profileAPI } from '../api/api'
@@ -12,10 +12,10 @@ const SET_NEW_MESSAGES_COUNT = 'samurai-network/messages/SET_NEW_MESSAGES_COUNT'
 const TOGGLE_IS_FETCHING = 'samurai-network/messages/TOGGLE_IS_FETCHING'
 
 const initialState = {
-  interlocutors: null as Array<InterlocutorType> | null,
-  newInterlocutor: null as ProfileType | null,
-  currentDialog: null as Array<DialogType> | null,
-  messagesAfterDate: null as Array<MessagesAfterDateType> | null,
+  interlocutors: null as Array<IInterlocutor> | null,
+  newInterlocutor: null as IProfile | null,
+  currentDialog: null as Array<IDialog> | null,
+  messagesAfterDate: null as Array<IMessagesAfterDate> | null,
   newMessagesCount: 0,
 
   fetching: {
@@ -85,26 +85,26 @@ function messagesReducer (state = initialState, action: ActionTypes): InitialSta
 }
 
 /* Action creators */
-type setInterlocutorsActionType = { type: typeof SET_INTERLOCUTORS, messages: Array<InterlocutorType> };
-export const setInterlocutors = (messages: Array<InterlocutorType>): setInterlocutorsActionType => ({
+type setInterlocutorsActionType = { type: typeof SET_INTERLOCUTORS, messages: Array<IInterlocutor> };
+export const setInterlocutors = (messages: Array<IInterlocutor>): setInterlocutorsActionType => ({
   type: SET_INTERLOCUTORS,
   messages
 })
 
-type setNewInterlocutorActionType = { type: typeof SET_NEW_INTERLOCUTOR, profile: ProfileType };
-export const setNewInterlocutor = (profile: ProfileType): setNewInterlocutorActionType => ({
+type setNewInterlocutorActionType = { type: typeof SET_NEW_INTERLOCUTOR, profile: IProfile };
+export const setNewInterlocutor = (profile: IProfile): setNewInterlocutorActionType => ({
   type: SET_NEW_INTERLOCUTOR,
   profile
 })
 
-type setCurrentDialogActionType = { type: typeof SET_CURRENT_DIALOG, currentDialog: Array<DialogType> };
-export const setCurrentDialog = (currentDialog: Array<DialogType>): setCurrentDialogActionType => ({
+type setCurrentDialogActionType = { type: typeof SET_CURRENT_DIALOG, currentDialog: Array<IDialog> };
+export const setCurrentDialog = (currentDialog: Array<IDialog>): setCurrentDialogActionType => ({
   type: SET_CURRENT_DIALOG,
   currentDialog
 })
 
-type setMessagesAfterDateActionType = { type: typeof SET_MESSAGES_AFTER_DATE, messagesAfterDate: Array<MessagesAfterDateType> };
-export const setMessagesAfterDate = (messagesAfterDate: Array<MessagesAfterDateType>): setMessagesAfterDateActionType => ({
+type setMessagesAfterDateActionType = { type: typeof SET_MESSAGES_AFTER_DATE, messagesAfterDate: Array<IMessagesAfterDate> };
+export const setMessagesAfterDate = (messagesAfterDate: Array<IMessagesAfterDate>): setMessagesAfterDateActionType => ({
   type: SET_MESSAGES_AFTER_DATE,
   messagesAfterDate: messagesAfterDate
 })
@@ -145,7 +145,7 @@ export const startChatting = (userID: number): ThunkType => {
 export const getInterlocutorsList = (): ThunkType => {
   return async (dispatch) => {
     dispatch(toggleIsFetching('interlocutors', true))
-    const res = await messagesAPI.getInterlocutorsList()
+    const res = await messagesAPI.getInterlocutors()
     dispatch(setInterlocutors(res))
     dispatch(toggleIsFetching('interlocutors', false))
   }

@@ -1,5 +1,5 @@
 import { usersAPI } from '../api/api'
-import { UserType } from '../types/types'
+import { IUser } from '../types/types'
 import { AppStateType } from './store'
 import { ThunkAction } from 'redux-thunk'
 
@@ -15,7 +15,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = 'samurai-network/users/TOGGLE_IS_FOLLOWING_
 const TOGGLE_IS_FOLLOWING_USER = 'samurai-network/users/TOGGLE_IS_FOLLOWING_USER'
 
 const initialState = {
-  users: [] as Array<UserType>,
+  users: [] as Array<IUser>,
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
@@ -123,8 +123,8 @@ export const acceptUnfollow = (id: number): AcceptUnfollowActionType => ({
   id
 })
 
-type SetUsersActionType = { type: typeof SET_USERS, users: Array<UserType> };
-export const setUsers = (users: Array<UserType>): SetUsersActionType => ({
+type SetUsersActionType = { type: typeof SET_USERS, users: Array<IUser> };
+export const setUsers = (users: Array<IUser>): SetUsersActionType => ({
   type: SET_USERS,
   users
 })

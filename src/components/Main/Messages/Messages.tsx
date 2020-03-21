@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { AppStateType } from '../../../redux/store'
-import { InterlocutorType, DialogType, MessagesAfterDateType, ProfileType } from '../../../types/types'
+import { IInterlocutor, IDialog, IMessagesAfterDate, IProfile } from '../../../types/types'
 import {
   getInterlocutorsList,
   getDialog,
@@ -16,10 +16,10 @@ import Dialog from './Dialog/Dialog'
 import styles from './Messages.module.css'
 
 type MapStatePropTypes = {
-  interlocutors: Array<InterlocutorType> | null
-  newInterlocutor: ProfileType | null
-  currentDialog: Array<DialogType> | null
-  messagesAfterDate: Array<MessagesAfterDateType> | null
+  interlocutors: Array<IInterlocutor> | null
+  newInterlocutor: IProfile | null
+  currentDialog: Array<IDialog> | null
+  messagesAfterDate: Array<IMessagesAfterDate> | null
 
   fetching: {
     interlocutors: boolean
@@ -30,12 +30,12 @@ type MapStatePropTypes = {
   }
 
   isAuth: boolean
-  myProfile: ProfileType | null
+  myProfile: IProfile | null
 }
 
 type MapDispatchPropTypes = {
   startChatting: (userID: number) => void
-  getInterlocutorsList: () => any
+  getInterlocutors: () => any
   getNewInterlocutor: (userID: number) => void
   getDialog: (userID: number) => void
   sendMessage: (userID: number, message: string) => void
@@ -50,7 +50,7 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   messagesAfterDate,
   fetching,
   startChatting,
-  getInterlocutorsList,
+  getInterlocutors,
   getDialog,
   sendMessage,
   getMessagesAfterDate,
@@ -58,11 +58,11 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   myProfile,
 }) => {
   const { userID } = useParams()
-  const [interlocutor, setInterlocutor] = useState<InterlocutorType | null>(null)
+  const [interlocutor, setInterlocutor] = useState<IInterlocutor | null>(null)
 
   useEffect(() => {
-    getInterlocutorsList()
-  }, [getInterlocutorsList])
+    getInterlocutors()
+  }, [getInterlocutors])
 
   useEffect(() => {
     if (userID) {
@@ -119,7 +119,7 @@ function mapStateToProps (state: AppStateType): MapStatePropTypes {
 
 export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>(mapStateToProps, {
   startChatting,
-  getInterlocutorsList,
+  getInterlocutors: getInterlocutorsList,
   getNewInterlocutor,
   getDialog,
   getMessagesAfterDate,

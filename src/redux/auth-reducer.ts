@@ -1,6 +1,6 @@
 import { authAPI, profileAPI, securityAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
-import { PhotosType, ProfileType } from '../types/types'
+import { IPhotos, IProfile } from '../types/types'
 import { getMyProfile } from './init-reducer'
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType } from './store'
@@ -18,7 +18,7 @@ const initialState = {
   isFetching: false,
   isAuth: false,
   captchaUrl: null as string | null,
-  myProfile: null as ProfileType | null,
+  myProfile: null as IProfile | null,
 }
 
 type InitialStateType = typeof initialState
@@ -55,7 +55,7 @@ function authReducer (state = initialState, action: ActionTypes): InitialStateTy
         myProfile: {
           ...state.myProfile,
           photos: action.photos
-        } as ProfileType,
+        } as IProfile,
       }
 
     default:
@@ -81,14 +81,14 @@ export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessTy
   captchaUrl: captchaUrl,
 })
 
-type SetMyProfileType = { type: typeof SET_MY_PROFILE, profile: ProfileType }
-export const setMyProfile = (profile: ProfileType): SetMyProfileType => ({
+type SetMyProfileType = { type: typeof SET_MY_PROFILE, profile: IProfile }
+export const setMyProfile = (profile: IProfile): SetMyProfileType => ({
   type: SET_MY_PROFILE,
   profile,
 })
 
-export type SetMyPhotoType = { type: typeof SET_MY_PHOTO, photos: PhotosType }
-export const setMyPhoto = (photos: PhotosType): SetMyPhotoType => ({
+export type SetMyPhotoType = { type: typeof SET_MY_PHOTO, photos: IPhotos }
+export const setMyPhoto = (photos: IPhotos): SetMyPhotoType => ({
   type: SET_MY_PHOTO,
   photos,
 })
@@ -96,7 +96,7 @@ export const setMyPhoto = (photos: PhotosType): SetMyPhotoType => ({
 /* Thunk creators */
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
-export const saveMyProfile = (profile: ProfileType): ThunkType => {
+export const saveMyProfile = (profile: IProfile): ThunkType => {
   return async (dispatch) => {
     const response = await profileAPI.updateProfile(profile)
     if (response.resultCode === 0) {

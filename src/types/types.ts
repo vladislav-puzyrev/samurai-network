@@ -1,35 +1,40 @@
 /* Abstract */
-export interface OperationResult {
+export interface IOperationData {
   data: Object
   messages: Array<string>
   resultCode: number
 }
 
-interface ItemsResult {
+interface IOperationItems {
   items: Array<Object>
   totalCount: number
   error: string | null
 }
 
-/* Types */
-export interface UserType {
+/* Users */
+export interface IUser {
   id: number
   name: string
   status: string
-  photos: PhotosType
+  photos: IPhotos
   followed: boolean
 }
 
-export interface ProfileType {
+export interface IUsers extends IOperationItems {
+  items: Array<IUser>
+}
+
+/* Profile */
+export interface IProfile {
   userId: number
   lookingForAJob: boolean
   lookingForAJobDescription: string
   fullName: string
-  contacts: ContactsType
-  photos: PhotosType
+  contacts: IContacts
+  photos: IPhotos
 }
 
-export interface ContactsType {
+export interface IContacts {
   github: string
   vk: string
   facebook: string
@@ -40,28 +45,25 @@ export interface ContactsType {
   mainLink: string
 }
 
-export interface PhotosType {
+export interface IPhotos {
   small: string | null
   large: string | null
 }
 
-export interface PostType {
+export interface IUpdatePhoto extends IOperationData {
+  data: {
+    photos: IPhotos
+  }
+}
+
+export interface IPost {
   id: number
   text: string
   likes: number
 }
 
-export interface UsersType extends ItemsResult {
-  items: Array<UserType>
-}
-
-export interface SavePhotoType extends OperationResult {
-  data: {
-    photos: PhotosType
-  }
-}
-
-export interface MeType extends OperationResult {
+/* Auth */
+export interface IMe extends IOperationData {
   data: {
     id: number
     email: string
@@ -69,42 +71,48 @@ export interface MeType extends OperationResult {
   }
 }
 
-export interface LoginType extends OperationResult {
+export interface ILogin extends IOperationData {
   data: {
     userId: number
   }
 }
 
-export interface CaptchaType {
+/* Security */
+export interface ICaptcha {
   url: string
 }
 
-export interface InterlocutorType {
+/* Messages */
+export interface IInterlocutor {
   id: number
   userName: string
   hasNewMessages: boolean
   lastDialogActivityDate: string
   lastUserActivityDate: string
   newMessagesCount: number
-  photos: PhotosType
+  photos: IPhotos
 }
 
-export interface DialogType {
-  id: string
-  body: string
-  translatedBody: null
-  addedAt: string
-  senderId: number
-  senderName: string
-  recipientId: number
-  viewed: boolean
+export interface IDialogs extends IOperationItems {
+  items: Array<{
+    id: string
+    body: string
+    translatedBody: null
+    addedAt: string
+    senderId: number
+    senderName: string
+    recipientId: number
+    viewed: boolean
+  }>
 }
 
-export interface DialogsType extends ItemsResult {
-  items: Array<DialogType>
+export interface ISendMessage extends IOperationData {
+  data: {
+    message: IMessagesAfterDate
+  }
 }
 
-export interface MessagesAfterDateType {
+export interface IMessagesAfterDate {
   id: string
   body: string
   translatedBody: null
@@ -119,10 +127,4 @@ export interface MessagesAfterDateType {
   deletedByRecipient: boolean
   isSpam: boolean
   distributionId: null
-}
-
-export interface SendMessageType extends OperationResult {
-  data: {
-    message: MessagesAfterDateType
-  }
 }

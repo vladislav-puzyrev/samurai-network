@@ -1,6 +1,6 @@
 import { profileAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
-import { PhotosType, PostType, ProfileType } from '../types/types'
+import { IPhotos, IPost, IProfile } from '../types/types'
 import { ThunkAction } from 'redux-thunk'
 import { AppStateType } from './store'
 import { setMyPhoto, SetMyPhotoType } from './auth-reducer'
@@ -16,8 +16,8 @@ const initialState = {
   posts: [
     { id: 1, text: 'Вам нравится React?', likes: 4 },
     { id: 2, text: 'hey', likes: 2 },
-  ] as Array<PostType>,
-  profile: null as ProfileType | null,
+  ] as Array<IPost>,
+  profile: null as IProfile | null,
   status: '',
   avatarIsFetching: false,
 }
@@ -61,7 +61,7 @@ function profileReducer (state = initialState, action: ActionTypes): InitialStat
     case SET_PROFILE_PHOTO:
       return {
         ...state,
-        profile: { ...state.profile, photos: action.photos } as ProfileType,
+        profile: { ...state.profile, photos: action.photos } as IProfile,
       }
 
     case SET_AVATAR_FETCHING:
@@ -82,8 +82,8 @@ export const addPost = (formData: { newPost: string }): AddPostActionType => ({
   text: formData.newPost
 })
 
-type SetUserProfileActionType = { type: typeof SET_USER_PROFILE, profile: ProfileType | null }
-export const setUserProfile = (profile: ProfileType | null): SetUserProfileActionType => ({
+type SetUserProfileActionType = { type: typeof SET_USER_PROFILE, profile: IProfile | null }
+export const setUserProfile = (profile: IProfile | null): SetUserProfileActionType => ({
   type: SET_USER_PROFILE,
   profile: profile
 })
@@ -94,8 +94,8 @@ export const setStatus = (status: string): SetStatusActionType => ({
   status: status
 })
 
-type setProfilePhotoActionType = { type: typeof SET_PROFILE_PHOTO, photos: PhotosType }
-export const setProfilePhoto = (photos: PhotosType): setProfilePhotoActionType => ({
+type setProfilePhotoActionType = { type: typeof SET_PROFILE_PHOTO, photos: IPhotos }
+export const setProfilePhoto = (photos: IPhotos): setProfilePhotoActionType => ({
   type: SET_PROFILE_PHOTO,
   photos: photos
 })
@@ -146,7 +146,7 @@ export const savePhoto = (file: any): ThunkType => {
   }
 }
 
-export const saveProfile = (profile: ProfileType): ThunkType => {
+export const saveProfile = (profile: IProfile): ThunkType => {
   return async (dispatch, getState) => {
     const response = await profileAPI.updateProfile(profile)
     if (response.resultCode === 0) {
