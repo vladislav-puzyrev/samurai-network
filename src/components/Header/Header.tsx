@@ -1,7 +1,7 @@
 import React from 'react'
 import { logout } from '../../redux/auth-reducer'
 import { connect } from 'react-redux'
-import { AppStateType } from '../../redux/store'
+import { RootReducerType } from '../../redux/store'
 import styles from './Header.module.css'
 import Button from '../common/Button/Button'
 import { NavLink } from 'react-router-dom'
@@ -48,11 +48,11 @@ const Header: React.FC<PropTypes> = ({ isAuth, logout, myProfile }) => {
   )
 }
 
-const mapStateToProps = (state: AppStateType): MapStatePropTypes => ({
+const mapStateToProps = (state: RootReducerType): MapStatePropTypes => ({
   isAuth: state.auth.isAuth,
   myProfile: state.auth.myProfile
 })
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, AppStateType>(mapStateToProps, {
+export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, RootReducerType>(mapStateToProps, {
   logout,
 })(Header)

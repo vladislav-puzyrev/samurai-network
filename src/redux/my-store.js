@@ -7,14 +7,14 @@ const myStore = {
     console.log('no subscribers')
   },
   _state: {
-    profilePage: {
+    profile: {
       posts: [
         { id: 1, text: 'Вам нравится React?', likes: 4 },
         { id: 2, text: 'hey', likes: 2 }
       ],
       postText: 'facebook'
     },
-    messagesPage: {
+    messages: {
       dialogs: [
         { id: 1, username: 'Димыч' },
         { id: 2, username: 'Саша' },
@@ -57,8 +57,8 @@ const myStore = {
   },
 
   dispatch (action) {
-    this._state.profilePage = profileReducer(this._state.profilePage, action)
-    this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+    this._state.profilePage = profileReducer(this._state.profile, action)
+    this._state.messagesPage = messagesReducer(this._state.messages, action)
     this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
     this._subscriber()

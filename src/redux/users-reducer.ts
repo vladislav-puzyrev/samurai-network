@@ -1,6 +1,6 @@
 import { usersAPI } from '../api/api'
 import { IUser } from '../types/types'
-import { AppStateType } from './store'
+import { RootReducerType } from './store'
 import { ThunkAction } from 'redux-thunk'
 
 /* Action types */
@@ -169,7 +169,7 @@ export const toggleFollowedUser = (following: boolean): toggleFollowedUserAction
 /* Thunk creators */
 // type GetStateType = () => AppStateType
 // type DispatchType = Dispatch<ActionTypes>
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
+type ThunkType = ThunkAction<Promise<void>, RootReducerType, unknown, ActionTypes>
 
 export const getRequestUsers = (pageSize: number, currentPage: number, term = ''): ThunkType => {
   return async (dispatch) => {

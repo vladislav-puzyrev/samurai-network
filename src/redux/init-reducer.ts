@@ -1,7 +1,7 @@
-import { getAuthUserData, setMyProfile } from './auth-reducer'
+import { getAuthUserData, setMyProfile, SetMyProfileType } from './auth-reducer'
 import { profileAPI } from '../api/api'
 import { ThunkAction } from 'redux-thunk'
-import { AppStateType } from './store'
+import { RootReducerType } from './store'
 
 /* Action types */
 const INITIALIZED_SUCCESS = 'samurai-network/app/INITIALIZED_SUCCESS'
@@ -12,7 +12,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 
-type ActionTypes = InitializedSuccessType
+type ActionTypes = InitializedSuccessType | SetMyProfileType
 
 function initReducer (state = initialState, action: ActionTypes): InitialStateType {
   switch (action.type) {
@@ -34,7 +34,7 @@ export const initializedSuccess = (): InitializedSuccessType => ({
 })
 
 /* Thunk creators */
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
+type ThunkType = ThunkAction<Promise<void>, RootReducerType, unknown, ActionTypes>
 
 export const initializeApp = (): ThunkType => {
   return async (dispatch) => {
@@ -54,7 +54,6 @@ export const getMyProfile = (): ThunkType => {
 
     if (isAuth && userID) {
       const response = await profileAPI.getProfile(userID)
-      // @ts-ignore
       dispatch(setMyProfile(response))
     }
   }

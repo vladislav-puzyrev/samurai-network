@@ -1,6 +1,6 @@
 import { IInterlocutor, IDialog, IMessagesAfterDate, IProfile } from '../types/types'
 import { ThunkAction } from 'redux-thunk'
-import { AppStateType } from './store'
+import { RootReducerType } from './store'
 import { messagesAPI, profileAPI } from '../api/api'
 
 /* Action types */
@@ -134,7 +134,7 @@ export const toggleIsFetching = (property: toggleIsFetchingPropertyType, isFetch
 })
 
 /* Thunk creators */
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
+type ThunkType = ThunkAction<Promise<void>, RootReducerType, unknown, ActionTypes>
 
 export const startChatting = (userID: number): ThunkType => {
   return async () => {

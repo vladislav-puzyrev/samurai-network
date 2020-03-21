@@ -6,7 +6,7 @@ import Sidebar from './Sidebar/Sidebar'
 import Main from './Main/Main'
 import Header from './Header/Header'
 import { initializeApp } from '../redux/init-reducer'
-import { AppStateType } from '../redux/store'
+import { RootReducerType } from '../redux/store'
 import { HashRouter } from 'react-router-dom'
 import Preloader from './common/Preloader/Preloader'
 
@@ -41,12 +41,12 @@ const App: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ initializeApp
   )
 }
 
-function mapStateToProps (state: AppStateType): MapStatePropTypes {
+function mapStateToProps (state: RootReducerType): MapStatePropTypes {
   return {
     initialized: state.init.initialized
   }
 }
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, AppStateType>(
+export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, RootReducerType>(
   mapStateToProps, { initializeApp }
 )(App)

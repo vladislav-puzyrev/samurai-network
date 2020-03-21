@@ -15,7 +15,7 @@ import {
   getTotalUsersCount,
   getUsersSelector,
 } from '../../../redux/users-selectors'
-import { AppStateType } from '../../../redux/store'
+import { RootReducerType } from '../../../redux/store'
 import { IUser } from '../../../types/types'
 import { compose } from 'redux'
 import Search from './Search/Search'
@@ -94,19 +94,19 @@ const Users: React.FC<PropTypes> = ({
   )
 }
 
-function mapStateToProps (state: AppStateType): MapStatePropTypes {
+function mapStateToProps (state: RootReducerType): MapStatePropTypes {
   return {
     users: getUsersSelector(state),
     totalUsersCount: getTotalUsersCount(state),
     currentPage: getCurrentPage(state),
     isFetching: getIsFetching(state),
     followingInProgress: getFollowingInProgress(state),
-    term: state.usersPage.term,
+    term: state.users.term,
   }
 }
 
 export default compose(
-  connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>(mapStateToProps, {
+  connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>(mapStateToProps, {
     setCurrentPage,
     setIsFetching,
     getRequestUsers,

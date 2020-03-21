@@ -9,7 +9,7 @@ import Textarea from '../../../common/Textarea/Textarea'
 const maxLengthValidator = maxLength(10)
 
 function Posts (props) {
-  const postsElements = props.state.profilePage.posts.map(
+  const postsElements = props.state.profile.posts.map(
     post => <Post key={post.id} text={post.text} likes={post.likes}/>
   ).reverse()
 

@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom'
 import Input from '../../common/Input/Input'
 import styles from './Login.module.css'
 import Button from '../../common/Button/Button'
-import { AppStateType } from '../../../redux/store'
+import { RootReducerType } from '../../../redux/store'
 
 type MapStatePropTypes = {
   isAuth: boolean
@@ -121,7 +121,7 @@ const LoginForm: React.FC<InjectedFormProps<formNames, formProps> & formProps> =
 
 const LoginReduxForm = reduxForm<formNames, formProps>({ form: 'login' })(LoginForm)
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>((state) => ({
+export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>((state) => ({
   isAuth: state.auth.isAuth,
   captchaUrl: state.auth.captchaUrl
 }), { login })(Login)

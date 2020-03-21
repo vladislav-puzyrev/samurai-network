@@ -12,7 +12,7 @@ import { useParams, Redirect } from 'react-router-dom'
 import { saveMyProfile } from '../../../redux/auth-reducer'
 import { IProfile } from '../../../types/types'
 import PostsContainer from './Posts/PostsContainer'
-import { AppStateType } from '../../../redux/store'
+import { RootReducerType } from '../../../redux/store'
 import User from './User/User'
 import { follow, isFollowing, unfollow } from '../../../redux/users-reducer'
 
@@ -30,7 +30,7 @@ type MapStatePropTypes = {
 type MapDispatchPropTypes = {
   getUsersProfile: (userID: number) => void
   getStatus: (userID: number) => void
-  savePhoto: (photo: Blob) => void
+  savePhoto: (photo: File) => void
   updateStatus: (newStatus: string) => void
   setAvatarIsFetching: (isFetching: boolean) => void
   saveProfile: (profile: IProfile) => void
@@ -111,20 +111,20 @@ const Profile: React.FC<PropTypes> = ({
   )
 }
 
-function mapStateToProps (state: AppStateType): MapStatePropTypes {
+function mapStateToProps (state: RootReducerType): MapStatePropTypes {
   return {
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
+    profile: state.profile.profile,
+    status: state.profile.status,
     userID: state.auth.userId,
-    avatarIsFetching: state.profilePage.avatarIsFetching,
+    avatarIsFetching: state.profile.avatarIsFetching,
     myProfile: state.auth.myProfile,
     isAuth: state.auth.isAuth,
-    followingInProgress: state.usersPage.followingInProgress,
-    isFollowingUser: state.usersPage.isFollowingUser,
+    followingInProgress: state.users.followingInProgress,
+    isFollowingUser: state.users.isFollowingUser,
   }
 }
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>(mapStateToProps, {
+export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>(mapStateToProps, {
   getUsersProfile,
   getStatus,
   updateStatus,

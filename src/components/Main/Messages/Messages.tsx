@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { AppStateType } from '../../../redux/store'
+import { RootReducerType } from '../../../redux/store'
 import { IInterlocutor, IDialog, IMessagesAfterDate, IProfile } from '../../../types/types'
 import {
   getInterlocutorsList,
@@ -105,19 +105,19 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   )
 }
 
-function mapStateToProps (state: AppStateType): MapStatePropTypes {
+function mapStateToProps (state: RootReducerType): MapStatePropTypes {
   return {
-    interlocutors: state.messagesPage.interlocutors,
-    newInterlocutor: state.messagesPage.newInterlocutor,
-    currentDialog: state.messagesPage.currentDialog,
-    messagesAfterDate: state.messagesPage.messagesAfterDate,
-    fetching: state.messagesPage.fetching,
+    interlocutors: state.messages.interlocutors,
+    newInterlocutor: state.messages.newInterlocutor,
+    currentDialog: state.messages.currentDialog,
+    messagesAfterDate: state.messages.messagesAfterDate,
+    fetching: state.messages.fetching,
     isAuth: state.auth.isAuth,
     myProfile: state.auth.myProfile,
   }
 }
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>(mapStateToProps, {
+export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>(mapStateToProps, {
   startChatting,
   getInterlocutors: getInterlocutorsList,
   getNewInterlocutor,

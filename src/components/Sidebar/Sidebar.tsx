@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import styles from './Sidebar.module.css'
 import Menu from './Menu/Menu'
 import { connect } from 'react-redux'
-import { AppStateType } from '../../redux/store'
+import { RootReducerType } from '../../redux/store'
 import { getNewMessagesCount } from '../../redux/messages-reducer'
 
 type MapStatePropTypes = { newMessagesCount: number, isAuth: boolean }
@@ -33,13 +33,13 @@ const Sidebar: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ newMessag
   )
 }
 
-function mapStateToProps (state: AppStateType): MapStatePropTypes {
+function mapStateToProps (state: RootReducerType): MapStatePropTypes {
   return {
-    newMessagesCount: state.messagesPage.newMessagesCount,
+    newMessagesCount: state.messages.newMessagesCount,
     isAuth: state.auth.isAuth,
   }
 }
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, AppStateType>(mapStateToProps, {
+export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>(mapStateToProps, {
   getNewMessagesCount
 })(Sidebar)

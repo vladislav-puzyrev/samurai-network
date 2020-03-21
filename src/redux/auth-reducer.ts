@@ -1,9 +1,9 @@
 import { authAPI, profileAPI, securityAPI } from '../api/api'
-import { stopSubmit } from 'redux-form'
+import { stopSubmit, FormAction } from 'redux-form'
 import { IPhotos, IProfile } from '../types/types'
 import { getMyProfile } from './init-reducer'
 import { ThunkAction } from 'redux-thunk'
-import { AppStateType } from './store'
+import { RootReducerType } from './store'
 
 /* Action types */
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
@@ -81,7 +81,7 @@ export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessTy
   captchaUrl: captchaUrl,
 })
 
-type SetMyProfileType = { type: typeof SET_MY_PROFILE, profile: IProfile }
+export type SetMyProfileType = { type: typeof SET_MY_PROFILE, profile: IProfile }
 export const setMyProfile = (profile: IProfile): SetMyProfileType => ({
   type: SET_MY_PROFILE,
   profile,
@@ -94,7 +94,7 @@ export const setMyPhoto = (photos: IPhotos): SetMyPhotoType => ({
 })
 
 /* Thunk creators */
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
+type ThunkType = ThunkAction<Promise<void>, RootReducerType, unknown, ActionTypes | FormAction>
 
 export const saveMyProfile = (profile: IProfile): ThunkType => {
   return async (dispatch) => {
@@ -103,7 +103,6 @@ export const saveMyProfile = (profile: IProfile): ThunkType => {
       await dispatch(setMyProfile(profile))
     }
     else {
-      // @ts-ignore
       dispatch(stopSubmit('edit-profile', { _error: response.messages[0] }))
       return Promise.reject()
     }
@@ -137,7 +136,6 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
         await dispatch(getCaptchaUrl())
       }
 
-      // @ts-ignore
       dispatch(stopSubmit('login', { _error: data.messages[0] }))
     }
   }

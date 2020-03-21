@@ -1,8 +1,8 @@
 import { profileAPI } from '../api/api'
-import { stopSubmit } from 'redux-form'
+import { FormAction, stopSubmit } from 'redux-form'
 import { IPhotos, IPost, IProfile } from '../types/types'
 import { ThunkAction } from 'redux-thunk'
-import { AppStateType } from './store'
+import { RootReducerType } from './store'
 import { setMyPhoto, SetMyPhotoType } from './auth-reducer'
 
 /* Action types */
@@ -107,7 +107,7 @@ export const setAvatarIsFetching = (isFetching: boolean): setAvatarIsFetchingAct
 })
 
 /* Thunk creators */
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
+type ThunkType = ThunkAction<Promise<void>, RootReducerType, unknown, ActionTypes | FormAction>
 
 export const getUsersProfile = (userID: number | null): ThunkType => {
   return async (dispatch) => {
@@ -135,7 +135,7 @@ export const updateStatus = (status: string): ThunkType => {
   }
 }
 
-export const savePhoto = (file: any): ThunkType => {
+export const savePhoto = (file: File): ThunkType => {
   return async (dispatch) => {
     const response = await profileAPI.updatePhoto(file)
     if (response.resultCode === 0) {
@@ -153,7 +153,6 @@ export const saveProfile = (profile: IProfile): ThunkType => {
       await dispatch(getUsersProfile(getState().auth.userId))
     }
     else {
-      // @ts-ignore
       dispatch(stopSubmit('edit-profile', { _error: response.messages[0] }))
       return Promise.reject()
     }

@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
-import { AppStateType } from './store'
+import { RootReducerType } from './store'
 
-export const getUsers = (state: AppStateType) => {
-  return state.usersPage.users
+export const getUsers = (state: RootReducerType) => {
+  return state.users.users
 }
 
 // export const getUsersSelector__BadRender = (state: AppStateType) => {
@@ -14,18 +14,18 @@ export const getUsersSelector = createSelector(getUsers, (users) => {
   },
 )
 
-export const getTotalUsersCount = (state: AppStateType) => {
-  return state.usersPage.totalUsersCount
+export const getTotalUsersCount = (state: RootReducerType) => {
+  return state.users.totalUsersCount
 }
 
-export const getCurrentPage = (state: AppStateType) => {
-  return state.usersPage.currentPage
+export const getCurrentPage = (state: RootReducerType) => {
+  return state.users.currentPage
 }
 
-export const getIsFetching = (state: AppStateType) => {
-  return state.usersPage.isFetching
+export const getIsFetching = (state: RootReducerType) => {
+  return state.users.isFetching
 }
 
-export const getFollowingInProgress = (state: AppStateType) => {
-  return state.usersPage.followingInProgress
+export const getFollowingInProgress = (state: RootReducerType) => {
+  return state.users.followingInProgress
 }
