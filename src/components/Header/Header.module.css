@@ -52,4 +52,13 @@
 .title {
   font-size: 18px;
   font-family: 'Righteous', cursive;
+  cursor: pointer;
+  background-image: url('../../assets/backgrounds/gif/bg4.gif');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 0;
+}
+
+.title:hover {
+  background-size: cover;
 }

@@ -3,6 +3,8 @@ import styles from './User.module.css'
 import defaultAvatar from '../../../../../assets/images/defaultAvatar.png'
 import { NavLink } from 'react-router-dom'
 import { IUser } from '../../../../../types/types'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type PropTypes = {
   user: IUser
@@ -12,7 +14,6 @@ type PropTypes = {
 }
 
 const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follow }) => {
-  console.log('s')
   return (
     <li className={styles.user}>
       <div className={styles.avatarBox}>
@@ -32,7 +33,8 @@ const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follo
               disabled={followButtonDisabled}
               onClick={() => {unfollow(user.id)}}
             >
-              Отписаться <span aria-label="Отписаться" role="img">❌</span>
+              <span className={styles.followedButton}>Отписаться</span>
+              <FontAwesomeIcon color='#f03a17' icon={faTimes}/>
             </button>
           ) : (
             <button
@@ -40,7 +42,8 @@ const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follo
               disabled={followButtonDisabled}
               onClick={() => {follow(user.id)}}
             >
-              Подписаться <span aria-label="Подписаться" role="img">✅</span>
+              <span className={styles.followedButton}>Подписаться</span>
+              <FontAwesomeIcon color='#16c60c' icon={faCheck}/>
             </button>
           )
         }

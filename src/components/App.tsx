@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styles from './App.module.css'
 import Footer from './Footer/Footer'
@@ -9,6 +9,7 @@ import { initializeApp } from '../redux/init-reducer'
 import { RootReducerType } from '../redux/store'
 import { HashRouter } from 'react-router-dom'
 import Preloader from './common/Preloader/Preloader'
+import ModalWindow from './ModalWindow/ModalWindow'
 
 type MapStatePropTypes = {
   initialized: boolean
@@ -22,6 +23,10 @@ const App: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ initializeApp
   useEffect(() => {
     initializeApp()
   }, [initializeApp])
+
+  const [modalWindowIsOpen, setModalWindowIsOpen] = useState(false)
+  const [modalWindowChildren, setModalWindowChildren] = useState<React.ReactNode>(null)
+  const [modalWindowTitle, setModalWindowTitle] = useState('')
 
   if (!initialized) {
     return (
@@ -40,6 +45,12 @@ const App: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ initializeApp
           <Main/>
         </main>
         <Footer/>
+
+        {
+          modalWindowIsOpen ? <ModalWindow title={modalWindowTitle} close={() => {setModalWindowIsOpen(false)}}>
+            {modalWindowChildren}
+          </ModalWindow> : null
+        }
       </div>
     </HashRouter>
   )

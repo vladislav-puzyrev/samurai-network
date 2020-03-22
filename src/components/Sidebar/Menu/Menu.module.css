@@ -3,27 +3,38 @@
   padding-right: 10px;
 }
 
+.menuItem {
+  display: flex;
+  align-items: center;
+}
+
 .menuLink {
   display: block;
   width: 160px;
   padding: 8px;
   border-radius: 2px;
-  text-decoration: none;
 }
 
 .menuLink:hover {
   background-color: #1f1f23;
 }
 
-.active {
+.menuLink {
+  text-decoration: none;
+}
+
+.active > .linkText {
   text-decoration: underline;
 }
 
-.messagesCount {
-  display: block !important;
-  margin-left: 50px !important;
-  text-decoration: none !important;
-  color: red !important;
-  background-color: red !important;
-  transform: scale(2) !important;
+.linkText {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.linkIcon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
 }

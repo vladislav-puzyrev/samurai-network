@@ -1,0 +1,55 @@
+.wrapper {
+  position: absolute;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  min-width: 900px;
+}
+
+.childrenBox {
+  background-color: #26262c;
+  border-radius: 15px;
+  width: 40%;
+  height: 80vh;
+  min-width: 600px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+.control {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #444446;
+  align-items: center;
+}
+
+.closeButton {
+  border: none;
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  outline: none;
+  cursor: pointer;
+}
+
+.closeButton:focus {
+  background-color: #ff4b43;
+}
+
+.closeButton:hover {
+  background-color: #ff4b43;
+}
+
+.children {
+  padding: 20px;
+}
+
+.title {
+  padding-left: 10px;
+  font-size: 20px;
+}

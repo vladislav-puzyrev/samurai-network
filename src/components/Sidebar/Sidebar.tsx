@@ -4,6 +4,7 @@ import Menu from './Menu/Menu'
 import { connect } from 'react-redux'
 import { RootReducerType } from '../../redux/store'
 import { getNewMessagesCount } from '../../redux/messages-reducer'
+import useSetTitle from '../../hooks/useSetTitle'
 
 type MapStatePropTypes = {
   newMessagesCount: number
@@ -41,6 +42,8 @@ const Sidebar: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
       }
     }
   }, [getNewMessagesCount, isAuth, newMessagesCountFetching])
+
+  useSetTitle(newMessagesCount > 0 ? `Новое сообщение - ${newMessagesCount}` : null)
 
   return (
     <aside className={styles.aside}>

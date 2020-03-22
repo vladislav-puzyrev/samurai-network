@@ -5,6 +5,8 @@ import Preloader from '../../../../common/Preloader/Preloader'
 import { NavLink } from 'react-router-dom'
 import Button from '../../../../common/Button/Button'
 import { IProfile } from '../../../../../types/types'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type PropTypes = {
   isOwner: boolean
@@ -89,10 +91,27 @@ const Avatar: React.FC<PropTypes> = ({
           <Button style={{ width: '100%' }}>Написать сообщение</Button>
         </NavLink>
       }
+
       {
         !isOwner &&
-        <Button style={{ width: '100%', marginTop: '10px' }} disabled={followingFetching} onClick={followUnfollow}>
-          {isFollowingUser ? 'Отписаться ❌' : 'Подписаться ✅'}
+        <Button
+          style={{ width: '100%', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          disabled={followingFetching}
+          onClick={followUnfollow}
+        >
+          {
+            isFollowingUser ? (
+              <span>
+                  <span className={styles.buttonText}>Отписаться</span>
+                  <FontAwesomeIcon color='#f03a17' icon={faTimes}/>
+                </span>
+            ) : (
+              <span>
+                <span className={styles.buttonText}>Подписаться</span>
+                <FontAwesomeIcon color='#16c60c' icon={faCheck}/>
+              </span>
+            )
+          }
         </Button>
       }
     </div>
