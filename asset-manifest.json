@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/samurai-network/static/css/main.3ca33f57.chunk.css",
-    "main.js": "/samurai-network/static/js/main.9ef16571.chunk.js",
-    "main.js.map": "/samurai-network/static/js/main.9ef16571.chunk.js.map",
+    "main.css": "/samurai-network/static/css/main.35553f21.chunk.css",
+    "main.js": "/samurai-network/static/js/main.f1ca17aa.chunk.js",
+    "main.js.map": "/samurai-network/static/js/main.f1ca17aa.chunk.js.map",
     "runtime-main.js": "/samurai-network/static/js/runtime-main.da4e6650.js",
     "runtime-main.js.map": "/samurai-network/static/js/runtime-main.da4e6650.js.map",
-    "static/js/2.94f2a531.chunk.js": "/samurai-network/static/js/2.94f2a531.chunk.js",
-    "static/js/2.94f2a531.chunk.js.map": "/samurai-network/static/js/2.94f2a531.chunk.js.map",
+    "static/js/2.8220f4e5.chunk.js": "/samurai-network/static/js/2.8220f4e5.chunk.js",
+    "static/js/2.8220f4e5.chunk.js.map": "/samurai-network/static/js/2.8220f4e5.chunk.js.map",
     "index.html": "/samurai-network/index.html",
-    "precache-manifest.b8737414e6687d6b7da1420a08908496.js": "/samurai-network/precache-manifest.b8737414e6687d6b7da1420a08908496.js",
+    "precache-manifest.a6fce327d3bd8ad4aa6ba35772ad499e.js": "/samurai-network/precache-manifest.a6fce327d3bd8ad4aa6ba35772ad499e.js",
     "service-worker.js": "/samurai-network/service-worker.js",
-    "static/css/main.3ca33f57.chunk.css.map": "/samurai-network/static/css/main.3ca33f57.chunk.css.map",
-    "static/js/2.94f2a531.chunk.js.LICENSE": "/samurai-network/static/js/2.94f2a531.chunk.js.LICENSE",
+    "static/css/main.35553f21.chunk.css.map": "/samurai-network/static/css/main.35553f21.chunk.css.map",
+    "static/js/2.8220f4e5.chunk.js.LICENSE": "/samurai-network/static/js/2.8220f4e5.chunk.js.LICENSE",
     "static/media/Header.module.css": "/samurai-network/static/media/bg4.d69e4db4.gif",
     "static/media/defaultAvatar.png": "/samurai-network/static/media/defaultAvatar.b4b85090.png",
     "static/media/preloader.gif": "/samurai-network/static/media/preloader.584b607f.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.da4e6650.js",
-    "static/js/2.94f2a531.chunk.js",
-    "static/css/main.3ca33f57.chunk.css",
-    "static/js/main.9ef16571.chunk.js"
+    "static/js/2.8220f4e5.chunk.js",
+    "static/css/main.35553f21.chunk.css",
+    "static/js/main.f1ca17aa.chunk.js"
   ]
 }
