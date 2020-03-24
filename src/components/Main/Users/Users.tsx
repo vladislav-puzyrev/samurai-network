@@ -29,6 +29,7 @@ type MapStatePropTypes = {
   isFetching: boolean
   followingInProgress: Array<number>
   term: string
+  isAuth: boolean
 }
 
 type MapDispatchPropTypes = {
@@ -54,6 +55,7 @@ const Users: React.FC<PropTypes> = ({
   setTerm,
   getRequestUsers,
   term,
+  isAuth,
 }) => {
 
   useSetTitle('Поиск пользователей')
@@ -91,6 +93,7 @@ const Users: React.FC<PropTypes> = ({
         follow={follow}
         unfollow={unfollow}
         isFetching={isFetching}
+        isAuth={isAuth}
       />
     </>
   )
@@ -104,6 +107,7 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
     isFetching: getIsFetching(state),
     followingInProgress: getFollowingInProgress(state),
     term: state.users.term,
+    isAuth: state.auth.isAuth,
   }
 }
 

@@ -11,9 +11,21 @@ type PropTypes = {
   followButtonDisabled: boolean
   unfollow: (id: number) => void
   follow: (id: number) => void
+  isAuth: boolean
 }
 
-const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follow }) => {
+const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follow, isAuth }) => {
+  const handleClick = () => {
+    if (isAuth) {
+      if (user.followed) {
+        unfollow(user.id)
+      }
+      else {
+        follow(user.id)
+      }
+    }
+  }
+
   return (
     <li className={styles.user}>
       <div className={styles.avatarBox}>
@@ -31,7 +43,7 @@ const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follo
             <button
               className={styles.followButton}
               disabled={followButtonDisabled}
-              onClick={() => {unfollow(user.id)}}
+              onClick={handleClick}
             >
               <span className={styles.followedButton}>Отписаться</span>
               <FontAwesomeIcon color='#f03a17' icon={faTimes}/>
@@ -40,7 +52,7 @@ const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follo
             <button
               className={styles.followButton}
               disabled={followButtonDisabled}
-              onClick={() => {follow(user.id)}}
+              onClick={handleClick}
             >
               <span className={styles.followedButton}>Подписаться</span>
               <FontAwesomeIcon color='#16c60c' icon={faCheck}/>

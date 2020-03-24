@@ -5,10 +5,16 @@
   background-color: #0e0e10;
 }
 
+.wrapper {
+  padding: 0 20px;
+  display: flex;
+
+  flex: 1 0 auto;
+}
+
 .main {
   display: flex;
   margin: 0 auto;
-  flex: 1 0 auto;
   padding: 20px 0;
 
   width: 60%;

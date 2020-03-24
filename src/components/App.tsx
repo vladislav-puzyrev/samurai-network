@@ -40,10 +40,12 @@ const App: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ initializeApp
     <HashRouter>
       <div className={styles.page}>
         <Header/>
-        <main className={styles.main}>
-          <Sidebar/>
-          <Main/>
-        </main>
+        <div className={styles.wrapper}>
+          <main className={styles.main}>
+            <Sidebar/>
+            <Main/>
+          </main>
+        </div>
         <Footer/>
 
         {

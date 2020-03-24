@@ -76,10 +76,10 @@ const Profile: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   useSetTitle(profile ? profile.fullName : null)
 
   useEffect(() => {
-    if (userURL) {
+    if (userURL && isAuth) {
       isFollowing(+userURL)
     }
-  }, [userURL, isFollowing])
+  }, [userURL, isFollowing, isAuth])
 
   useEffect(() => {
     const updateProfile = () => {

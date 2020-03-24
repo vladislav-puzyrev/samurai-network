@@ -40,12 +40,21 @@ const Avatar: React.FC<PropTypes> = ({
     const target = e.target as HTMLInputElement
     const photo: File = (target.files as FileList)[0]
 
-    if (uploadLabel.current) {
-      uploadLabel.current.textContent = photo.name
-    }
-    setAvatarIsFetching(true)
-    savePhoto(photo)
+    if (photo.type) {
+      if (photo.type !== 'png' && photo.type !== 'jpg' && photo.type !== 'jpeg') {
+        if (uploadLabel.current) {
+          uploadLabel.current.textContent = 'Не верный тип файла…'
+        }
+      }
 
+      else {
+        if (uploadLabel.current) {
+          uploadLabel.current.textContent = photo.name
+          setAvatarIsFetching(true)
+          savePhoto(photo)
+        }
+      }
+    }
   }
 
   const followingFetching = followingInProgress.some((id) => (id === userURL))

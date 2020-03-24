@@ -8,7 +8,8 @@ import {
   getMessagesAfterDate,
   startChatting,
   sendMessage,
-  getNewInterlocutor
+  getNewInterlocutor,
+  setCurrentInterlocutor
 } from '../../../redux/messages-reducer'
 import { Redirect, useParams } from 'react-router-dom'
 import Interlocutors from './Interlocutors/Interlocutors'
@@ -21,6 +22,7 @@ type MapStatePropTypes = {
   newInterlocutor: IProfile | null
   currentDialog: Array<IDialog> | null
   messagesAfterDate: Array<IMessagesAfterDate> | null
+  currentInterlocutor: number | null
 
   fetching: {
     interlocutors: boolean
@@ -41,6 +43,7 @@ type MapDispatchPropTypes = {
   getDialog: (userID: number) => void
   sendMessage: (userID: number, message: string) => void
   getMessagesAfterDate: (userID: number, date: string) => void
+  setCurrentInterlocutor: (userID: number) => void
 }
 
 const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
@@ -57,6 +60,8 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   getMessagesAfterDate,
   isAuth,
   myProfile,
+  currentInterlocutor,
+  setCurrentInterlocutor,
 }) => {
   const { userID } = useParams()
   const [interlocutor, setInterlocutor] = useState<IInterlocutor | null>(null)
@@ -64,8 +69,16 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   useSetTitle('Сообщения')
 
   useEffect(() => {
-    getInterlocutors()
-  }, [getInterlocutors])
+    if (userID && +userID !== currentInterlocutor) {
+      setCurrentInterlocutor(+userID)
+    }
+  }, [currentInterlocutor, setCurrentInterlocutor, userID])
+
+  useEffect(() => {
+    if (isAuth) {
+      getInterlocutors()
+    }
+  }, [getInterlocutors, isAuth])
 
   useEffect(() => {
     if (userID) {
@@ -74,10 +87,10 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   }, [getNewInterlocutor, userID])
 
   useEffect(() => {
-    if (userID) {
+    if (userID && isAuth) {
       getDialog(+userID)
     }
-  }, [getDialog, userID])
+  }, [getDialog, isAuth, userID])
 
   useEffect(() => {
     if (userID && interlocutors) {
@@ -87,6 +100,10 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
 
   if (!isAuth) {
     return <Redirect to='/login'/>
+  }
+
+  if (!userID && currentInterlocutor) {
+    return <Redirect to={`/messages/${currentInterlocutor}`}/>
   }
 
   return (
@@ -117,6 +134,7 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
     fetching: state.messages.fetching,
     isAuth: state.auth.isAuth,
     myProfile: state.auth.myProfile,
+    currentInterlocutor: state.messages.currentInterlocutor,
   }
 }
 
@@ -126,5 +144,6 @@ export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootRed
   getNewInterlocutor,
   getDialog,
   getMessagesAfterDate,
-  sendMessage
+  sendMessage,
+  setCurrentInterlocutor,
 })(Messages)

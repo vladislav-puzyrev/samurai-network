@@ -9,6 +9,7 @@ const SET_NEW_INTERLOCUTOR = 'samurai-network/messages/SET_NEW_INTERLOCUTOR'
 const SET_CURRENT_DIALOG = 'samurai-network/messages/SET_CURRENT_DIALOG'
 const SET_MESSAGES_AFTER_DATE = 'samurai-network/messages/SET_MESSAGES_AFTER_DATE'
 const SET_NEW_MESSAGES_COUNT = 'samurai-network/messages/SET_NEW_MESSAGES_COUNT'
+const SET_CURRENT_INTERLOCUTOR = 'samurai-network/messages/SET_CURRENT_INTERLOCUTOR'
 const TOGGLE_IS_FETCHING = 'samurai-network/messages/TOGGLE_IS_FETCHING'
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   currentDialog: null as Array<IDialog> | null,
   messagesAfterDate: null as Array<IMessagesAfterDate> | null,
   newMessagesCount: 0,
+  currentInterlocutor: null as number | null,
 
   fetching: {
     interlocutors: false,
@@ -36,7 +38,8 @@ type ActionTypes =
   setCurrentDialogActionType |
   setNewMessagesCountActionType |
   setMessagesAfterDateActionType |
-  toggleIsFetchingActionType
+  toggleIsFetchingActionType |
+  setCurrentInterlocutorActionType
 
 function messagesReducer (state = initialState, action: ActionTypes): InitialStateType {
   switch (action.type) {
@@ -68,6 +71,12 @@ function messagesReducer (state = initialState, action: ActionTypes): InitialSta
       return {
         ...state,
         newMessagesCount: action.count
+      }
+
+    case SET_CURRENT_INTERLOCUTOR:
+      return {
+        ...state,
+        currentInterlocutor: action.userID
       }
 
     case TOGGLE_IS_FETCHING:
@@ -113,6 +122,12 @@ type setNewMessagesCountActionType = { type: typeof SET_NEW_MESSAGES_COUNT, coun
 export const setNewMessagesCount = (count: number): setNewMessagesCountActionType => ({
   type: SET_NEW_MESSAGES_COUNT,
   count
+})
+
+type setCurrentInterlocutorActionType = { type: typeof SET_CURRENT_INTERLOCUTOR, userID: number };
+export const setCurrentInterlocutor = (userID: number): setCurrentInterlocutorActionType => ({
+  type: SET_CURRENT_INTERLOCUTOR,
+  userID
 })
 
 type toggleIsFetchingPropertyType =
