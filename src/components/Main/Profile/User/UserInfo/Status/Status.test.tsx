@@ -5,11 +5,14 @@ import ProfileData from '../ProfileData/ProfileData'
 import { updateStatus } from '../../../../../../redux/profile-reducer'
 import { IProfile } from '../../../../../../types/types'
 
-describe('ProfileData component', () => {
-  test('статус из пропсов поступает в стейт', () => {
-    const component = TestRenderer.create(<Status status='REACT!!!' updateStatus={updateStatus} isOwner={false}/>)
-    const instance = component.getInstance()
-    expect(instance).toBe('REACT!!!')
+describe('Status-component', () => {
+  test('Статус из пропсов попадает в стейт', () => {
+    const testRenderer = TestRenderer.create(<Status status='REACT!!!' updateStatus={updateStatus} isOwner={false}/>)
+    const testInstance = testRenderer.root;
+    console.log(testInstance.findByType('input'))
+
+    expect(testInstance.findByType('input')).toBe('dasdasd');
+    // expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
   })
 
   test('нету спана при создании', () => {

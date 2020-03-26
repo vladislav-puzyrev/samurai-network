@@ -11,26 +11,28 @@ const initialState = {
   avatarIsFetching: false,
 }
 
-it('Длина постов была увеличена', () => {
-  // 1) Arrange
-  const action = addPost({ newPost: 'new post' })
+describe('profile-reducer', () => {
+  it('Длина постов была увеличена', () => {
+    // 1) Arrange - подготовка
+    const action = addPost({ newPost: 'new post' })
 
-  // 2) Act
-  const newState = profileReducer(initialState, action)
+    // 2) Act - действие
+    const newState = profileReducer(initialState, action)
 
-  // 3) Assert
-  expect(newState.posts.length).toBe(3)
-})
+    // 3) Assert - првоерка
+    expect(newState.posts.length).toBe(3)
+  })
 
-it('Текст нового поста верный', () => {
-  // 1) Arrange
-  const action = addPost({ newPost: 'new post' })
+  it('Текст нового поста верный', () => {
+    // 1) Arrange
+    const action = addPost({ newPost: 'new post' })
 
-  // 2) Act
-  const newState = profileReducer(initialState, action)
+    // 2) Act
+    const newState = profileReducer(initialState, action)
 
-  // 3) Assert
-  expect(newState.posts[2].text).toBe('new post')
+    // 3) Assert
+    expect(newState.posts[2].text).toBe('new post')
+  })
 })
 
 // it('Длина постов после удаления декрементирована', () => {
