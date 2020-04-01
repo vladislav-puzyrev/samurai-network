@@ -26,6 +26,8 @@ const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follo
     }
   }
 
+  const status = user.status && (user.status.length > 80) ? user.status.slice(0, 80) + '…' : user.status
+
   return (
     <li className={styles.user}>
       <div className={styles.avatarBox}>
@@ -36,7 +38,7 @@ const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follo
 
       <div className={styles.info}>
         <NavLink className={styles.userName} to={`/profile/${user.id}`}>{user.name}</NavLink>
-        {user.status && <span className={styles.userStatus}>{user.status.slice(0, 50)}</span>}
+        {user.status && <span className={styles.userStatus}>{status}</span>}
 
         {
           user.followed ? (

@@ -15,7 +15,7 @@ interface IOperationItems {
 export interface IUser {
   id: number
   name: string
-  status: string
+  status: string | null
   photos: IPhotos
   followed: boolean
 }

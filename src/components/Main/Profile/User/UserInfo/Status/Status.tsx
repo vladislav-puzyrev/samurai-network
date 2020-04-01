@@ -35,8 +35,6 @@ const Status: React.FC<PropTypes> = ({ status, updateStatus, isOwner }) => {
 
   const statusClass = ((status) ? styles.statusExist : styles.statusNotExist) + ' ' + styles.statusButton
 
-  status = status.slice(0, 40)
-
   return (
     <div className={styles.statusBox}>
       {
