@@ -36,7 +36,7 @@ const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follo
 
       <div className={styles.info}>
         <NavLink className={styles.userName} to={`/profile/${user.id}`}>{user.name}</NavLink>
-        {user.status && <span className={styles.userStatus}>{user.status}</span>}
+        {user.status && <span className={styles.userStatus}>{user.status.slice(0, 50)}</span>}
 
         {
           user.followed ? (

@@ -3,6 +3,7 @@
   padding: 15px 20px;
   background-color: #26262c;
   flex-basis: 75%;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;

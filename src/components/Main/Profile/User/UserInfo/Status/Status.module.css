@@ -2,7 +2,7 @@
 
 }
 
-.status {
+.statusButton {
   background-color: transparent;
   border: none;
   display: block;
@@ -12,18 +12,6 @@
   border-radius: 2px;
   cursor: pointer;
   transform: translateX(-5px);
-}
-
-.status:hover {
-  background-color: #464848;
-}
-
-.statusNotExist {
-  color: #7c8080;
-}
-
-.statusExist {
-  color: white;
 }
 
 .statusInput {
@@ -40,4 +28,16 @@
 .statusNotMe {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.statusButton:hover {
+  background-color: #464848;
+}
+
+.statusNotExist {
+  color: #7c8080;
+}
+
+.statusExist {
+  color: white;
 }

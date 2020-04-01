@@ -20,7 +20,9 @@ const Status: React.FC<PropTypes> = ({ status, updateStatus, isOwner }) => {
 
   const onUpdateStatus = () => {
     deactivateEditMode()
-    updateStatus(localStatus)
+    if (localStatus !== status) {
+      updateStatus(localStatus)
+    }
   }
 
   const onStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +33,9 @@ const Status: React.FC<PropTypes> = ({ status, updateStatus, isOwner }) => {
     event.currentTarget.select()
   }
 
-  const statusClass = ((status) ? styles.statusExist : styles.statusNotExist) + ' ' + styles.status
+  const statusClass = ((status) ? styles.statusExist : styles.statusNotExist) + ' ' + styles.statusButton
+
+  status = status.slice(0, 40)
 
   return (
     <div className={styles.statusBox}>
