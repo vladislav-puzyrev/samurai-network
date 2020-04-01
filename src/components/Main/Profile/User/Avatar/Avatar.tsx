@@ -46,7 +46,7 @@ const Avatar: React.FC<PropTypes> = ({
       }
 
       else {
-        uploadLabel.current.textContent = photo.name
+        uploadLabel.current.textContent = photo.name.length > 20 ? photo.name.slice(0, 20) + '…' : photo.name
         setAvatarIsFetching(true)
         savePhoto(photo)
       }
