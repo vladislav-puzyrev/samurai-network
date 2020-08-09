@@ -5,10 +5,10 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { required, maxLength } from '../../../../utils/validators'
 import Button from '../../../common/Button/Button'
 import Textarea from '../../../common/Textarea/Textarea'
-import { IPost } from '../../../../types/types'
+import { PostType } from '../../../../types/types'
 
 type PropTypes = {
-  posts: Array<IPost>
+  posts: PostType[]
   addPost: (formData: formNames) => void
 }
 

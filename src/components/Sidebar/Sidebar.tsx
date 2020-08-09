@@ -3,8 +3,7 @@ import styles from './Sidebar.module.css'
 import Menu from './Menu/Menu'
 import { connect } from 'react-redux'
 import { RootReducerType } from '../../redux/store'
-import { getNewMessagesCount } from '../../redux/messages-reducer'
-import useSetTitle from '../../hooks/useSetTitle'
+import { getNewMessagesCount } from '../../redux/messages/thunks'
 
 type MapStatePropTypes = {
   newMessagesCount: number
@@ -43,7 +42,7 @@ const Sidebar: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
     }
   }, [getNewMessagesCount, isAuth, newMessagesCountFetching])
 
-  useSetTitle(newMessagesCount > 0 ? `Новое сообщение - ${newMessagesCount}` : null)
+  if (newMessagesCount) document.title = `Новое сообщение - ${newMessagesCount}`
 
   return (
     <aside className={styles.aside}>

@@ -1,41 +1,39 @@
 import { connect } from 'react-redux'
 import {
   getRequestUsers,
-  setCurrentPage,
-  setIsFetching,
   follow,
-  unfollow,
-  setTerm,
-} from '../../../redux/users-reducer'
+  unfollow
+} from '../../../redux/users/thunks'
 import React, { useEffect, useState } from 'react'
 import {
   getCurrentPage,
   getFollowingInProgress,
   getIsFetching,
   getTotalUsersCount,
-  getUsersSelector,
-} from '../../../redux/users-selectors'
+  getUsersSelector
+} from '../../../redux/users/selectors'
 import { RootReducerType } from '../../../redux/store'
-import { IUser } from '../../../types/types'
+import { UserType } from '../../../types/types'
 import Search from './Search/Search'
 import Paginator from './Paginator/Paginator'
 import UsersList from './UsersList/UsersList'
-import useSetTitle from '../../../hooks/useSetTitle'
+import { setCurrentPage, setIsFetching, setTerm } from '../../../redux/users/actions'
 
 type MapStatePropTypes = {
   currentPage: number
-  users: Array<IUser>
+  users: UserType[]
   totalUsersCount: number
   isFetching: boolean
-  followingInProgress: Array<number>
+  followingInProgress: number[]
   term: string
+  friend: boolean
   isAuth: boolean
 }
 
 type MapDispatchPropTypes = {
   setCurrentPage: (page: number) => void
   setIsFetching: (isFetching: boolean) => void
-  getRequestUsers: (pageSize: number, currentPage: number, term: string) => void
+  getRequestUsers: (pageSize: number, currentPage: number, term: string, friend: boolean) => void
   follow: (id: number) => void
   unfollow: (id: number) => void
   setTerm: (term: string) => void
@@ -55,10 +53,10 @@ const Users: React.FC<PropTypes> = ({
   setTerm,
   getRequestUsers,
   term,
-  isAuth,
+  friend,
+  isAuth
 }) => {
-
-  useSetTitle('Поиск пользователей')
+  document.title = 'Поиск пользователей'
 
   useEffect(() => {
     return () => {
@@ -83,6 +81,7 @@ const Users: React.FC<PropTypes> = ({
         portionSize={10}
         getRequestUsers={getRequestUsers}
         term={term}
+        friend={friend}
         setCurrentPage={setCurrentPage}
         portionNumber={portionNumber}
         setPortionNumber={setPortionNumber}
@@ -107,7 +106,8 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
     isFetching: getIsFetching(state),
     followingInProgress: getFollowingInProgress(state),
     term: state.users.term,
-    isAuth: state.auth.isAuth,
+    friend: true,
+    isAuth: state.auth.isAuth
   }
 }
 
@@ -117,5 +117,5 @@ export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootRed
   getRequestUsers,
   follow,
   unfollow,
-  setTerm,
+  setTerm
 })(Users)

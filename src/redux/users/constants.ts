@@ -1,0 +1,9 @@
+export const FOLLOW = 'users/FOLLOW' as const
+export const UNFOLLOW = 'users/UNFOLLOW' as const
+export const SET_USERS = 'users/SET_USERS' as const
+export const SET_CURRENT_PAGE = 'users/SET_CURRENT_PAGE' as const
+export const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL_USERS_COUNT' as const
+export const SET_TERM = 'users/SET_TERM' as const
+export const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING' as const
+export const TOGGLE_IS_FOLLOWING_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_PROGRESS' as const
+export const TOGGLE_IS_FOLLOWING_USER = 'users/TOGGLE_IS_FOLLOWING_USER' as const

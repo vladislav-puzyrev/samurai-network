@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './Interlocutors.module.css'
-import { IInterlocutor } from '../../../../types/types'
+import { InterlocutorType } from '../../../../types/types'
 import InterlocutorsList from './InterlocutorsList/InterlocutorsList'
 import Preloader from '../../../common/Preloader/Preloader'
 
 type PropTypes = {
-  interlocutors: Array<IInterlocutor> | null
+  interlocutors: InterlocutorType[] | null
 }
 
 const Interlocutors: React.FC<PropTypes> = ({ interlocutors }) => {

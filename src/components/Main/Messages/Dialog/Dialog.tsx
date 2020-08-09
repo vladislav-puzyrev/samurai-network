@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Dialog.module.css'
-import { IInterlocutor, IPhotos, IProfile, IDialog } from '../../../../types/types'
+import { InterlocutorType, PhotosType, ProfileType, DialogType } from '../../../../types/types'
 import SelectInterlocutor from './SelectIntercutor/SelectInterlocutor'
 import InterlocutorInfo from './InterlocutorInfo/InterlocutorInfo'
 import DialogMessages from './DialogMessages/DialogMessages'
 import DialogForm from './DialogForm/DialogForm'
 
 type PropTypes = {
-  currentDialog: Array<IDialog> | null
-  interlocutor: IInterlocutor | null
+  currentDialog: DialogType[] | null
+  interlocutor: InterlocutorType | null
   userID: number | null
   myPhoto: string | null
   myID: number | null
   dialogFetching: boolean
-  newInterlocutor: IProfile | null
+  newInterlocutor: ProfileType | null
   sendMessage: (userID: number, message: string) => void
   startChatting: (userID: number) => void
   sendMessageFetching: boolean
@@ -35,7 +35,7 @@ const Dialog: React.FC<PropTypes> = ({
     id: null as number | null,
     userName: null as string | null,
     lastUserActivityDate: null as string | null,
-    photos: null as IPhotos | null
+    photos: null as PhotosType | null
   })
 
   useEffect(() => {

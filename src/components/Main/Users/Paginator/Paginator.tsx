@@ -7,23 +7,32 @@ type PropTypes = {
   totalUsersCount: number
   pageSize: number
   portionSize: number
-  getRequestUsers: (pageSize: number, currentPage: number, term: string) => void
+  getRequestUsers: (pageSize: number, currentPage: number, term: string, friend: boolean) => void
   term: string
+  friend: boolean
   setCurrentPage: (page: number) => void
   portionNumber: number
   setPortionNumber: (number: number) => void
 }
 
 const Paginator: React.FC<PropTypes> = ({
-  setCurrentPage, currentPage, totalUsersCount, pageSize, portionSize, getRequestUsers, term, portionNumber, setPortionNumber
+  setCurrentPage,
+  currentPage,
+  totalUsersCount,
+  pageSize,
+  portionSize,
+  getRequestUsers,
+  term,
+  friend,
+  portionNumber,
+  setPortionNumber
 }) => {
-
   useEffect(() => {
-    getRequestUsers(pageSize, currentPage, term)
+    getRequestUsers(pageSize, currentPage, term, friend)
   }, [getRequestUsers, pageSize, currentPage, term])
 
   const onPageChanged = (currentPage: number) => {
-    getRequestUsers(pageSize, currentPage, term)
+    getRequestUsers(pageSize, currentPage, term, friend)
     setCurrentPage(currentPage)
   }
 
@@ -52,20 +61,30 @@ const Paginator: React.FC<PropTypes> = ({
     <div onClick={changePage} className={styles.paginationItems}>
       {
         totalUsersCount > 0 &&
-        <button disabled={portionNumber === 1} className={styles.button}
-                onClick={() => {setPortionNumber(portionNumber - 1)}}>Влево</button>
+        <button
+          disabled={portionNumber === 1}
+          className={styles.button}
+          onClick={() => { setPortionNumber(portionNumber - 1) }}
+        >
+          Влево
+        </button>
       }
       {
         pages.filter(
-          (num) => (num >= leftPortionPageNumber && num <= rightPortionPageNumber && num <= lastElemPageNumber))
-          .map((num) => (
+          num => (num >= leftPortionPageNumber && num <= rightPortionPageNumber && num <= lastElemPageNumber)).
+          map((num) => (
             <PaginationItem key={num} number={num} active={+currentPage === num}/>
           ))
       }
       {
         totalUsersCount > 0 &&
-        <button disabled={portionCount === portionNumber} className={styles.button}
-                onClick={() => {setPortionNumber(portionNumber + 1)}}>Вправо</button>
+        <button
+          disabled={portionCount === portionNumber}
+          className={styles.button}
+          onClick={() => { setPortionNumber(portionNumber + 1) }}
+        >
+          Вправо
+        </button>
       }
     </div>
   )

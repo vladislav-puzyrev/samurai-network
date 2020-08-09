@@ -1,20 +1,19 @@
 import React from 'react'
 import styles from './InterlocutorInfo.module.css'
-import defaultAvatar from '../../../../../assets/images/defaultAvatar.png'
+import defaultAvatar from '../../../../../assets/defaultAvatar.png'
 import { NavLink } from 'react-router-dom'
-import { IPhotos } from '../../../../../types/types'
+import { PhotosType } from '../../../../../types/types'
 
 type PropTypes = {
   interlocutor: {
     id: number | null,
     userName: string | null,
     lastUserActivityDate: string | null
-    photos: IPhotos | null
+    photos: PhotosType | null
   }
 }
 
 const InterlocutorInfo: React.FC<PropTypes> = ({ interlocutor }) => {
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>
@@ -28,9 +27,11 @@ const InterlocutorInfo: React.FC<PropTypes> = ({ interlocutor }) => {
         }
       </div>
       <NavLink to={`/profile/${interlocutor.id}`}>
-        <img className={styles.avatar}
-             src={interlocutor.photos?.small ? interlocutor.photos.small : defaultAvatar || defaultAvatar}
-             alt='avatar'/>
+        <img
+          className={styles.avatar}
+          src={interlocutor.photos?.small ? interlocutor.photos.small : defaultAvatar || defaultAvatar}
+          alt='avatar'
+        />
       </NavLink>
     </div>
   )

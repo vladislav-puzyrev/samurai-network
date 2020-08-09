@@ -2,7 +2,7 @@ import React from 'react'
 import TestRenderer from 'react-test-renderer'
 import Status from './Status'
 import ProfileData from '../ProfileData/ProfileData'
-import { updateStatus } from '../../../../../../redux/profile-reducer'
+import { updateStatus } from '../../../../../../redux/profile/reducer'
 import { IProfile } from '../../../../../../types/types'
 
 describe('Status-component', () => {

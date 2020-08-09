@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './ProfileData.module.css'
-import { IProfile, IContacts } from '../../../../../../types/types'
+import { ProfileType, ContactsType } from '../../../../../../types/types'
 
 type PropTypes = {
-  profile: IProfile
+  profile: ProfileType
 }
 
 const ProfileData: React.FC<PropTypes> = ({ profile }) => {
@@ -36,7 +36,7 @@ const ProfileData: React.FC<PropTypes> = ({ profile }) => {
               <dl className={styles.contactsList}>
                 {
                   Object.entries(profile.contacts).map((contact) => {
-                    const key = contact[0] as keyof IContacts
+                    const key = contact[0] as keyof ContactsType
                     const value = contact[1]
 
                     return (value) ? (

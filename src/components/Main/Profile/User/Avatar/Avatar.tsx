@@ -1,19 +1,19 @@
 import React, { useRef, ChangeEvent } from 'react'
 import styles from './Avatar.module.css'
-import defaultAvatar from '../../../../../assets/images/defaultAvatar.png'
+import defaultAvatar from '../../../../../assets/defaultAvatar.png'
 import Preloader from '../../../../common/Preloader/Preloader'
 import { NavLink } from 'react-router-dom'
 import Button from '../../../../common/Button/Button'
-import { IProfile } from '../../../../../types/types'
+import { ProfileType } from '../../../../../types/types'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type PropTypes = {
   isOwner: boolean
-  profile: IProfile | null
+  profile: ProfileType | null
   avatarIsFetching: boolean
   isFollowingUser: boolean
-  followingInProgress: Array<number>
+  followingInProgress: number[]
   userURL: number | null
 
   savePhoto: (photo: File) => void
@@ -32,7 +32,7 @@ const Avatar: React.FC<PropTypes> = ({
   unfollow,
   followingInProgress,
   isFollowingUser,
-  userURL,
+  userURL
 }) => {
   const uploadLabel = useRef<HTMLLabelElement>(null)
 
@@ -43,15 +43,12 @@ const Avatar: React.FC<PropTypes> = ({
     if (photo && photo.type && uploadLabel.current) {
       if (photo.type !== 'image/png' && photo.type !== 'image/jpeg') {
         uploadLabel.current.textContent = 'Не верный тип файла…'
-      }
-
-      else {
+      } else {
         uploadLabel.current.textContent = photo.name.length > 20 ? photo.name.slice(0, 20) + '…' : photo.name
         setAvatarIsFetching(true)
         savePhoto(photo)
       }
     }
-
   }
 
   const followingFetching = followingInProgress.some((id) => (id === userURL))
@@ -60,8 +57,7 @@ const Avatar: React.FC<PropTypes> = ({
     if (userURL) {
       if (isFollowingUser) {
         unfollow(userURL)
-      }
-      else {
+      } else {
         follow(userURL)
       }
     }
@@ -108,9 +104,9 @@ const Avatar: React.FC<PropTypes> = ({
           {
             isFollowingUser ? (
               <span>
-                  <span className={styles.buttonText}>Отписаться</span>
-                  <FontAwesomeIcon color='#f03a17' icon={faTimes}/>
-                </span>
+                <span className={styles.buttonText}>Отписаться</span>
+                <FontAwesomeIcon color='#f03a17' icon={faTimes}/>
+              </span>
             ) : (
               <span>
                 <span className={styles.buttonText}>Подписаться</span>

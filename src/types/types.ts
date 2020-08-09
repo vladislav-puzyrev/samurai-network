@@ -1,41 +1,22 @@
-/* Abstract */
-export interface IOperationData {
-  data: Object
-  messages: Array<string>
-  resultCode: number
-}
-
-interface IOperationItems {
-  items: Array<Object>
-  totalCount: number
-  error: string | null
-}
-
-/* Users */
-export interface IUser {
+export type UserType = {
   id: number
   name: string
   status: string | null
-  photos: IPhotos
+  photos: PhotosType
   followed: boolean
 }
 
-export interface IUsers extends IOperationItems {
-  items: Array<IUser>
-}
-
-/* Profile */
-export interface IProfile {
+export type ProfileType = {
   userId: number
   lookingForAJob: boolean
   lookingForAJobDescription: string
   fullName: string
   aboutMe: string
-  contacts: IContacts
-  photos: IPhotos
+  contacts: ContactsType
+  photos: PhotosType
 }
 
-export interface IContacts {
+export type ContactsType = {
   github: string
   vk: string
   facebook: string
@@ -46,59 +27,28 @@ export interface IContacts {
   mainLink: string
 }
 
-export interface IPhotos {
+export type PhotosType = {
   small: string | null
   large: string | null
 }
 
-export interface IUpdatePhoto extends IOperationData {
-  data: {
-    photos: IPhotos
-  }
-}
-
-export interface IPost {
+export type PostType = {
   id: number
   text: string
   likes: number
 }
 
-/* Auth */
-export interface IMe extends IOperationData {
-  data: {
-    id: number
-    email: string
-    login: string
-  }
-}
-
-export interface ILogin extends IOperationData {
-  data: {
-    userId: number
-  }
-}
-
-/* Security */
-export interface ICaptcha {
-  url: string
-}
-
-/* Messages */
-export interface IInterlocutor {
+export type InterlocutorType = {
   id: number
   userName: string
   hasNewMessages: boolean
   lastDialogActivityDate: string
   lastUserActivityDate: string
   newMessagesCount: number
-  photos: IPhotos
+  photos: PhotosType
 }
 
-export interface IDialogs extends IOperationItems {
-  items: Array<IDialog>
-}
-
-export interface IDialog {
+export type DialogType = {
   id: string
   body: string
   translatedBody: null
@@ -109,13 +59,7 @@ export interface IDialog {
   viewed: boolean
 }
 
-export interface ISendMessage extends IOperationData {
-  data: {
-    message: IMessagesAfterDate
-  }
-}
-
-export interface IMessagesAfterDate {
+export type MessagesAfterDateType = {
   id: string
   body: string
   translatedBody: null

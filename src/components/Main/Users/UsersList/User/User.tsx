@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './User.module.css'
-import defaultAvatar from '../../../../../assets/images/defaultAvatar.png'
+import defaultAvatar from '../../../../../assets/defaultAvatar.png'
 import { NavLink } from 'react-router-dom'
-import { IUser } from '../../../../../types/types'
+import { UserType } from '../../../../../types/types'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type PropTypes = {
-  user: IUser
+  user: UserType
   followButtonDisabled: boolean
   unfollow: (id: number) => void
   follow: (id: number) => void
@@ -19,8 +19,7 @@ const User: React.FC<PropTypes> = ({ user, followButtonDisabled, unfollow, follo
     if (isAuth) {
       if (user.followed) {
         unfollow(user.id)
-      }
-      else {
+      } else {
         follow(user.id)
       }
     }

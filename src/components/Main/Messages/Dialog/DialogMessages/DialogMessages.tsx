@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './DialogMessages.module.css'
-import { IDialog } from '../../../../../types/types'
+import { DialogType } from '../../../../../types/types'
 import DialogMessagesItem from './DialogMessagesItem/DialogMessagesItem'
 import Preloader from '../../../../common/Preloader/Preloader'
 
 type PropTypes = {
-  dialog: Array<IDialog> | null
+  dialog: DialogType[] | null
   interlocutorPhoto: string | null
   myPhoto: string | null
   myID: number | null

@@ -2,13 +2,12 @@ import React from 'react'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { required } from '../../../utils/validators'
 import { connect } from 'react-redux'
-import { login } from '../../../redux/auth-reducer'
+import { login } from '../../../redux/auth/thunks'
 import { Redirect } from 'react-router-dom'
 import Input from '../../common/Input/Input'
 import styles from './Login.module.css'
 import Button from '../../common/Button/Button'
 import { RootReducerType } from '../../../redux/store'
-import useSetTitle from '../../../hooks/useSetTitle'
 
 type MapStatePropTypes = {
   isAuth: boolean
@@ -20,7 +19,7 @@ type MapDispatchPropTypes = {
 }
 
 const Login: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ login, isAuth, captchaUrl }) => {
-  useSetTitle('Авторизация')
+  document.title = 'Авторизация'
 
   const onSubmit = (formData: formNames) => {
     const { userLogin, password, rememberMe, captcha } = formData

@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { RootReducerType } from '../../../redux/store'
-import { IInterlocutor, IDialog, IMessagesAfterDate, IProfile } from '../../../types/types'
+import { InterlocutorType, DialogType, MessagesAfterDateType, ProfileType } from '../../../types/types'
 import {
   getInterlocutors,
   getDialog,
   getMessagesAfterDate,
   startChatting,
   sendMessage,
-  getNewInterlocutor,
-  setCurrentInterlocutor
-} from '../../../redux/messages-reducer'
+  getNewInterlocutor
+} from '../../../redux/messages/thunks'
+import { setCurrentInterlocutor } from '../../../redux/messages/actions'
 import { Redirect, useParams } from 'react-router-dom'
 import Interlocutors from './Interlocutors/Interlocutors'
 import Dialog from './Dialog/Dialog'
 import styles from './Messages.module.css'
-import useSetTitle from '../../../hooks/useSetTitle'
 
 type MapStatePropTypes = {
-  interlocutors: Array<IInterlocutor> | null
-  newInterlocutor: IProfile | null
-  currentDialog: Array<IDialog> | null
-  messagesAfterDate: Array<IMessagesAfterDate> | null
+  interlocutors: InterlocutorType[] | null
+  newInterlocutor: ProfileType | null
+  currentDialog: DialogType[] | null
+  messagesAfterDate: MessagesAfterDateType[] | null
   currentInterlocutor: number | null
 
   fetching: {
@@ -33,7 +32,7 @@ type MapStatePropTypes = {
   }
 
   isAuth: boolean
-  myProfile: IProfile | null
+  myProfile: ProfileType | null
 }
 
 type MapDispatchPropTypes = {
@@ -61,12 +60,12 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   isAuth,
   myProfile,
   currentInterlocutor,
-  setCurrentInterlocutor,
+  setCurrentInterlocutor
 }) => {
   const { userID } = useParams()
-  const [interlocutor, setInterlocutor] = useState<IInterlocutor | null>(null)
+  const [interlocutor, setInterlocutor] = useState<InterlocutorType | null>(null)
 
-  useSetTitle('Сообщения')
+  document.title = 'Сообщения'
 
   useEffect(() => {
     if (userID && +userID !== currentInterlocutor) {
@@ -134,7 +133,7 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
     fetching: state.messages.fetching,
     isAuth: state.auth.isAuth,
     myProfile: state.auth.myProfile,
-    currentInterlocutor: state.messages.currentInterlocutor,
+    currentInterlocutor: state.messages.currentInterlocutor
   }
 }
 
@@ -145,5 +144,5 @@ export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootRed
   getDialog,
   getMessagesAfterDate,
   sendMessage,
-  setCurrentInterlocutor,
+  setCurrentInterlocutor
 })(Messages)

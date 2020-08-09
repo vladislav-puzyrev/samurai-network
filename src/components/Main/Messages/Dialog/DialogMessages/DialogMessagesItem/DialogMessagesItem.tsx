@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './DialogMessagesItem.module.css'
 import { NavLink } from 'react-router-dom'
-import defaultAvatar from '../../../../../../assets/images/defaultAvatar.png'
+import defaultAvatar from '../../../../../../assets/defaultAvatar.png'
 
 type PropTypes = {
   messageID: string

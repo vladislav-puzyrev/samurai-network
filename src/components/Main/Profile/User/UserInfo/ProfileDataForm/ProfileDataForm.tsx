@@ -5,10 +5,10 @@ import Button from '../../../../../common/Button/Button'
 import Input from '../../../../../common/Input/Input'
 import Textarea from '../../../../../common/Textarea/Textarea'
 import styles from './ProfileDataForm.module.css'
-import { IProfile } from '../../../../../../types/types'
+import { ProfileType } from '../../../../../../types/types'
 
 type PropTypes = {
-  profile: IProfile
+  profile: ProfileType
   setEditMode: (editMode: boolean) => void
 }
 
@@ -93,10 +93,10 @@ const ProfileDataForm: React.FC<InjectedFormProps<PropTypes> & PropTypes> = ({ h
 
       <div className={styles.buttons}>
         <Button type='submit'>Сохранить</Button>
-        <Button style={{ marginLeft: '10px' }} type='button' onClick={() => {setEditMode(false)}}>Отмена</Button>
+        <Button style={{ marginLeft: '10px' }} type='button' onClick={() => { setEditMode(false) }}>Отмена</Button>
       </div>
     </form>
   )
 }
 
-export default reduxForm<any, PropTypes>({ form: 'edit-profile' })((React.memo(ProfileDataForm)))
+export default reduxForm<any, any>({ form: 'edit-profile' })((React.memo(ProfileDataForm)))

@@ -1,15 +1,15 @@
 import React from 'react'
-import { logout } from '../../redux/auth-reducer'
+import { logout } from '../../redux/auth/thunks'
 import { connect } from 'react-redux'
 import { RootReducerType } from '../../redux/store'
 import styles from './Header.module.css'
 import Button from '../common/Button/Button'
 import { NavLink } from 'react-router-dom'
-import { IProfile } from '../../types/types'
+import { ProfileType } from '../../types/types'
 
 type MapStatePropTypes = {
   isAuth: boolean
-  myProfile: IProfile | null
+  myProfile: ProfileType | null
 }
 
 type MapDispatchPropTypes = {
@@ -52,5 +52,5 @@ const mapStateToProps = (state: RootReducerType): MapStatePropTypes => ({
 })
 
 export default connect<MapStatePropTypes, MapDispatchPropTypes, Object, RootReducerType>(mapStateToProps, {
-  logout,
+  logout
 })(Header)

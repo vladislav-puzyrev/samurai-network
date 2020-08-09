@@ -2,14 +2,14 @@ import React from 'react'
 import Preloader from '../../../common/Preloader/Preloader'
 import Avatar from './Avatar/Avatar'
 import UserInfo from './UserInfo/UserInfo'
-import { IProfile } from '../../../../types/types'
+import { ProfileType } from '../../../../types/types'
 
 type PropTypes = {
-  profile: IProfile | null
+  profile: ProfileType | null
   status: string
   isOwner: boolean
   avatarIsFetching: boolean
-  followingInProgress: Array<number>
+  followingInProgress: number[]
   isFollowingUser: boolean
   userURL: number | null
 
@@ -18,7 +18,7 @@ type PropTypes = {
   setAvatarIsFetching: (isFetching: boolean) => void
   savePhoto: (photo: File) => void
   updateStatus: (newStatus: string) => void
-  saveProfile: (profile: IProfile) => void
+  saveProfile: (profile: ProfileType) => void
 }
 
 const User: React.FC<PropTypes> = ({
@@ -34,9 +34,8 @@ const User: React.FC<PropTypes> = ({
   unfollow,
   followingInProgress,
   isFollowingUser,
-  userURL,
+  userURL
 }) => {
-
   if (!profile) {
     return <Preloader/>
   }

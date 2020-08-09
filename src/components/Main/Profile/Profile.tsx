@@ -1,34 +1,34 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import {
+  setAvatarIsFetching,
+  addPost
+} from '../../../redux/profile/actions'
 import {
   getStatus,
   getUsersProfile,
   savePhoto,
   saveProfile,
-  updateStatus,
-  setAvatarIsFetching
-} from '../../../redux/profile-reducer'
+  updateStatus
+} from '../../../redux/profile/thunks'
 import { connect } from 'react-redux'
 import { useParams, Redirect } from 'react-router-dom'
-import { saveMyProfile } from '../../../redux/auth-reducer'
-import { IPost, IProfile } from '../../../types/types'
+import { saveMyProfile } from '../../../redux/auth/thunks'
+import { PostType, ProfileType } from '../../../types/types'
 import Posts from './Posts/Posts'
 import { RootReducerType } from '../../../redux/store'
 import User from './User/User'
-import { addPost } from '../../../redux/profile-reducer'
-import { follow, isFollowing, unfollow } from '../../../redux/users-reducer'
-import useSetTitle from '../../../hooks/useSetTitle'
-import ModalWindow from '../../ModalWindow/ModalWindow'
+import { follow, isFollowing, unfollow } from '../../../redux/users/thunks'
 
 type MapStatePropTypes = {
   userID: number | null
-  profile: IProfile | null
+  profile: ProfileType | null
   status: string
   avatarIsFetching: boolean
-  myProfile: IProfile | null
+  myProfile: ProfileType | null
   isAuth: boolean
-  followingInProgress: Array<number>
+  followingInProgress: number[]
   isFollowingUser: boolean
-  posts: Array<IPost>
+  posts: PostType[]
 }
 
 type MapDispatchPropTypes = {
@@ -37,8 +37,8 @@ type MapDispatchPropTypes = {
   savePhoto: (photo: File) => void
   updateStatus: (newStatus: string) => void
   setAvatarIsFetching: (isFetching: boolean) => void
-  saveProfile: (profile: IProfile) => void
-  saveMyProfile: (profile: IProfile) => void
+  saveProfile: (profile: ProfileType) => void
+  saveMyProfile: (profile: ProfileType) => void
   follow: (userID: number) => void
   unfollow: (userID: number) => void
   isFollowing: (userID: number) => void
@@ -65,15 +65,14 @@ const Profile: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   isFollowing,
   isFollowingUser,
   posts,
-  addPost,
+  addPost
 }) => {
-
   const { userID: id } = useParams()
 
   const userURL = (id) ? +id : userID
   const isOwner = userID === userURL
 
-  useSetTitle(profile ? profile.fullName : null)
+  if (profile) document.title = profile.fullName
 
   useEffect(() => {
     if (userURL && isAuth) {
@@ -131,7 +130,7 @@ function mapStateToProps (state: RootReducerType): MapStatePropTypes {
     isAuth: state.auth.isAuth,
     followingInProgress: state.users.followingInProgress,
     isFollowingUser: state.users.isFollowingUser,
-    posts: state.profile.posts,
+    posts: state.profile.posts
   }
 }
 
@@ -146,5 +145,5 @@ export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootRed
   follow,
   unfollow,
   isFollowing,
-  addPost,
+  addPost
 })(Profile)

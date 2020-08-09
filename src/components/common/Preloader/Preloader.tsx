@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Preloader.module.css'
-import preloader from '../../../assets/images/preloader.gif'
+import preloader from '../../../assets/preloader.gif'
 
 type PropTypes = {
   stretch?: boolean

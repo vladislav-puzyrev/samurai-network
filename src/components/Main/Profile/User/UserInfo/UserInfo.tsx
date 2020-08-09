@@ -4,21 +4,21 @@ import Status from './Status/Status'
 import ProfileDataForm from './ProfileDataForm/ProfileDataForm'
 import ProfileData from './ProfileData/ProfileData'
 import Button from '../../../../common/Button/Button'
-import { IProfile } from '../../../../../types/types'
+import { ProfileType } from '../../../../../types/types'
 
 type PropTypes = {
-  profile: IProfile
+  profile: ProfileType
   status: string
   isOwner: boolean
 
   updateStatus: (newStatus: string) => void
-  saveProfile: (profile: IProfile) => void
+  saveProfile: (profile: ProfileType) => void
 }
 
 const UserInfo: React.FC<PropTypes> = ({ profile, status, isOwner, saveProfile, updateStatus }) => {
   const [editMode, setEditMode] = useState(false)
 
-  async function onSubmit (formData: IProfile) {
+  async function onSubmit (formData: ProfileType) {
     await saveProfile(formData)
     setEditMode(false)
   }
@@ -32,9 +32,9 @@ const UserInfo: React.FC<PropTypes> = ({ profile, status, isOwner, saveProfile, 
         {(status || isOwner) && <hr/>}
 
         {
-          editMode ?
-            <ProfileDataForm setEditMode={setEditMode} profile={profile} initialValues={profile} onSubmit={onSubmit}/> :
-            <ProfileData profile={profile}/>
+          editMode
+            ? <ProfileDataForm setEditMode={setEditMode} profile={profile} initialValues={profile} onSubmit={onSubmit}/>
+            : <ProfileData profile={profile}/>
         }
       </div>
 
