@@ -35,26 +35,3 @@ describe('profile-reducer', () => {
     expect(newState.posts[2].text).toBe('new post')
   })
 })
-
-// it('Длина постов после удаления декрементирована', () => {
-//   // 1) Arrange
-//   const action = deletePost(1)
-//
-//   // 2) Act
-//   const newState = reducer(initialState, action)
-//
-//   // 3) Assert
-//   expect(newState.posts.length).toBe(1)
-// })
-
-// it('Длина постов после удаления не должна уменьшится если id не корректный',
-//   () => {
-//     // 1) Arrange
-//     const action = deletePost(1000)
-//
-//     // 2) Act
-//     const newState = reducer(initialState, action)
-//
-//     // 3) Assert
-//     expect(newState.posts.length).toBe(2)
-//   })

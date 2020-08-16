@@ -15,7 +15,7 @@ import * as usersAPI from '../api/users'
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({ form, profile, messages, users, auth, init })
-const extraArgument = { authAPI, messagesAPI, profileAPI, securityAPI, usersAPI }
+export const extraArgument = { authAPI, messagesAPI, profileAPI, securityAPI, usersAPI }
 
 export type RootReducerType = ReturnType<typeof rootReducer>
 export type ExtraArgumentType = typeof extraArgument
