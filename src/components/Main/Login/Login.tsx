@@ -1,7 +1,7 @@
 import React from 'react'
-import { Field, reduxForm, InjectedFormProps } from 'redux-form'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { required } from '../../../utils/validators'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../../redux/auth/thunks'
 import { Redirect } from 'react-router-dom'
 import Input from '../../common/Input/Input'
@@ -9,25 +9,19 @@ import styles from './Login.module.css'
 import Button from '../../common/Button/Button'
 import { RootReducerType } from '../../../redux/store'
 
-type MapStatePropTypes = {
-  isAuth: boolean
-  captchaUrl: string | null
-}
-
-type MapDispatchPropTypes = {
-  login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
-}
-
-const Login: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({ login, isAuth, captchaUrl }) => {
+const Login: React.FC = () => {
+  const isAuth = useSelector((state: RootReducerType) => state.auth.isAuth)
+  const captchaUrl = useSelector((state: RootReducerType) => state.auth.captchaUrl)
+  const dispatch = useDispatch()
   document.title = 'Авторизация'
 
   const onSubmit = (formData: formNames) => {
     const { userLogin, password, rememberMe, captcha } = formData
-    login(userLogin, password, rememberMe, captcha)
+    dispatch(login(userLogin, password, rememberMe, captcha))
   }
 
   const loginTestAccount = () => {
-    login('free@samuraijs.com', 'free', true, '')
+    dispatch(login('free@samuraijs.com', 'free', true, ''))
   }
 
   if (isAuth) {
@@ -123,7 +117,4 @@ const LoginForm: React.FC<InjectedFormProps<formNames, formProps> & formProps> =
 
 const LoginReduxForm = reduxForm<formNames, formProps>({ form: 'login' })(LoginForm)
 
-export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>((state) => ({
-  isAuth: state.auth.isAuth,
-  captchaUrl: state.auth.captchaUrl
-}), { login })(Login)
+export default Login

@@ -7,9 +7,9 @@ type PropTypes = {
   totalUsersCount: number
   pageSize: number
   portionSize: number
-  getRequestUsers: (pageSize: number, currentPage: number, term: string, friend: boolean) => void
+  getRequestUsers: (pageSize: number, currentPage: number, term: string, friend: null | boolean) => void
   term: string
-  friend: boolean
+  friend: null | boolean
   setCurrentPage: (page: number) => void
   portionNumber: number
   setPortionNumber: (number: number) => void
@@ -29,7 +29,7 @@ const Paginator: React.FC<PropTypes> = ({
 }) => {
   useEffect(() => {
     getRequestUsers(pageSize, currentPage, term, friend)
-  }, [getRequestUsers, pageSize, currentPage, term])
+  }, [])
 
   const onPageChanged = (currentPage: number) => {
     getRequestUsers(pageSize, currentPage, term, friend)

@@ -1,68 +1,37 @@
-import { connect } from 'react-redux'
-import {
-  getRequestUsers,
-  follow,
-  unfollow
-} from '../../../redux/users/thunks'
+import { useDispatch, useSelector } from 'react-redux'
+import { follow, getRequestUsers, unfollow } from '../../../redux/users/thunks'
 import React, { useEffect, useState } from 'react'
 import {
   getCurrentPage,
   getFollowingInProgress,
   getIsFetching,
   getTotalUsersCount,
-  getUsersSelector
+  getUsers
 } from '../../../redux/users/selectors'
 import { RootReducerType } from '../../../redux/store'
-import { UserType } from '../../../types/types'
 import Search from './Search/Search'
 import Paginator from './Paginator/Paginator'
 import UsersList from './UsersList/UsersList'
-import { setCurrentPage, setIsFetching, setTerm } from '../../../redux/users/actions'
+import { setCurrentPage, setTerm } from '../../../redux/users/actions'
 
-type MapStatePropTypes = {
-  currentPage: number
-  users: UserType[]
-  totalUsersCount: number
-  isFetching: boolean
-  followingInProgress: number[]
-  term: string
-  friend: boolean
-  isAuth: boolean
-}
+const Users: React.FC = () => {
+  const totalUsersCount = useSelector(getTotalUsersCount)
+  const currentPage = useSelector(getCurrentPage)
+  const term = useSelector((state: RootReducerType) => state.users.term)
+  const friend = useSelector((state: RootReducerType) => state.users.friend)
+  const users = useSelector(getUsers)
+  const isFetching = useSelector(getIsFetching)
+  const followingInProgress = useSelector(getFollowingInProgress)
+  const isAuth = useSelector((state: RootReducerType) => state.auth.isAuth)
 
-type MapDispatchPropTypes = {
-  setCurrentPage: (page: number) => void
-  setIsFetching: (isFetching: boolean) => void
-  getRequestUsers: (pageSize: number, currentPage: number, term: string, friend: null | boolean) => void
-  follow: (id: number) => void
-  unfollow: (id: number) => void
-  setTerm: (term: string) => void
-}
+  const dispatch = useDispatch()
 
-type PropTypes = MapStatePropTypes & MapDispatchPropTypes
-
-const Users: React.FC<PropTypes> = ({
-  currentPage,
-  totalUsersCount,
-  isFetching,
-  users,
-  followingInProgress,
-  setCurrentPage,
-  follow,
-  unfollow,
-  setTerm,
-  getRequestUsers,
-  term,
-  friend,
-  isAuth
-}) => {
   document.title = 'Поиск пользователей'
-
   useEffect(() => {
     return () => {
-      setCurrentPage(1)
+      dispatch(setCurrentPage(1))
     }
-  }, [setCurrentPage])
+  }, [dispatch])
 
   const [portionNumber, setPortionNumber] = useState(1)
 
@@ -70,8 +39,8 @@ const Users: React.FC<PropTypes> = ({
     <>
       <h1>Пользователи</h1>
       <Search
-        setTerm={setTerm}
-        setCurrentPage={setCurrentPage}
+        setTerm={() => dispatch(setTerm)}
+        setCurrentPage={() => dispatch(setCurrentPage)}
         setPortionNumber={setPortionNumber}
       />
       <Paginator
@@ -79,18 +48,18 @@ const Users: React.FC<PropTypes> = ({
         currentPage={currentPage}
         pageSize={6}
         portionSize={10}
-        getRequestUsers={getRequestUsers}
+        getRequestUsers={(a: number, b: number, c: string) => dispatch(getRequestUsers(a, b, c))}
         term={term}
         friend={friend}
-        setCurrentPage={setCurrentPage}
+        setCurrentPage={() => dispatch(setCurrentPage)}
         portionNumber={portionNumber}
         setPortionNumber={setPortionNumber}
       />
       <UsersList
         users={users}
         followingInProgress={followingInProgress}
-        follow={follow}
-        unfollow={unfollow}
+        follow={(id: number) => dispatch(follow(id))}
+        unfollow={(id: number) => dispatch(unfollow(id))}
         isFetching={isFetching}
         isAuth={isAuth}
       />
@@ -98,24 +67,4 @@ const Users: React.FC<PropTypes> = ({
   )
 }
 
-function mapStateToProps (state: RootReducerType): MapStatePropTypes {
-  return {
-    users: getUsersSelector(state),
-    totalUsersCount: getTotalUsersCount(state),
-    currentPage: getCurrentPage(state),
-    isFetching: getIsFetching(state),
-    followingInProgress: getFollowingInProgress(state),
-    term: state.users.term,
-    friend: true,
-    isAuth: state.auth.isAuth
-  }
-}
-
-export default connect<MapStatePropTypes, MapDispatchPropTypes, unknown, RootReducerType>(mapStateToProps, {
-  setCurrentPage,
-  setIsFetching,
-  getRequestUsers,
-  follow,
-  unfollow,
-  setTerm
-})(Users)
+export default Users
