@@ -32,7 +32,7 @@ const DialogMessagesItem: React.FC<PropTypes> = ({
   interlocutorPhoto,
   myPhoto,
   myID,
-  firstMessage,
+  firstMessage
 }) => {
   const isNewSender = lastSenderID !== senderID
   const iSender = senderID === myID

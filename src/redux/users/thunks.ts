@@ -12,10 +12,14 @@ import { BaseThunkType } from '../store'
 
 type ThunkType = BaseThunkType<ActionsType>
 
-export const getRequestUsers = (pageSize: number, currentPage: number, term: string, friend: boolean): ThunkType => {
+export const getRequestUsers = (
+  pageSize: number,
+  currentPage: number,
+  term: string
+): ThunkType => {
   return async (dispatch, getState, { usersAPI }) => {
     dispatch(setIsFetching(true))
-    const response = await usersAPI.getUsers(pageSize, currentPage, term, friend)
+    const response = await usersAPI.getUsers(pageSize, currentPage, term, getState().users.friend)
     dispatch(setUsers(response.items))
     dispatch(setTotalUsers(response.totalCount))
     dispatch(setIsFetching(false))

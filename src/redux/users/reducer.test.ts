@@ -16,7 +16,8 @@ describe('Users reducer', () => {
       isFetching: false,
       followingInProgress: [],
       term: '',
-      isFollowingUser: false
+      isFollowingUser: false,
+      friend: null
     }
   })
 

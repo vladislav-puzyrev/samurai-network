@@ -7,3 +7,4 @@ export const SET_TERM = 'users/SET_TERM' as const
 export const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING' as const
 export const TOGGLE_IS_FOLLOWING_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_PROGRESS' as const
 export const TOGGLE_IS_FOLLOWING_USER = 'users/TOGGLE_IS_FOLLOWING_USER' as const
+export const SET_FRIEND_MODE = 'users/SET_FRIEND_MODE' as const

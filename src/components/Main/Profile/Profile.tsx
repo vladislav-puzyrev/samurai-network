@@ -67,7 +67,7 @@ const Profile: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   posts,
   addPost
 }) => {
-  const { userID: id } = useParams()
+  const { userID: id } = useParams<{ userID: string }>()
 
   const userURL = (id) ? +id : userID
   const isOwner = userID === userURL

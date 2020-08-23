@@ -1,10 +1,14 @@
 import server, { OperationData, OperationItems } from './server'
 import { UserType } from '../types/types'
 
-export const getUsers = async (count: number, page: number, term: string, friend: boolean) => {
+export const getUsers = async (count: number, page: number, term: string, friend: null | boolean) => {
   type getUsersRes = OperationItems<UserType>
 
-  const res = await server.get<getUsersRes>(`users?count=${count}&page=${page}&term=${term}`)
+  let uri = `users?count=${count}&page=${page}`
+  if (term) uri += `&term=${term}`
+  if (friend !== null) uri += `&friend=${friend}`
+
+  const res = await server.get<getUsersRes>(uri)
   return res.data
 }
 

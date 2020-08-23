@@ -46,3 +46,8 @@ export const toggleFollowedUser = (following: boolean) => ({
   type: constants.TOGGLE_IS_FOLLOWING_USER,
   following
 })
+
+export const setFriendMode = (mode: null | boolean) => ({
+  type: constants.SET_FRIEND_MODE,
+  mode
+})

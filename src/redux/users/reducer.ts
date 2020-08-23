@@ -10,7 +10,8 @@ const initialState = {
   isFetching: false,
   followingInProgress: [] as number[],
   term: '',
-  isFollowingUser: false
+  isFollowingUser: false,
+  friend: null as null | boolean
 }
 
 export type InitialStateType = typeof initialState
@@ -82,6 +83,12 @@ function reducer (state = initialState, action: ActionsType): InitialStateType {
       return {
         ...state,
         isFollowingUser: action.following
+      }
+
+    case constants.SET_FRIEND_MODE:
+      return {
+        ...state,
+        friend: action.mode
       }
 
     default:

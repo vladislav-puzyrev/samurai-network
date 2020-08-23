@@ -62,7 +62,7 @@ const Messages: React.FC<MapStatePropTypes & MapDispatchPropTypes> = ({
   currentInterlocutor,
   setCurrentInterlocutor
 }) => {
-  const { userID } = useParams()
+  const { userID } = useParams<{ userID: string }>()
   const [interlocutor, setInterlocutor] = useState<InterlocutorType | null>(null)
 
   document.title = 'Сообщения'
